@@ -7,6 +7,10 @@
 </head>
 <body>
     <main>
+        <header>
+            <%@include file="../../Header.jsp"%>
+        </header>
+
         <div class="container1">
             <h2>글 내용 보기</h2>
             <table>
@@ -68,6 +72,10 @@
                 window.location.href = 'update_gboard.do?num=${getGboard.num}';
             }
         </script>
+
+		<footer>
+        	<%@include file="../../bottom.jsp" %>
+    	</footer>
    </main>
 </body>
 </html>

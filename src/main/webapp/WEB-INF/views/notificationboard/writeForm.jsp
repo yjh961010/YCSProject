@@ -9,6 +9,9 @@
 <body>
 <main>
 
+<header>
+    <%@include file="../../Header.jsp"%>
+</header>
 
 <div class="container1">
     <div align="center">
@@ -44,6 +47,9 @@
         </form>
     </div>
 </div>
+		<footer>
+        	<%@include file="../../bottom.jsp" %>
+    	</footer>
 </main>
 </body>
 </html>
