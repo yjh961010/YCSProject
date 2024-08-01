@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>적금 사이트</title>
-    <link rel="stylesheet" type="text/css" href="css/mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainStyle.css">
     
   <script>
         let slideIndex = 1;
@@ -46,7 +46,7 @@
             <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
         </div>
             <nav>
-                <a href="#board">커뮤니티</a>
+                <a href="/commu/commuList.do">커뮤니티</a>
                 <a href="#products">상품 목록</a>
                 <a href="#help">고객지원</a>
             </nav>
