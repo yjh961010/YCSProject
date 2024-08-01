@@ -76,16 +76,16 @@
         <c:if test="${not empty notificationboardList}">
             <div class="pagination">
                 <%-- 페이지네이션 출력 --%>
-                <%
-                    int pageSize = 5; // 한 페이지에 보여질 게시물 수
-                    int currentPage = (request.getParameter("pageNum") != null) ? Integer.parseInt(request.getParameter("pageNum")) : 1;
-                    int count = (Integer) request.getAttribute("count"); // 전체 게시물 수
-                    int pageBlock = 5; // 페이지 블록 수
-                    int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1); // 전체 페이지 수
-                    int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-                    int endPage = startPage + pageBlock - 1;
-                    if (endPage > pageCount) endPage = pageCount;
-                %>
+<%--                    <%--%>
+<%--                        int pageSize = 5; // 한 페이지에 보여질 게시물 수--%>
+<%--                        int currentPage = (request.getParameter("pageNum") != null) ? Integer.parseInt(request.getParameter("pageNum")) : 1;--%>
+<%--                        int count = (Integer) request.getAttribute("count"); // 전체 게시물 수--%>
+<%--                        int pageBlock = 5; // 페이지 블록 수--%>
+<%--                        int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1); // 전체 페이지 수--%>
+<%--                        int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;--%>
+<%--                        int endPage = startPage + pageBlock - 1;--%>
+<%--                        if (endPage > pageCount) endPage = pageCount;--%>
+<%--                    %>--%>
                 <%-- 이전 페이지 링크 --%>
                 <% if (startPage > pageBlock) { %>
                     <a href="notificationboard.do?pageNum=<%=startPage-pageBlock%>">&laquo; 이전</a>
