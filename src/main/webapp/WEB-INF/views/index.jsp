@@ -115,16 +115,27 @@
         
     <section id="community" class="community">
     <div class="container">
-                <h2>커뮤니티 글 목록</h2>
+                <h2>커뮤니티</h2>
         <div class="community-content">
             <div class="community-posts">
-                <div class="post-item">
-                    <h3>글 제목 1</h3>
+                <div>
+                    <h3>공지글</h3>
                     <p>글 내용 요약...</p>
-                    <a href="#" class="btn">자세히 보기</a>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
                 </div>
-
-                <!-- 추가적인 커뮤니티 글 -->
+            </div>
+            <div class="community-posts">
+                <div>
+                    <h3>커뮤니티</h3>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                    <p>글 내용 요약...</p>
+                </div>
             </div>
             <div class="community-prizes">
                 <h3>전회차 상금</h3>
