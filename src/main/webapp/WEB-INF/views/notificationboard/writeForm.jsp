@@ -9,9 +9,7 @@
 <body>
 <main>
 
-<header>
-    <%@include file="../../Header.jsp"%>
-</header>
+
 
 <div class="container1">
     <div align="center">
