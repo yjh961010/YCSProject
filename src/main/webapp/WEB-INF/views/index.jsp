@@ -1,55 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>적금 사이트</title>
-    <link rel="stylesheet" type="text/css" href="css/mainStyle.css">
-    
-  <script>
-        let slideIndex = 1;
-
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("slides");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex-1].style.display = "block";
-        }
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function autoShowSlides() {
-            plusSlides(1);
-            setTimeout(autoShowSlides, 5000); // Change image every 5 seconds
-        }
-
-        window.onload = function() {
-            showSlides(slideIndex);
-            autoShowSlides();
-        }
-    </script>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>neoheulge</h1>
-            <div class="scrolling-text-container">
-            <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
-        </div>
-            <nav>
-                <a href="#board">커뮤니티</a>
-                <a href="#products">상품 목록</a>
-                <a href="#help">고객지원</a>
-            </nav>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
 
     <main>
          <section class="hero">
@@ -83,34 +35,42 @@
             </div>
         </section>
 
-        <section id="products" class="products">
-            <div class="container">
-                <h2>상품</h2>
-                <div class="product-list">
-                    <!-- 여기에 동적으로 상품 목록을 추가할 수 있습니다 -->
-                    <div class="product-item">
-                        <h3>상품 1</h3>
-                        <p>연 2.5% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 2</h3>
-                        <p>연 3.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 3</h3>
-                        <p>연 5.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 4</h3>
-                        <p>연 10.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
+       <section id="products" class="products">
+    <div class="container">
+        <h2>상품 목록</h2>
+        <div class="product-list">
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">100,000원</div>
                 </div>
+                <h3 class="product-name">상품 1</h3>
             </div>
-        </section>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">325,000원</div>
+                </div>
+                <h3 class="product-name">상품 2</h3>
+            </div>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">505,000원</div>
+                </div>
+                <h3 class="product-name">상품 3</h3>
+            </div>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">900,000원</div>
+                </div>
+                <h3 class="product-name">상품 4</h3>
+            </div>
+            <!-- 추가 상품들 -->
+        </div>
+    </div>
+</section>
         
         
     <section id="community" class="community">
@@ -151,14 +111,5 @@
         
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; neoheulge. 조원 모든 권리 보유.</p>
-            <p>[우편번호]종로 아이티뱅크 509호</p>
-            <p>대표 전화 : xxx-xxxx-xxxx</p>
-            <p>문의 메일 : xxx@xxxx.com</p>
-          
-        </div>
-    </footer>
-</body>
-</html>
+<jsp:include page="footer.jsp"/> 
+
