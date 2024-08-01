@@ -1,10 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>적금 사이트</title>
+    <link rel="stylesheet" type="text/css" href="css/mainStyle.css">
+    
+  <script>
+        let slideIndex = 1;
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slides");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function autoShowSlides() {
+            plusSlides(1);
+            setTimeout(autoShowSlides, 5000); // Change image every 5 seconds
+        }
+
+        window.onload = function() {
+            showSlides(slideIndex);
+            autoShowSlides();
+        }
+        
+        
+    </script>
 </head>
 <body>
 <header>
@@ -19,6 +51,4 @@
                 <a href="#help">고객지원</a>
             </nav>
         </div>
-</header>
-</body>
-</html>
+    </header>

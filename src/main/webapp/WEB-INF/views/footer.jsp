@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
+	<footer>
         <div class="container">
             <h3>(주)넣을게</h3>
             <tr></tr>
@@ -19,5 +15,6 @@
             <p>금융소비자보호  넣을게비즈니스 개인정보 처리방침</p>
           
         </div>
+       </footer>
 </body>
 </html>
