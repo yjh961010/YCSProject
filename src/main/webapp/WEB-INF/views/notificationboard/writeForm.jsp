@@ -3,7 +3,7 @@
 <!-- writeForm.jsp -->
 <html>
 <head>
-    <title>글 쓰기 폼</title>
+    <title>Write Form</title>
  	<link rel="stylesheet" type="text/css" href="resources/css/header/gboard/gboardWrite.css">
 </head>
 <body>
