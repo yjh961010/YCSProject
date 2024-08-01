@@ -34,6 +34,8 @@
             showSlides(slideIndex);
             autoShowSlides();
         }
+        
+        
     </script>
 </head>
 <body>
@@ -83,34 +85,42 @@
             </div>
         </section>
 
-        <section id="products" class="products">
-            <div class="container">
-                <h2>상품</h2>
-                <div class="product-list">
-                    <!-- 여기에 동적으로 상품 목록을 추가할 수 있습니다 -->
-                    <div class="product-item">
-                        <h3>상품 1</h3>
-                        <p>연 2.5% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 2</h3>
-                        <p>연 3.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 3</h3>
-                        <p>연 5.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
-                    <div class="product-item">
-                        <h3>상품 4</h3>
-                        <p>연 10.0% 이율</p>
-                        <a href="#" class="btn">자세히 보기</a>
-                    </div>
+       <section id="products" class="products">
+    <div class="container">
+        <h2>상품 목록</h2>
+        <div class="product-list">
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">100,000원</div>
                 </div>
+                <h3 class="product-name">상품 1</h3>
             </div>
-        </section>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">325,000원</div>
+                </div>
+                <h3 class="product-name">상품 2</h3>
+            </div>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">505,000원</div>
+                </div>
+                <h3 class="product-name">상품 3</h3>
+            </div>
+            <div class="product-item">
+                <div class="circle">
+                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <div class="amount">900,000원</div>
+                </div>
+                <h3 class="product-name">상품 4</h3>
+            </div>
+            <!-- 추가 상품들 -->
+        </div>
+    </div>
+</section>
         
         
     <section id="community" class="community">
