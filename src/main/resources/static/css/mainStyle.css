@@ -1,0 +1,291 @@
+@charset "UTF-8";
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background: #004d99;
+    color: #fff;
+    padding: 1em 0;
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2em 10%;
+}
+
+.hero {
+    background: #ffffff;
+    padding: 2em 0;
+    text-align: center;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+
+/* 로그인 스타일 */
+.login-form {
+    flex: 0 0 20%; /* Fixed width of 50% */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.login-form input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #004d99;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background: #003366;
+}
+
+.login-form .links a {
+    display: inline-block;
+    margin: 5px 0;
+    color: #004d99;
+    text-decoration: none;
+}
+
+.login-form .links a:hover {
+    text-decoration: underline;
+}
+
+
+/* 상품 스타일 */
+.products {
+    padding: 2em 0;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1;
+    max-width: calc(33.333% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-item h3 {
+    margin-top: 0;
+}
+
+.register, .login {
+    background: #f1f8e9;
+    padding: 2em 0;
+    text-align: center;
+}
+
+footer {
+    background: #004d99;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+/* 슬라이드쇼 스타일 */
+ .slideshow-container {
+    flex: 1; /* Take up the remaining space */
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+.slides {
+    display: none;
+    
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.active {
+    background-color: #717171;
+}
+
+/* 헤더에 글 스크롤 */
+.scrolling-text-container {
+    width: 300px; /* 너비 설정 */
+    height: 20px; /* 높이 설정, 필요에 따라 조정 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    position: relative;
+}
+
+.scrolling-text {
+    white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 설정 */
+    position: absolute;
+    animation: scroll 10s linear infinite; /* 애니메이션 설정 */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+/* 커뮤니티 부문 스타일 */
+.community {
+    padding: 2rem 0;
+    
+}
+
+.community-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100%; /* 커뮤니티 콘텐츠 영역의 높이를 섹션 높이와 동일하게 설정 */
+}
+
+.community-posts {
+    flex: 0 0 80%; /* 글 목록이 전체의 80%를 차지하도록 설정 */
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+    
+    
+}
+
+.community-prizes {
+    flex: 0 0 20%; /* 상금 정보가 전체의 20%를 차지하도록 설정 */
+    padding-left: 20px;
+}
+
+.community-posts h2, .community-prizes h2 {
+    margin-top: 0;
+}
+
+.post-item {
+    margin-bottom: 20px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h3 {
+    margin-top: 0;
+}
+
+.post-item .btn {
+    display: inline-block;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.post-item .btn:hover {
+    background: #555;
+}
+
+.community-prizes ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.community-prizes li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+}
