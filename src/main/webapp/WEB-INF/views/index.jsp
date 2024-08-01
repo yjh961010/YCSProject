@@ -44,7 +44,7 @@
             <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
         </div>
             <nav>
-                <a href="#board">커뮤니티1</a>
+                <a href="#board">커뮤니티</a>
                 <a href="#products">상품 목록</a>
                 <a href="#help">고객지원</a>
             </nav>
