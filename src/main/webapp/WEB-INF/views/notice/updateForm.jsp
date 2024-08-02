@@ -9,7 +9,7 @@
 <main>
 
 <header>
-    <%@include file="../../Header.jsp"%>
+    <%@include file="../header.jsp"%>
 </header>
 
 <div class="container1">
@@ -64,7 +64,7 @@
     }
 </script>
 		<footer>
-        	<%@include file="../../bottom.jsp" %>
+        	<%@include file="../footer.jsp" %>
     	</footer>
 </main>
 </body>

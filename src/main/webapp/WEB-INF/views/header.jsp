@@ -49,6 +49,7 @@
                 <a href="#board">커뮤니티</a>
                 <a href="#products">상품 목록</a>
                 <a href="#help">고객지원</a>
+                <a href="${pageContext.request.contextPath}/admin/adminmember.do">회원관리(admin)</a>
             </nav>
         </div>
     </header>

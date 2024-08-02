@@ -46,7 +46,7 @@
     </div>
 </div>
 		<footer>
-        	<%@include file="../../bottom.jsp" %>
+        	<%@include file="../footer.jsp" %>
     	</footer>
 </main>
 </body>
