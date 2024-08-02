@@ -4,16 +4,12 @@
 <html>
 <head>
     <title>Write Form</title>
- 	<link rel="stylesheet" type="text/css" href="resources/css/header/gboard/gboardWrite.css">
 </head>
 <body>
 <main>
-
-
-
 <div class="container1">
     <div align="center">
-        <form name="f" action="write_gboard.do" method="post" onsubmit="return check()">
+        <form name="f" action="write_noticeboard.do" method="post" onsubmit="return check()">
             <h3 style="color: #007bff;">공지글 작성</h3><br>
             <table>
                 <tr>
@@ -37,7 +33,7 @@
                         <div class="btn-group">
                             <input type="submit" value="글 쓰 기">
                             <input type="reset" value="다시 작성">
-                            <input type="button" value="목록 보기" onclick="window.location='gboard.do'">
+                            <input type="button" value="목록 보기" onclick="window.location='noticeboard.do'">
                         </div>
                     </td>
                 </tr>
@@ -45,9 +41,6 @@
         </form>
     </div>
 </div>
-		<footer>
-        	<%@include file="../footer.jsp" %>
-    	</footer>
 </main>
 </body>
 </html>

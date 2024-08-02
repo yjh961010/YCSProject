@@ -3,43 +3,37 @@
 <html>
 <head>
     <title>글 수정 폼</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/header/gboard/gboardUpdate.css">
 </head>
 <body>
 <main>
-
-<header>
-    <%@include file="../header.jsp"%>
-</header>
-
 <div class="container1">
     <div align="center">
-        <form name="f" action="update_gboard.do" method="post" onsubmit="return check()">
-            <input type="hidden" name="num" value="${getGboard.num}"/>
+        <form name="f" action="update_noticeboard.do" method="post" onsubmit="return check()">
+            <input type="hidden" name="num" value="${getNoticeboard.num}"/>
             <h3 style="color: #007bff;">공지글 수정</h3><br>
             <table>
                 <tr>
                     <th>이 름</th>
-                    <td><input type="text" name="writer" class="box" value="${getGboard.writer}" readonly></td>
+                    <td><input type="text" name="writer" class="box" value="${getNoticeboard.writer}" readonly></td>
                 </tr>
                 <tr>
                     <th>제 목</th>
-                    <td><input type="text" name="subject" class="box" size="50" value="${getGboard.subject}"></td>
+                    <td><input type="text" name="subject" class="box" size="50" value="${getNoticeboard.subject}"></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td><input type="text" name="email" class="box" size="50" value="${getGboard.email}"></td>
+                    <td><input type="text" name="email" class="box" size="50" value="${getNoticeboard.email}"></td>
                 </tr>
                 <tr>
                     <th>내 용</th>
-                    <td><textarea name="content" rows="11" cols="50" class="box">${getGboard.content}</textarea></td>
+                    <td><textarea name="content" rows="11" cols="50" class="box">${getNoticeboard.content}</textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
                         <div class="btn-group">
                             <input type="submit" value="글 수정">
                             <input type="reset" value="다시 작성">
-                            <input type="button" value="목록 보기" onclick="window.location='gboard.do'">
+                            <input type="button" value="목록 보기" onclick="window.location='noticeboard.do'">
                         </div>
                     </td>
                 </tr>
@@ -63,9 +57,6 @@
         return true;
     }
 </script>
-		<footer>
-        	<%@include file="../footer.jsp" %>
-    	</footer>
 </main>
 </body>
 </html>
