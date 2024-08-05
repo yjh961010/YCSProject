@@ -1,24 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<link rel="stylesheet" type="text/css" href="/css/notice/noticeInsert.css">
+
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
-<h1><span style="font-weight: bold; color:#054afa; font-family: 'Gothic A1', sans-serif;">공지사항 등록</span></h1>
-<div class="container">
-    <form action ="/notice/insertNotice.do" method="post"  onsubmit="return check();">
-        <table class="form-table">
+<div class="container1">
+    <form name="f" action="/notice/noticeInsert.do" method="post" onsubmit="return check()">
+        <input type="hidden" name="id" value="${getNotice.id}" />
+        <h2>글 쓰 기</h2>
+        <table border="1">
             <tr>
-                <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+                <th>제 목</th>
+                <td><input type="text" name="title" class="box" size="50"></td>
             </tr>
             <tr>
-                <td><textarea name="content" rows="10" cols="50" placeholder="내용을 입력하세요"></textarea></td>
+                <th>아이디</th>
+                <td><input type="text" name="author" class="box"></td>
             </tr>
-            <td>
-                <div>
-                    <button type="submit" align="center">등록</button>
-                    <button type="button" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'">공지사항 목록 보기</button>
-                </div>
-            </td>
+            <tr>
+                <th>내 용</th>
+                <td><textarea name="content" rows="11" cols="50" class="box"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="글쓰기">
+                    <input type="reset" value="다시작성">
+                    <input type="button" value="목록보기" onclick="window.location='/notice/noticeList.do'">
+                </td>
+            </tr>
         </table>
     </form>
+
 </div>
 <jsp:include page="../footer.jsp"/>
+
+
+
+
+
+
+
+

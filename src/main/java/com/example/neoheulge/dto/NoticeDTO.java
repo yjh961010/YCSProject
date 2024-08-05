@@ -1,6 +1,6 @@
 package com.example.neoheulge.dto;
 
-import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +8,11 @@ import lombok.Setter;
 @Setter
 public class NoticeDTO {
     private int id;
-    private String title;
     private String author;
+    private String title;
     private String content;
+    private String createtime;
     private int views;
-    private Date createTime;
+    private int re_step;
+    private int re_level;
 }
