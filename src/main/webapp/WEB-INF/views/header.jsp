@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
     <title>적금 사이트</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainStyle.css">
     
@@ -47,7 +49,7 @@
         </div>
             <nav>
                 <a href="${pageContext.request.contextPath}/commu/commuList.do">커뮤니티</a>
-                <a href="${pageContext.request.contextPath}/notice/noticeboard.do">공지사항</a>
+                <a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a>
                 <a href="#products">상품 목록</a>
                 <a href="#help">고객지원</a>
                 <a href="${pageContext.request.contextPath}/admin/adminmember.do">회원관리</a>
