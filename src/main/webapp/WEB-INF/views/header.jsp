@@ -71,6 +71,7 @@
                 <a href="/notice/noticeList.do">공지사항</a>
                 <a href="#products">상품 목록</a>
                 <a href="/qna/qnaList.do">고객지원</a>
+                <a href="/admin/adminMember.do">회원관리</a>
             </nav>
         </div>
     </header>
