@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
 <div align="center">
-	<h3>커 뮤 니 티</h3>
+	<h3>고 객 지 원</h3>
 	<table border="0" width="100%">
 		<tr bgcolor="yellow">
 			<td align="right">
-				<a href="/commu/commuWrite.do">글쓰기</a>
+				<a href="/qna/qnaWrite.do">글쓰기</a>
 			</td>
 		</tr>
 	</table>
@@ -21,16 +21,16 @@
 			<th>조회</th> 
 			
 		</tr>
-	<c:if test="${empty commuList}">		
+	<c:if test="${empty qnaList}">		
 		<tr>
 			<td colspan="6">등록된 게시글이 없습니다.</td>
 		</tr>
 	</c:if>	
-	<c:forEach var="dto" items="${commuList}">
+	<c:forEach var="dto" items="${qnaList}">
 		<tr>
 			<td align="center">${dto.id}</td>
 			<td align="left">
-				<a href="/commu/commuContent.do?id=${dto.id}">${dto.subject}</a>
+				<a href="/qna/qnaContent.do?id=${dto.id}">${dto.subject}</a>
 				<c:if test="${dto.views > 10}">
 					<img src="img/hot.gif">
 				</c:if>

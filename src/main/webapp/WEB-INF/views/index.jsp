@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <jsp:include page="header.jsp"/>
 
@@ -41,28 +42,28 @@
         <div class="product-list">
             <div class="product-item">
                 <div class="circle">
-                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
                     <div class="amount">100,000원</div>
                 </div>
                 <h3 class="product-name">상품 1</h3>
             </div>
             <div class="product-item">
                 <div class="circle">
-                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
                     <div class="amount">325,000원</div>
                 </div>
                 <h3 class="product-name">상품 2</h3>
             </div>
             <div class="product-item">
                 <div class="circle">
-                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
                     <div class="amount">505,000원</div>
                 </div>
                 <h3 class="product-name">상품 3</h3>
             </div>
             <div class="product-item">
                 <div class="circle">
-                    <img src="images/money.jpg" class="circle-bg" alt="상품 이미지">
+                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
                     <div class="amount">900,000원</div>
                 </div>
                 <h3 class="product-name">상품 4</h3>
@@ -89,12 +90,16 @@
             </div>
             <div class="community-posts">
                 <div>
-                    <h3>커뮤니티</h3>
-                    <p>글 내용 요약...</p>
-                    <p>글 내용 요약...</p>
-                    <p>글 내용 요약...</p>
-                    <p>글 내용 요약...</p>
-                    <p>글 내용 요약...</p>
+                   <h3>커뮤니티</h3>
+                 <c:forEach var="dto" items="${commuList}" varStatus="status">
+				   <c:if test="${status.index < 5}">
+				<p>
+				<a href="/commu/commuContent.do?id=${dto.id}">
+				${dto.subject}
+				</a>
+				</p>
+				</c:if>
+                </c:forEach>
                 </div>
             </div>
             <div class="community-prizes">
