@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,20 +62,15 @@
 <body>
 <header>
         <div class="container">
-        <img alt ="main"
-            src="${pageContext.request.contextPath}/img/logo.jpg"
-            style="width: 90px; height: 60px; vertical-alignt: bottom">
             <h1><a href="/index.do">neoheulge</a></h1>
             <div class="scrolling-text-container">
-            
             <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
         </div>
             <nav>
-                <a href="${pageContext.request.contextPath}/commu/commuList.do">커뮤니티</a>
-                <a href="${pageContext.request.contextPath}/notice/noticeboard.do">공지사항</a>
+                <a href="/commu/commuList.do">커뮤니티</a>
+                <a href="/notice/noticeList.do">공지사항</a>
                 <a href="#products">상품 목록</a>
-                <a href="/admin/adminMember.do">회원관리</a>
-                <a href="${pageContext.request.contextPath}/qna/qnaList.do">고객지원</a>
+                <a href="/qna/qnaList.do">고객지원</a>
             </nav>
         </div>
     </header>

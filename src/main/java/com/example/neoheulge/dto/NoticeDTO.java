@@ -1,5 +1,18 @@
 package com.example.neoheulge.dto;
 
-public class NoticeDTO {
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class NoticeDTO {
+    private int id;
+    private String author;
+    private String title;
+    private String content;
+    private String createtime;
+    private int views;
+    private int re_step;
+    private int re_level;
 }
