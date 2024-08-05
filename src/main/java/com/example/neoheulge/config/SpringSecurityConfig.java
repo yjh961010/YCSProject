@@ -35,7 +35,12 @@ public class SpringSecurityConfig {
 	            .failureHandler(new CustomAuthenticationFailureHandler()) // 커스텀 핸들러 추가
 	            .defaultSuccessUrl("/")
 	            .permitAll()  // 로그인 페이지는 모든 사용자에게 허용
+	         
 	        )
+	        .logout((logout) -> logout
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	                .logoutSuccessUrl("/")
+	                .invalidateHttpSession(true))
 	        .httpBasic(basic -> basic.disable()); // HTTP Basic 인증 비활성화
 	    return http.build();
 	}
