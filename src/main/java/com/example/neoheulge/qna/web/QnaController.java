@@ -24,9 +24,41 @@ public class QnaController {
 	QnaService qnaService;
 	
 	@GetMapping("/qnaList.do")
-	public String qnaList(HttpServletRequest req) {
+	public String qnaList(HttpServletRequest req,@RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "searchType", required = false, defaultValue = "all") String searchType) {
+		int pageSize = 5; // 한 페이지당 보여줄 게시물 수
+	    String pageNumStr = req.getParameter("pageNum"); // 현재 페이지 번호를 파라미터로 받아옴
+
+	    int pageNum = (pageNumStr == null) ? 1 : Integer.parseInt(pageNumStr); // 현재 페이지 번호, 기본값은 1
+		
 		List<QnaDTO> list = qnaService.qnaList();
-		req.setAttribute("qnaList", list);
+		int totalCount;
+	    
+	    if (search != null && !search.isEmpty()) {
+	    	list = qnaService.searchQnaList(searchType, search);
+            totalCount = list.size(); // 검색 결과의 전체 게시물 수
+        } else {
+            list = qnaService.qnaList();
+            totalCount = list.size(); // 전체 게시물 수
+        }
+		
+	    int start = (pageNum - 1) * pageSize;
+	    int end = Math.min(start + pageSize, totalCount);
+	    List<QnaDTO> paginatedList = list.subList(start, end);
+	    
+	    int pageCount = (int) Math.ceil((double) totalCount / pageSize); // 전체 페이지 수
+	    int pageBlock = 5; // 페이지 블록 사이즈
+	    int startPage = (pageNum - 1) / pageBlock * pageBlock + 1; // 시작 페이지 번호
+	    int endPage = Math.min(startPage + pageBlock - 1, pageCount); // 끝 페이지 번호
+
+	    req.setAttribute("count", totalCount);
+	    req.setAttribute("qnaList", paginatedList); // 현재 페이지에 해당하는 게시판 목록
+	    req.setAttribute("pageNum", pageNum); // 현재 페이지 번호
+	    req.setAttribute("pageCount", pageCount); // 전체 페이지 수
+	    req.setAttribute("startPage", startPage); // 시작 페이지 번호
+	    req.setAttribute("endPage", endPage); // 끝 페이지 번호
+	    req.setAttribute("search", search);
+	    req.setAttribute("searchType", searchType);
 		return "qna/qnaList";
 	}
 	
