@@ -3,7 +3,7 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
-<link rel="stylesheet" type="text/css" href="/css/commu/commuStyle.css">
+<link rel="stylesheet" type="text/css" href="/css/qna/qnaStyle.css">
 <script>
         function performSearch() {
             var searchType = document.getElementById("searchType").value;
@@ -19,8 +19,8 @@
             }
         }
     </script>
-<div class="commu">
-        <h2>커뮤니티</h2>
+<div class="qna">
+        <h2>고객지원</h2>
         <br>
         <div class="search-form">
               <select id="searchType">
@@ -31,17 +31,17 @@
         <input type="text" placeholder="검색어를 입력하세요" id="search" value="${search}">
         <button onclick="performSearch()">검색</button>
         </div>
-        <div id="commu">
+        <div id="qna">
             <table align="right">
                 <tr>
                   <td>
-                   <a href="/commu/commuWrite.do" class="write-btn">글쓰기</a>
+                   <a href="/qna/qnaWrite.do" class="write-btn">글쓰기</a>
                   </td>
                 </tr>
             </table>
-            <table class="commu-table">
+            <table class="qna-table">
                 <thead>
-                <tr class="commu-header">
+                <tr class="qna-header">
                     <th>번호</th>
                     <th>제목</th>
                     <th>작성자</th>
@@ -50,16 +50,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:if test="${empty commuList}">
+                <c:if test="${empty qnaList}">
                     <tr>
-                        <td colspan="4" class="no-data">등록된 게시글이 없습니다.</td>
+                        <td colspan="4" class="no-data">등록된 문의글이 없습니다.</td>
                     </tr>
                 </c:if>
-                <c:forEach var="dto" items="${commuList}">
-                    <tr class="commu-row">
+                <c:forEach var="dto" items="${qnaList}">
+                    <tr class="qna-row">
                         <td align="center">${dto.id}</td>
                         <td align="left">
-                            <a href="/commu/commuContent.do?id=${dto.id}" class="commu-link">${dto.subject}</a>
+                            <a href="/qna/qnaContent.do?id=${dto.id}" class="qna-link">${dto.subject}</a>
                         </td>
                         <td align="center">${dto.author}</td>
                         <td align="center">${dto.createtime}</td>
@@ -69,7 +69,7 @@
                 </tbody>
             </table>
 
-            <c:if test="${not empty commuList}">
+            <c:if test="${not empty qnaList}">
                 <div class="pagination">
                        
                     <%
@@ -84,17 +84,17 @@
                     %>
                        
                     <% if (startPage > pageBlock) { %>
-                    <a href="/commu/commuList.do?pageNum=<%=startPage-pageBlock%>">&laquo; 이전</a>
+                    <a href="/qna/qnaList.do?pageNum=<%=startPage-pageBlock%>">&laquo; 이전</a>
                     <% } %>
 
                       
                     <% for (int i = startPage; i <= endPage; ++i) { %>
-                    <a href="/commu/commuList.do?pageNum=<%=i%>" class="<%= (i == currentPage) ? "active" : "" %>"><%=i%></a>
+                    <a href="/qna/qnaList.do?pageNum=<%=i%>" class="<%= (i == currentPage) ? "active" : "" %>"><%=i%></a>
                     <% } %>
 
                       
                     <% if (endPage < pageCount) { %>
-                    <a href="/commu/commuList.do?pageNum=<%=startPage+pageBlock%>">다음 &raquo;</a>
+                    <a href="/qna/qnaList.do?pageNum=<%=startPage+pageBlock%>">다음 &raquo;</a>
                     <% } %>
                 </div>
             </c:if>
