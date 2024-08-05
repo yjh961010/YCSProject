@@ -61,36 +61,24 @@
        <section id="products" class="products">
     <div class="container">
         <h2>상품 목록</h2>
-        <div class="product-list">
-            <div class="product-item">
-                <div class="circle">
-                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
-                    <div class="amount">100,000원</div>
-                </div>
-                <h3 class="product-name">상품 1</h3>
+        <div class="container">
+        <div class="box-wrapper">
+            <div class="box-container">
+                <div id="box-fill-1" class="box-fill"></div>
+                <div id="box-label-1" class="box-label">150,000원</div>
             </div>
-            <div class="product-item">
-                <div class="circle">
-                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
-                    <div class="amount">325,000원</div>
-                </div>
-                <h3 class="product-name">상품 2</h3>
+            <div class="box-container">
+                <div id="box-fill-2" class="box-fill"></div>
+                <div id="box-label-2" class="box-label">700,000원</div>
             </div>
-            <div class="product-item">
-                <div class="circle">
-                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
-                    <div class="amount">505,000원</div>
-                </div>
-                <h3 class="product-name">상품 3</h3>
+            <div class="box-container">
+                <div id="box-fill-3" class="box-fill"></div>
+                <div id="box-label-3" class="box-label">500,000원</div>
             </div>
-            <div class="product-item">
-                <div class="circle">
-                    <img src="img/money.jpg" class="circle-bg" alt="상품 이미지">
-                    <div class="amount">900,000원</div>
-                </div>
-                <h3 class="product-name">상품 4</h3>
+            <div class="box-container">
+                <div id="box-fill-4" class="box-fill"></div>
+                <div id="box-label-4" class="box-label">1,000,000원</div>
             </div>
-            <!-- 추가 상품들 -->
         </div>
     </div>
 </section>
