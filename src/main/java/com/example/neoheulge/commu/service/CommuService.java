@@ -1,6 +1,8 @@
 package com.example.neoheulge.commu.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,11 @@ public class CommuService {
 			return sqlSession.update("commuUpdate", dto);
 		}
 	 
-
+	 public List<CommuDTO> searchCommuList(String searchType, String search) {
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("searchType", searchType);
+	        params.put("search", search);
+	        return sqlSession.selectList("searchCommuList", params);
+	    }
 
 }

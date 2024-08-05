@@ -1,6 +1,8 @@
 package com.example.neoheulge.qna.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,17 @@ public class QnaService {
 		}
 	 
 	 public int qnaDelete(int id) {
-		 return sqlSession.delete("QnaDelete",id);
+		 return sqlSession.delete("qnaDelete",id);
 	 }
 	 
 	 public int qnaUpdate(QnaDTO dto) {
-			return sqlSession.update("QnaUpdate", dto);
+			return sqlSession.update("qnaUpdate", dto);
 		}
+	 
+	 public List<QnaDTO> searchQnaList(String searchType, String search) {
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("searchType", searchType);
+	        params.put("search", search);
+	        return sqlSession.selectList("searchQnaList", params);
+	    }
 }

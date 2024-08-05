@@ -43,5 +43,20 @@
 		update neq_a set
 		subject=#{subject},content=#{content} where id=#{id}
 	</update>
+	
+	<select id="searchQnaList" parameterType="map" resultType="QnaDTO">
+    select *
+    from neq_a
+    where 
+    <if test="searchType == 'subject'">
+        subject LIKE '%' || #{search} || '%'
+    </if>
+    <if test="searchType == 'author'">
+        author LIKE '%' || #{search} || '%'
+    </if>
+    <if test="searchType == 'all'">
+        (subject LIKE '%' || #{search} || '%' OR author LIKE '%' || #{search} || '%')
+    </if>
+	</select>
 
 </mapper>
