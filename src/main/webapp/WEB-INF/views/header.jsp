@@ -40,8 +40,12 @@
 <body>
 <header>
         <div class="container">
+        <img alt ="main"
+            src="${pageContext.request.contextPath}/img/logo.jpg"
+            style="width: 90px; height: 60px; vertical-alignt: bottom">
             <h1><a href="/index.do">neoheulge</a></h1>
             <div class="scrolling-text-container">
+            
             <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
         </div>
             <nav>

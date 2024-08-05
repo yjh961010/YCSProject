@@ -3,8 +3,17 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
-<jsp:include page="header.jsp"/>
 
+
+<jsp:include page="header.jsp"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+
+<div class="img-container-size">
+<div class="img=box-center">
+<img class="img" src="http://lorempixel.com/1920/400/sports/10/" alt="">
+</div>
+</div>
     <main>
          <section class="hero">
             <div class="hero-content">
