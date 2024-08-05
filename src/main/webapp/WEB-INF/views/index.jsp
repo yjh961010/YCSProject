@@ -25,6 +25,7 @@
 			    <sec:authorize access="isAuthenticated()">
 			        <!-- 로그아웃 버튼을 표시합니다. -->
 			        <h2>로그아웃</h2>
+			        <sec:authentication property="principal.Username"/>
 			        <form action="<c:url value='/logout' />" method="post">
 			            <button type="submit">로그아웃</button>
 			        </form>
