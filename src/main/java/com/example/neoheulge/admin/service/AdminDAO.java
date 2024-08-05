@@ -1,5 +1,12 @@
-package com.example.neohuelge.admin.service;
+package com.example.neoheulge.admin.service;
 
-public class AdminDAO {
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.neoheulge.dto.MemberDTO;
+@Mapper
+public interface AdminDAO {
+	List<MemberDTO> memberAll();
 
 }
