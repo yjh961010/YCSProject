@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
 <link rel="stylesheet" type="text/css" href="/css/commu/commuStyle.css">
-<script>
+<script> 
         function performSearch() {
             var searchType = document.getElementById("searchType").value;
             var searchTerm = document.getElementById("search").value.trim();
