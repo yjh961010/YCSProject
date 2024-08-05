@@ -1,6 +1,8 @@
 package com.example.neoheulge.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +13,39 @@ import com.example.neoheulge.dto.MemberDTO;
 
 @Service
 public class AdminService {
-	@Autowired
-	private AdminDAO admindao;
-	
 
-    // 캐시 이름을 'members'로 지정하고, 캐시 키를 자동 생성 (member 테이블에 변동있으면
-					//members캐시도 관리해줘야함
-    @Cacheable(value = "members", key = "'allMembers'")
-    public List<MemberDTO> MemberAll() {
-        // 캐시에 데이터가 없으면 데이터베이스에서 조회
-        List<MemberDTO> mList = admindao.memberAll();
-        return mList;
+    @Autowired
+    private AdminDAO admindao;
+
+    // 캐시 이름을 'members'로 지정하고, 캐시 키를 자동 생성
+    @Cacheable(value = "members", key = "'allMembers::' + #offset + ':' + #size")
+    public List<MemberDTO> MemberAll(int offset, int size) {
+        // 파라미터를 Map에 담아서 DAO에 전달
+        Map<String, Object> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("size", size);
+        List<MemberDTO> members = admindao.memberAll(params);
+        System.out.println("Fetched members: " + members.size());
+        return admindao.memberAll(params);
+        
     }
-	
 
+    @Cacheable(value = "members", key = "'search::' + #searchType + ':' + #searchKeyword + ':' + #offset + ':' + #size")
+    public List<MemberDTO> searchMember(String searchType, String searchKeyword, int offset, int size) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("searchType", searchType);
+        params.put("searchKeyword", searchKeyword);
+        params.put("offset", offset);
+        params.put("size", size);
+        return admindao.searchMember(params);
+    }
+
+    // 총 데이터 개수 반환
+    public int getTotalCount(String searchType, String searchKeyword) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("searchType", searchType);
+        params.put("searchKeyword", searchKeyword);
+        return admindao.getTotalCount(params);
+    }
+    
 }
