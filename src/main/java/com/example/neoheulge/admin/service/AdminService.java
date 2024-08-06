@@ -48,4 +48,9 @@ public class AdminService {
         return admindao.getTotalCount(params);
     }
     
+    public MemberDTO findMemberById(String memberID) {
+    	MemberDTO mdto = admindao.findMember(memberID);
+     System.out.println("memberDATE:"+mdto.getSignup_date());
+    	return admindao.findMember(memberID);
+    }
 }

@@ -58,5 +58,8 @@
             </choose>
         </where>
     </select>
+    <select id ="findMember" parameterType="String" resultType="MemberDTO">
+   SELECT *	FROM nemember WHERE memberid = #{memberID}
+    </select>
 
 </mapper>

@@ -16,7 +16,7 @@
         <table class="form-table">
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" class="box" size="50" value="${getNotice.title}"></td>
+                <td><input type="text" name="title" class="box" size="50" value="${getNotice.subject}"></td>
             </tr>
             <tr>
                 <th>이름</th>
