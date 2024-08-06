@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@EnableWebSecurity(debug = false)
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 public class SpringSecurityConfig {
 
