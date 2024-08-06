@@ -26,9 +26,7 @@ public class PurproductService {
     }
 
     // 만기된 가입 중 하나를 랜덤으로 선택하여 골든볼 등록
-    public void registerGoldenBallForExpiredSubscriptions(Map<String, Object> params) {
-        sqlSession.update("registerGoldenBallForExpiredSubscriptions", params);
-    }
+
 
     // 만기된 가입의 기본 이율 반환
     public Double getBaseRateForExpiredSubscriptions(String subscriptionId) {
