@@ -82,7 +82,7 @@
 								<c:otherwise>
 									<span>[질문] : </span>
 								</c:otherwise>
-							</c:choose> <a href="/commu/commuContent.do?id=${dto.id}" class="commu-link">${dto.subject}</a>
+							</c:choose> <a href="/qna/qnaContent.do?id=${dto.id}" class="qna-link">${dto.subject}</a>
 						</td>
 						<td align="center">${dto.author}</td>
 						<td align="center">${dto.createtime}</td>

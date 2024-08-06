@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
-<!-- content.jsp -->
 <!DOCTYPE html>
-<jsp:include page="../header.jsp"/>
+<html lang="ko">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/qna/qnaContent.css">
+<jsp:include page="../header.jsp"/>
 <script> 
 function checkLogin() {
                 alert("로그인이 필요합니다.");
@@ -46,7 +47,6 @@ function checkWriteId(username){
 
 
 <div class="container1">
-	<b>글내용 보기</b>
 		<h2>글내용 보기</h2>
         <table>
             <tr>
