@@ -28,7 +28,7 @@ public class HomeController {
 	@GetMapping("/index.do")
 	public String home(HttpServletRequest req) {
 		List<NoticeDTO> noticelist = noticeService.noticeList();
-		req.setAttribute("noticelist", noticelist);
+		req.setAttribute("noticeList", noticelist);
 		List<CommuDTO> commulist = commuService.commuList();
 		req.setAttribute("commuList", commulist);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
