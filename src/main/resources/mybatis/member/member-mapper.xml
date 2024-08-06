@@ -11,6 +11,6 @@
 
 	</insert>
 	<select id="findById" parameterType="String" resultType="CustomMemberDetails">
-	select * from nemember where memberID = #{memberID}
+	select memberid, grade as authority, password, name from nemember where memberID = #{memberID}
 	</select>
 </mapper>
