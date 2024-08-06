@@ -58,4 +58,17 @@ public class AdminController {
         //System.out.println("totalPages:" + totalPages);
         return response;
     }
+    @GetMapping("/updateMemberForm.do")
+    public String showUpdateForm(@RequestParam("memberID") String memberID, Model model) {
+        // memberID를 사용하여 데이터베이스에서 회원 정보를 조회합니다.
+        MemberDTO mdto = adminservice.findMemberById(memberID);
+        
+        // 모델에 회원 정보를 추가합니다.
+        model.addAttribute("member", mdto);
+        System.out.println("memberID: "+ mdto.getMemberID());
+     //   System.out.println("memberDATE:"+mdto.getSignup_date());
+        // 업데이트 페이지로 이동합니다.
+        return "admin/updateMemberForm"; // JSP 페이지 이름
+    }
+    
 }
