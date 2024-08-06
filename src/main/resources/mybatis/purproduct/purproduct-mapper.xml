@@ -28,12 +28,12 @@
 	</select>
 	
 	<!-- 전체정보 가져오기 (회원ID,상품ID) -->
-	<select id="getAllSubscriptionsByMemberId" parameterType="String" resultType="Map">
+ 	<select id="getAllSubscriptionsByMemberId222" parameterType="String" resultType="Map">
 	    SELECT * 
 	    FROM nepreSavProd
 	    WHERE member_id = #{memberId}
 	    AND product_code = #{productCode}
-	</select>
+	</select> 
 	
 	<!-- 상품 해지(회원 상태변경, 포기 환급액, 해지 날짜 기록) -->
 	<update id="terminateSubscription" parameterType="Map">
@@ -160,7 +160,7 @@
 	</update>
 
 	<!-- 결제는 따로 가입 -->	<!-- 자동결제 등록 -->
-	<insert id="insertSubscription" parameterType="Map">
+<!-- 	<insert id="insertSubscription" parameterType="Map">
  		INSERT INTO nepreSavProd (
 			auto_enabled, auto_amount, 
 	        auto_cycle, auto_account, auto_date
@@ -168,7 +168,7 @@
 			'Y', #{autoAmount}, 
 	        #{autoCycle}, #{autoAccount}, #{autoDate}
 	    )
-	</insert>
+	</insert> -->
 
 	
 	<!-- 자동결제 수정 -->
