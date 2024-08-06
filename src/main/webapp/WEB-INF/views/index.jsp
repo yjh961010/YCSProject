@@ -93,7 +93,7 @@
                             <c:if test="${status.index < 5}">
                                 <p>
                                     <a href="/notice/noticeView.do?id=${dto.id}">
-                                            ${dto.title}
+                                            ${dto.subject}
                                     </a>
                                 </p>
                             </c:if>
