@@ -25,15 +25,15 @@ public class HomeController {
     @Autowired
     private NoticeService noticeService;
 
-	@GetMapping("/index.do")
+	@GetMapping(value = {"/", "/index.do"})
 	public String home(HttpServletRequest req) {
 		List<NoticeDTO> noticelist = noticeService.noticeList();
 		req.setAttribute("noticeList", noticelist);
 		List<CommuDTO> commulist = commuService.commuList();
 		req.setAttribute("commuList", commulist);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.out.println(username);
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        System.out.println(username);
 		return "index";
 	}
 }
