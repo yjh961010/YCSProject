@@ -1,5 +1,6 @@
 package com.example.neoheulge.dto;
 
+
 import java.util.Date;
 
 public class MemberDTO {
