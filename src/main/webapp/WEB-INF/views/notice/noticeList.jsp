@@ -33,14 +33,19 @@
         <input type="text" placeholder="검색어를 입력하세요" id="search" value="${search}">
         <button onclick="performSearch()">검색</button>
     </div>
-    <div id="commu">
-        <table align="right">
-            <tr>
-                <td>
-                    <a href="/notice/noticeInsert.do" class="write-btn">글쓰기</a>
-                </td>
-            </tr>
-        </table>
+    <div id="notice">
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal.username" var="username" />
+            <c:if test="${username eq 'admin'}">
+                <table align="right">
+                    <tr>
+                        <td>
+                            <a href="/notice/noticeInsert.do" class="write-btn">글쓰기</a>
+                        </td>
+                    </tr>
+                </table>
+            </c:if>
+        </sec:authorize>
         <table class="notice-table">
             <thead>
             <tr class="notice-header">
