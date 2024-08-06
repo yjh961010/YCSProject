@@ -71,13 +71,24 @@
                     <tr class="qna-row">
                         <td align="center">${dto.id}</td>
                         <td align="left">
-                            <a href="/qna/qnaContent.do?id=${dto.id}" class="qna-link">${dto.subject}</a>
-                        </td>
-                        <td align="center">${dto.author}</td>
-                        <td align="center">${dto.createtime}</td>
-                        <td align="right">${dto.views}</td>
-                    </tr>
-                </c:forEach>
+                            <!-- 're_level'에 따라 공백 추가 --> <c:choose>
+								<c:when test="${dto.re_level > 0}">
+									<c:forEach var="i" begin="1" end="${dto.re_level}">
+										<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+										<!-- 4 공백 -->
+									</c:forEach>
+									<span>ㄴ[답변]: </span>
+								</c:when>
+								<c:otherwise>
+									<span>[질문] : </span>
+								</c:otherwise>
+							</c:choose> <a href="/commu/commuContent.do?id=${dto.id}" class="commu-link">${dto.subject}</a>
+						</td>
+						<td align="center">${dto.author}</td>
+						<td align="center">${dto.createtime}</td>
+						<td align="right">${dto.views}</td>
+					</tr>
+				</c:forEach>
                 </tbody>
             </table>
 
