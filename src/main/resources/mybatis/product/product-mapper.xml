@@ -14,7 +14,7 @@
 	        minimum_deposit, maximum_deposit, start_date, end_date,  
 	        product_description
 	    ) VALUES (
-	        #{productCode}, #{productName}, #{baseRate}, #{goldenballRate},
+	        product_code_seq.nextval, #{productName}, #{baseRate}, #{goldenballRate},
 	        #{subscriptionMethod}, #{subscriptionPeriod}, 0,
 	        #{terminationConditions}, #{earlyFee}, #{productStatus},
 	        #{minimumDeposit}, #{maximumDeposit}, #{startDate}, NULL,  <!-- end_date를 NULL로 설정(트리거) -->
@@ -68,7 +68,7 @@
 	<!-- interestRateType 필수 -->
 	<update id="updateAccumulatedAmountOnTermination" parameterType="Map">
 	    UPDATE nepreSavProd
-	    SET accumulated_amount = (
+	    SET accumulated_amount = NVL(accumulated_amount, 0) +(
 	        (SELECT
 	            (nps.subscription_amount + nps.auto_amount) +
 	            ((nps.subscription_amount + nps.auto_amount) *
