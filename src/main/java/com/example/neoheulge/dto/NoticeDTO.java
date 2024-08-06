@@ -9,7 +9,7 @@ import lombok.Setter;
 public class NoticeDTO {
     private int id;
     private String author;
-    private String subject;
+    private String title;
     private String content;
     private String createtime;
     private int views;

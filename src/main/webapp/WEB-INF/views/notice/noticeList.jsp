@@ -27,7 +27,7 @@
     <div class="search-form">
         <select id="searchType">
             <option value="all" <c:if test="${searchType == 'all'}">selected</c:if>>전체</option>
-            <option value="subject" <c:if test="${searchType == 'subject'}">selected</c:if>>제목</option>
+            <option value="title" <c:if test="${searchType == 'subject'}">selected</c:if>>제목</option>
             <option value="author" <c:if test="${searchType == 'author'}">selected</c:if>>작성자</option>
         </select>
         <input type="text" placeholder="검색어를 입력하세요" id="search" value="${search}">
@@ -66,7 +66,7 @@
                 <tr class="notice-row">
                     <td align="center">${dto.id}</td>
                     <td align="left">
-                        <a href="/notice/noticeView.do?id=${dto.id}" class="notice-link">${dto.subject}</a>
+                        <a href="/notice/noticeView.do?id=${dto.id}" class="notice-link">${dto.title}</a>
                     </td>
                     <td align="center">${dto.author}</td>
                     <td align="center">${dto.createtime}</td>
