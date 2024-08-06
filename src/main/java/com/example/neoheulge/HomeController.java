@@ -2,6 +2,8 @@ package com.example.neoheulge;
 
 import java.util.List;
 
+import com.example.neoheulge.dto.NoticeDTO;
+import com.example.neoheulge.notice.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,17 +19,21 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	CommuService commuService;
-	
-	@GetMapping("/index.do")
+    @Autowired
+    private NoticeService noticeService;
+
+	@GetMapping(value = {"/", "/index.do"})
 	public String home(HttpServletRequest req) {
-		List<CommuDTO> list = commuService.commuList();
-		req.setAttribute("commuList", list);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.out.println(username);
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        System.out.println(username);
 		return "index";
 	}
 }

@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <th>글제목</th>
-            <td colspan="3">${getNotice.title}</td>
+            <td colspan="3">${getNotice.subject}</td>
         </tr>
         <tr>
             <th>글내용</th>

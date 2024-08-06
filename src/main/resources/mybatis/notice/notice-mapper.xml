@@ -10,7 +10,7 @@
 
     <insert id="noticeInsert" parameterType="NoticeDTO">
         insert into nenotice values(nenotice_seq.nextval,
-        #{author},#{title},#{content}, sysdate, 0,
+        #{author},#{subject},#{content}, sysdate, 0,
         #{re_step},#{re_level})
     </insert>
 
@@ -32,7 +32,7 @@
 
     <update id="noticeEdit" parameterType="NoticeDTO">
         update nenotice set
-        title=#{title},content=#{content} where id=#{id}
+        subject=#{subject},content=#{content} where id=#{id}
     </update>
 
 
@@ -41,13 +41,13 @@
         from nenoticenity
         where
         <if test="searchType == 'title'">
-            title LIKE '%' || #{search} || '%'
+            subject LIKE '%' || #{search} || '%'
         </if>
         <if test="searchType == 'author'">
             author LIKE '%' || #{search} || '%'
         </if>
         <if test="searchType == 'all'">
-            (title LIKE '%' || #{search} || '%' OR author LIKE '%' || #{search} || '%')
+            (subject LIKE '%' || #{search} || '%' OR author LIKE '%' || #{search} || '%')
         </if>
     </select>
 
