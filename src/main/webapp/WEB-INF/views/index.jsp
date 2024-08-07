@@ -37,8 +37,7 @@
     </div>
 </div>
 <main>
-    <section class="hero">
-        <div class="hero-content">
+   <div class="hero-container">
             <div class="slideshow-container">
                 <div class="slides fade">
                     <img src="img/images1.jpg" width="100%" height="280">
@@ -81,30 +80,28 @@
                 </sec:authorize>
             </div>
         </div>
-    </section>
+    
 
-    <section id="products" class="products">
+   
 
             <h2>상품 목록</h2>
             <div class="container">
-                <div class="box-wrapper">
-                    <c:forEach var="dto" items="${prodList}" >
-		                    <div class="box-container">
-		                        <div id="box-fill-1" class="box-fill"></div>
-		                        <div id="box-label-1" class="box-label">
-			                        ${dto.product_name}
-			                        ${dto.start_date}
-			                        ${dto.accumulated_amount}
-		                        </div>
-		                    </div>
-                    </c:forEach>
-
+    <div class="box-wrapper">
+        <c:forEach var="dto" items="${prodList}" varStatus="status">
+            <div class="box-container">
+                <div id="box-fill-${status.index}" class="box-fill"></div>
+                <div id="box-label-${status.index}" class="box-label">
+                    ${dto.product_name}
+                    ${dto.start_date}
+                    ${dto.accumulated_amount}
                 </div>
             </div>
-    </section>
+        </c:forEach>
+    </div>
+</div>
+   
 
-
-    <section id="community" class="community">
+    
         <div class="container">
             <h2>커뮤니티</h2>
             <div class="community-content">
@@ -145,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </section>
+   
 
 
 </main>

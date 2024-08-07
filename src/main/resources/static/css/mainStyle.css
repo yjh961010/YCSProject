@@ -9,9 +9,9 @@ body {
     padding: 0;
     color: #333;
     /* 최소 너비 설정 및 가로 스크롤 허용 */
-     min-width: 1200px;
+    min-width: 1200px;
     overflow-x: auto;
-}
+} 
 
 /* 컨테이너 클래스 - 콘텐츠의 최대 너비 제한 */
 .container {
@@ -23,6 +23,17 @@ body {
     box-sizing: border-box;
 }
 
+.hero-container {
+	display: flex;
+    max-width: 1200px;
+    width: 100%;
+	min-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
 /* 헤더 스타일 */
 header {
     background: #004d99;
@@ -32,7 +43,7 @@ header {
 
 /* 헤더 내 컨테이너 스타일 */
 header .container {
-    display: flex;
+  display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -57,21 +68,6 @@ nav a:hover {
 /* 메인 콘텐츠 영역 스타일 */
 main {
     padding: 2em 0;
-}
-
-/* 히어로 섹션 스타일 */
-.hero {
-    background: #ffffff;
-    padding: 2em 0;
-    text-align: center;
-}
-
-/* 히어로 콘텐츠 레이아웃 */
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
 }
 
 /* 로그인 폼 스타일 */
@@ -247,7 +243,7 @@ footer {
 }
 
 .community-posts {
-    flex: 0 0 36%;
+    flex: 0 0 35%;
     margin-right: 0;
 }
 
