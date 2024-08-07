@@ -28,7 +28,7 @@ CREATE TABLE nepreSavProd (
     auto_date       VARCHAR2(10)                    			-- 자동결제 시작일
 );
 
-시퀀스 생성(상품 코드)
+--시퀀스 생성(상품 코드)
 CREATE SEQUENCE subscription_id_seq
 START WITH 1
 INCREMENT BY 1;
@@ -53,7 +53,7 @@ CREATE TABLE neSavProd (
     	product_description  		VARCHAR2(2500)                   	-- 상품 설명
 );
 
-트리거 생성(시작일 입력시 자동으로 종료일 생성)
+--트리거 생성(시작일 입력시 자동으로 종료일 생성)
 CREATE OR REPLACE TRIGGER set_end_date
 BEFORE INSERT OR UPDATE ON neSavProd
 FOR EACH ROW
@@ -72,7 +72,7 @@ BEGIN
     END IF;
 END;
 
-시퀀스 생성(상품 코드)
+--시퀀스 생성(상품 코드)
 CREATE SEQUENCE product_code_seq
 START WITH 1
 INCREMENT BY 1;
@@ -88,7 +88,7 @@ CREATE TABLE nenotice (
     re_level       NUMBER DEFAULT 0           -- 답글의 레벨 (깊이)
 );
 
-시퀀스 생성(공지)
+--시퀀스 생성(공지)
 create sequence nenotice_seq;
 
 
@@ -103,7 +103,7 @@ CREATE TABLE necommunity (
     re_level       NUMBER DEFAULT 0           -- 답글의 레벨 (깊이)
 );
 
-시퀀스 생성(커뮤니티)
+--시퀀스 생성(커뮤니티)
 create sequence necommunity_seq;
 
 CREATE TABLE neq_a (
@@ -117,5 +117,5 @@ CREATE TABLE neq_a (
     re_level       NUMBER DEFAULT 0           -- 답글의 레벨 (깊이)
 );
 
-시퀀스 생성(Q&A)
+--시퀀스 생성(Q&A)
 create sequence neq_a_seq;
