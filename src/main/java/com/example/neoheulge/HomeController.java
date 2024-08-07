@@ -36,4 +36,13 @@ public class HomeController {
 //        System.out.println(username);
 		return "index";
 	}
+
+	@GetMapping("/viewNotice.do")
+	public String content(HttpServletRequest req) {
+		NoticeDTO dto = noticeService.lastNotice();
+		req.setAttribute("getNotice",dto);
+		System.out.println(dto.getId());
+		return "viewNotice";
+	}
+
 }

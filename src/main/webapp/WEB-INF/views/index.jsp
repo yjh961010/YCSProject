@@ -6,6 +6,12 @@
 <jsp:include page="header.jsp"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+<script>
+    function viewNotice() {
+        var noticeWindow = window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=300");
+    }
+    viewNotice();
+</script>
 
 <div class="img-container-size">
     <div class="img=box-center">

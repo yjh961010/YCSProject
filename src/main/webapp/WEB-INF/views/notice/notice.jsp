@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <th>제 목</th>
-                <td><input type="text" name="title" class="box" size="50"></td>
+                <td><input type="text" name="subject" class="box" size="50"></td>
             </tr>
             <tr>
                 <th>아이디</th>

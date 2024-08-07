@@ -40,7 +40,7 @@
         select *
         from nenoticenity
         where
-        <if test="searchType == 'title'">
+        <if test="searchType == 'subject'">
             subject LIKE '%' || #{search} || '%'
         </if>
         <if test="searchType == 'author'">
@@ -51,5 +51,13 @@
         </if>
     </select>
 
+    <select id="lastNotice" resultType="NoticeDTO">
+        SELECT *
+        FROM nenotice
+        WHERE id = (
+        SELECT MAX(id)
+        FROM nenotice
+        )
+    </select>
 
 </mapper>
