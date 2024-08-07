@@ -47,7 +47,11 @@
             },
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader(csrfHeader, csrfToken);
+                if (csrfHeader && csrfToken) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                } else {
+                    console.error("CSRF header or token is missing");
+                }
             },
             success: function(response) {
                 var members = response.members;
@@ -59,11 +63,12 @@
                 } else {
                     $.each(members, function(index, member) {
                         resultHtml += '<div>';
-                        resultHtml += 'ID: ' + member.memberid + '<br>';
+                        resultHtml += 'ID: ' + member.memberID + '<br>';
                         resultHtml += '이름: ' + member.name + '<br>';
                         resultHtml += '전화번호: ' + member.phone + '<br>';
                         resultHtml += '닉네임: ' + member.nickname + '<br>';
                         resultHtml += '이메일: ' + member.email + '<br>';
+                        resultHtml += '<button type ="button"  onclick="doUpdate(\'' + member.memberID + '\')">회원수정</button>';
                         resultHtml += '<hr>';
                         resultHtml += '</div>';
                     });
@@ -121,6 +126,13 @@
         paginationHtml += '<button onclick="doSearch(' + totalPages + ')"' + (currentPage >= totalPages ? ' disabled' : '') + '>마지막</button>';
 
         $('#pagination').html(paginationHtml);
+    }
+    
+    function doUpdate(memberID) {
+       
+        var updateUrl = '/admin/updateMemberForm.do?memberID=' + encodeURIComponent(memberID);
+
+        window.location.href = updateUrl;
     }
 </script>
 <jsp:include page="../footer.jsp"/>
