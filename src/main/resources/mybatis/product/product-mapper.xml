@@ -17,7 +17,7 @@
 	        product_code_seq.nextval, #{productName}, #{baseRate}, #{goldenballRate},
 	        #{subscriptionMethod}, #{subscriptionPeriod}, 0,
 	        #{terminationConditions}, #{earlyFee}, #{productStatus},
-	        #{minimumDeposit}, #{maximumDeposit}, #{startDate}, NULL,  <!-- end_date를 NULL로 설정(트리거) -->
+	        #{minimumDeposit}, #{maximumDeposit}, SYSDATE, NULL,  <!-- end_date를 NULL로 설정(트리거) -->
 	        #{productDescription}
 	    )
 	</insert>
