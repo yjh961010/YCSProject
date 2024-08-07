@@ -7,10 +7,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 공지 사항의 ID 또는 고유 식별자를 설정
+        const noticeId = '${getNotice.id}';
+        // 로컬 스토리지에서 저장된 시간을 확인
+        const storedTime = localStorage.getItem(`dontShowNoticeTime_${noticeId}`);
+        const currentTime = new Date().getTime();
+        const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // 24시간
+
+        // 저장된 시간이 없거나 24시간 이상 경과된 경우에만 팝업 열기
+        if (!storedTime || currentTime >= parseInt(storedTime, 10) + oneDayInMilliseconds) {
+            viewNotice();
+        }
+    });
+
     function viewNotice() {
-        var noticeWindow = window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=300");
+        window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=650");
     }
-    viewNotice();
 </script>
 
 <div class="img-container-size">
