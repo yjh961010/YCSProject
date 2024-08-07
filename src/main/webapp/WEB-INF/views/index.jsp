@@ -6,6 +6,30 @@
 <jsp:include page="header.jsp"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+<script>
+     document.addEventListener('DOMContentLoaded', () => {
+            // 서버에서 전달받은 공지사항 유무 확인
+            const hasNotice = ${not empty noticeList}; // JSP EL을 사용하여 noticeList가 비어있지 않은지 확인
+
+            if (hasNotice) {
+                // 공지 사항의 ID 또는 고유 식별자를 설정
+                const noticeId = '${noticeList[0].id}'; // 첫 번째 공지사항의 ID 사용
+                // 로컬 스토리지에서 저장된 시간을 확인
+                const storedTime = localStorage.getItem(`dontShowNoticeTime_${noticeId}`);
+                const currentTime = new Date().getTime();
+                const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // 24시간
+
+                // 저장된 시간이 없거나 24시간 이상 경과된 경우에만 팝업 열기
+                if (!storedTime || currentTime >= parseInt(storedTime, 10) + oneDayInMilliseconds) {
+                    viewNotice();
+                }
+            }
+        });
+
+    function viewNotice() {
+        window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=650");
+    }
+</script>
 
 <div class="img-container-size">
     <div class="img=box-center">
@@ -13,8 +37,7 @@
     </div>
 </div>
 <main>
-    <section class="hero">
-        <div class="hero-content">
+   <div class="hero-container">
             <div class="slideshow-container">
                 <div class="slides fade">
                     <img src="img/images1.jpg" width="100%" height="280">
@@ -57,35 +80,28 @@
                 </sec:authorize>
             </div>
         </div>
-    </section>
+    
 
-    <section id="products" class="products">
-        <div class="container">
+   
+
             <h2>상품 목록</h2>
             <div class="container">
-                <div class="box-wrapper">
-                    <div class="box-container">
-                        <div id="box-fill-1" class="box-fill"></div>
-                        <div id="box-label-1" class="box-label">150,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-2" class="box-fill"></div>
-                        <div id="box-label-2" class="box-label">700,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-3" class="box-fill"></div>
-                        <div id="box-label-3" class="box-label">500,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-4" class="box-fill"></div>
-                        <div id="box-label-4" class="box-label">1,000,000원</div>
-                    </div>
+    <div class="box-wrapper">
+        <c:forEach var="dto" items="${prodList}" varStatus="status">
+            <div class="box-container">
+                <div id="box-fill-${status.index}" class="box-fill"></div>
+                <div id="box-label-${status.index}" class="box-label">
+                    ${dto.product_name}
+                    ${dto.start_date}
+                    ${dto.accumulated_amount}
                 </div>
             </div>
-    </section>
+        </c:forEach>
+    </div>
+</div>
+   
 
-
-    <section id="community" class="community">
+    
         <div class="container">
             <h2>커뮤니티</h2>
             <div class="community-content">
@@ -126,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </section>
+   
 
 
 </main>
