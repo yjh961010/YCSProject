@@ -17,7 +17,7 @@ public class ProductService {
 
     // 상품 등록
     public void insertProduct(Map<String, Object> params) {
-        sqlSession.insert("product.insertProduct", params);
+        sqlSession.insert("insertProduct", params);
     }
 
     // 모든 상품 정보 가져오기
