@@ -79,7 +79,7 @@
     </section>
 
     <section id="products" class="products">
-        <div class="container">
+
             <h2>상품 목록</h2>
             <div class="container">
                 <div class="box-wrapper">

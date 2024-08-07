@@ -41,7 +41,6 @@ public class HomeController {
 	public String content(HttpServletRequest req) {
 		NoticeDTO dto = noticeService.lastNotice();
 		req.setAttribute("getNotice",dto);
-		System.out.println(dto.getId());
 		return "viewNotice";
 	}
 
