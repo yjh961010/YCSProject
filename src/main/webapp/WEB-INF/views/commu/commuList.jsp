@@ -29,6 +29,7 @@
 
 	}
 </script>
+<div class="total-area">
 <div class="commu">
 	<h2>커뮤니티</h2>
 	<br>
@@ -45,7 +46,7 @@
 		<button onclick="performSearch()">검색</button>
 	</div>
 	<div id="commu">
-		<table align="right">
+		<table align="right" style= "margin-bottom: 20px" >
 			<tr>
 				<td><sec:authorize access="isAuthenticated()">
 						<a href="/commu/commuWrite.do" class="write-btn">글쓰기</a>
@@ -68,7 +69,7 @@
 			<tbody>
 				<c:if test="${empty commuList}">
 					<tr>
-						<td colspan="4" class="no-data">등록된 게시글이 없습니다.</td>
+						<td colspan="5" class="no-data">등록된 게시글이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${commuList}">
@@ -143,5 +144,11 @@
 			</div>
 		</c:if>
 	</div>
+</div>
+<div class="sidebar">
+	<img src="/img/광고.jpg"
+		alt="Advertisement"
+		style="width: 400 px; height: 200px; vertical-align: bottom;">
+</div>
 </div>
 <jsp:include page="../footer.jsp" />
