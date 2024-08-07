@@ -12,7 +12,10 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PaymentsRequestDTO {
 
-
+    @NonNull
+    private String payType;
+    @NonNull
+    private String currency;
     @NonNull
     private Long amount;
     @NonNull
@@ -21,6 +24,15 @@ public class PaymentsRequestDTO {
     private String mySuccessUrl;
     private String myFailUrl;
 
-
-
+    @Override
+    public String toString() {
+        return "PaymentsRequestDTO{" +
+                "payType='" + payType + '\'' +
+                ", currency='" + currency + '\'' +
+                ", amount=" + amount +
+                ", orderName='" + orderName + '\'' +
+                ", mySuccessUrl='" + mySuccessUrl + '\'' +
+                ", myFailUrl='" + myFailUrl + '\'' +
+                '}';
+    }
 }
