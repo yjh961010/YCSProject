@@ -1,5 +1,7 @@
 package com.example.neoheulge.payments.entity;
 
+import com.example.neoheulge.member.entity.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "NEPAYMENT")
 public class Payments {
 
     /**
@@ -33,11 +36,22 @@ public class Payments {
     @Column(nullable = false, name = "payment_id", unique = true)
     private Long paymentId;
     @Column(nullable = false, name = "pay_type")
-    private String paymentType;
+    @Enumerated(EnumType.STRING)
+    private final String paymentType = "card";
     @Column(nullable = false, name = "amount")
     private Long amount;
-    @Column(nullable = false, name = "orderName")
+    @Column(nullable = false, name = "order_name")
     private String orderName;
-    @Column(nullable = false , name = "order_id")
+    @Column(nullable = false, name = "order_id")
     private String orderId;
+    @Column(nullable = false, name = "customer_name")
+    private String customerName;
+    @Column(nullable = false, name = "customer_email")
+    private String customerEmail;
+    @Column(nullable = false, name = "customer_phone")
+    private String customerMobilePhone;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    @JsonIgnore
+    private Member member;
 }

@@ -12,8 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PaymentsRequestDTO {
 
-    @NonNull
-    private static final String payType = "CARD";
+
     @NonNull
     private Long amount;
     @NonNull
@@ -22,13 +21,6 @@ public class PaymentsRequestDTO {
     private String mySuccessUrl;
     private String myFailUrl;
 
-    public Payments toEntity() {
-        return Payments.builder()
-                .paymentType(payType)
-                .amount(amount)
-                .orderName(orderName)
-                .orderId(UUID.randomUUID().toString())
-                .build();
-    }
+
 
 }
