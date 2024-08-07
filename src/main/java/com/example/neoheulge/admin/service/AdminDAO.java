@@ -14,4 +14,5 @@ public interface AdminDAO {
     int getTotalCount(Map<String, Object> params);
     int getTotalMemberCount();
     MemberDTO findMember(String memberID);
+    int updateMember(MemberDTO dto);
     }

@@ -47,10 +47,10 @@
 
         // 퍼센트 채우기 초기화
         var initialValues = [
-            { amount: 150000, goal: 1000000, fillId: 'box-fill-1', labelId: 'box-label-1' },
-            { amount: 700000, goal: 1000000, fillId: 'box-fill-2', labelId: 'box-label-2' },
-            { amount: 500000, goal: 1000000, fillId: 'box-fill-3', labelId: 'box-label-3' },
-            { amount: 1000000, goal: 1000000, fillId: 'box-fill-4', labelId: 'box-label-4' }
+            { amount: 150000, goal: 1000000, fillId: 'box-fill-0', labelId: 'box-label-1' },
+            { amount: 700000, goal: 1000000, fillId: 'box-fill-1', labelId: 'box-label-2' },
+            { amount: 500000, goal: 1000000, fillId: 'box-fill-2', labelId: 'box-label-3' },
+            { amount: 1000000, goal: 1000000, fillId: 'box-fill-3', labelId: 'box-label-4' }
         ];
 
         initialValues.forEach(function(item) {
