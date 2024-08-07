@@ -34,6 +34,15 @@ public class HomeController {
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String username = authentication.getName();
 //        System.out.println(username);
+
+		boolean hasNotice = !noticelist.isEmpty();
+		req.setAttribute("hasNotice", hasNotice);
+
+		// 가장 최근 공지사항 정보 전달 (있는 경우)
+		if (hasNotice) {
+			req.setAttribute("latestNotice", noticelist.get(0));
+		}
+
 		return "index";
 	}
 

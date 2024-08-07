@@ -7,19 +7,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // 공지 사항의 ID 또는 고유 식별자를 설정
-        const noticeId = '${getNotice.id}';
-        // 로컬 스토리지에서 저장된 시간을 확인
-        const storedTime = localStorage.getItem(`dontShowNoticeTime_${noticeId}`);
-        const currentTime = new Date().getTime();
-        const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // 24시간
+     document.addEventListener('DOMContentLoaded', () => {
+            // 서버에서 전달받은 공지사항 유무 확인
+            const hasNotice = ${not empty noticeList}; // JSP EL을 사용하여 noticeList가 비어있지 않은지 확인
 
-        // 저장된 시간이 없거나 24시간 이상 경과된 경우에만 팝업 열기
-        if (!storedTime || currentTime >= parseInt(storedTime, 10) + oneDayInMilliseconds) {
-            viewNotice();
-        }
-    });
+            if (hasNotice) {
+                // 공지 사항의 ID 또는 고유 식별자를 설정
+                const noticeId = '${noticeList[0].id}'; // 첫 번째 공지사항의 ID 사용
+                // 로컬 스토리지에서 저장된 시간을 확인
+                const storedTime = localStorage.getItem(`dontShowNoticeTime_${noticeId}`);
+                const currentTime = new Date().getTime();
+                const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // 24시간
+
+                // 저장된 시간이 없거나 24시간 이상 경과된 경우에만 팝업 열기
+                if (!storedTime || currentTime >= parseInt(storedTime, 10) + oneDayInMilliseconds) {
+                    viewNotice();
+                }
+            }
+        });
 
     function viewNotice() {
         window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=650");

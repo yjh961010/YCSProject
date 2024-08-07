@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글내용 보기</title>
-    <link rel="stylesheet" type="text/css" href="/css/notice/noticeView.css">
+    <link rel="stylesheet" type="text/css" href="/css/notice/noticeViewStyle.css">
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
@@ -32,8 +32,11 @@
             <td colspan="3">${getNotice.subject}</td>
         </tr>
         <tr>
-            <th>글내용</th>
-            <td colspan="3">${getNotice.content}</td>
+            <td colspan="90">
+                <div class="textarea-container">
+                    <textarea readonly>${getNotice.content}</textarea>
+                </div>
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="text-align: right;">
