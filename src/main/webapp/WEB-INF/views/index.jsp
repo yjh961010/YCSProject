@@ -88,22 +88,17 @@
             <h2>상품 목록</h2>
             <div class="container">
                 <div class="box-wrapper">
-                    <div class="box-container">
-                        <div id="box-fill-1" class="box-fill"></div>
-                        <div id="box-label-1" class="box-label">150,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-2" class="box-fill"></div>
-                        <div id="box-label-2" class="box-label">700,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-3" class="box-fill"></div>
-                        <div id="box-label-3" class="box-label">500,000원</div>
-                    </div>
-                    <div class="box-container">
-                        <div id="box-fill-4" class="box-fill"></div>
-                        <div id="box-label-4" class="box-label">1,000,000원</div>
-                    </div>
+                    <c:forEach var="dto" items="${prodList}" >
+		                    <div class="box-container">
+		                        <div id="box-fill-1" class="box-fill"></div>
+		                        <div id="box-label-1" class="box-label">
+			                        ${dto.product_name}
+			                        ${dto.start_date}
+			                        ${dto.accumulated_amount}
+		                        </div>
+		                    </div>
+                    </c:forEach>
+
                 </div>
             </div>
     </section>
