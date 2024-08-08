@@ -51,6 +51,11 @@ public class PurproductService {
     }
 
     //자동결제가 활성화된 회원 목록을 가져옴
+    public List<Map<String, Object>> getStatusY() {
+        return sqlSession.selectList("getStatusY");
+    }
+    
+    //자동결제가 활성화된 회원 목록을 가져옴
     public List<Map<String, Object>> getActiveAuto() {
         return sqlSession.selectList("getActiveAuto");
     }

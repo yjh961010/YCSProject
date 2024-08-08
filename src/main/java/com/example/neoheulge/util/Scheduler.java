@@ -36,6 +36,35 @@ public class Scheduler {
             System.err.println("Error occurred while scheduling payments: " + e.getMessage());
         }
     }
+    
+    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행
+    public void applyMonthlyInterest() {
+        try {
+            List<Map<String, Object>> members = purproductService.getStatusY();
+            if (members != null && !members.isEmpty()) {
+                schedulerService.applyInterestRates(members);
+            } else {
+                System.out.println("No members found for interest calculation.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error occurred while applying monthly interest: " + e.getMessage());
+        }
+    }
+    
+    /*
+    @Scheduled(cron = "0 1 0 * * *") // 매일 자정에 실행
+    public void updateExpiredProductsStatus() {
+        try {
+            // SQL 쿼리를 실행하여 end_date가 현재 날짜보다 이전인 상품의 상태를 '비활성'으로 변경
+            sqlSession.update("updateProductStatus");
+            System.out.println("Expired products have been deactivated.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error occurred while updating product statuses: " + e.getMessage());
+        }
+    }
+    */
 }
 
 /*

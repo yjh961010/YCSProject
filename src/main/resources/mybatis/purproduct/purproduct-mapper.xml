@@ -151,6 +151,13 @@
 	        AND np.goldenball_rate IS NOT NULL
 	    )
 	</update>
+	
+		<!-- 활성화된 회원 목록을 가져옴 -->
+    <select id="getStatusY" resultType="Map">
+        SELECT *
+        FROM nepreSavProd
+        WHERE status = '활성'
+    </select>
 
 	<!-- 자동결제가 활성화된 회원 목록을 가져옴 -->
     <select id="getActiveAuto" resultType="Map">

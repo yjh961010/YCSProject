@@ -33,9 +33,10 @@ public class SchedulerService {
                 processPayment(member);
             }
         }
+        
     }
 
-    private boolean shouldProcessPayment(LocalDate today, DayOfWeek autoDateDayOfWeek, String autoCycle) {
+    public boolean shouldProcessPayment(LocalDate today, DayOfWeek autoDateDayOfWeek, String autoCycle) {
         switch (autoCycle) {
             case "매일":
                 return true; // 매일 실행되므로 항상 true
@@ -48,7 +49,7 @@ public class SchedulerService {
         }
     }
 
-    private void processPayment(Map<String, Object> member) {
+    public void processPayment(Map<String, Object> member) {
         // 결제 처리 로직
     	double autoAmount = ((Number) member.get("auto_amount")).doubleValue();
         String autoCycle = (String) member.get("auto_cycle");
@@ -77,7 +78,35 @@ public class SchedulerService {
 
         }
         
-        //결제 처리 로그
+        //결제 처리 로그 
         System.out.println("Processing payment for: " + member);
     }
+    
+    //이자계산
+    public void applyInterestRates(List<Map<String, Object>> members) {
+        for (Map<String, Object> member : members) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("memberId", member.get("member_id"));
+            params.put("productCode", member.get("product_code"));
+
+            String subscriptionSelect = (String) member.get("subscription_select");
+            if ("골든볼".equals(subscriptionSelect)) {
+                purproductService.applyGoldenBallRate(params);
+            } else if ("기본".equals(subscriptionSelect)) {
+                purproductService.applyBaseRate(params);
+            }
+
+            // 이자 계산 처리 로그
+            System.out.println("Applied interest for: " + member);
+        }
+    }
+    
+    /*
+    public void updateProductStatus(String status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("status", status);
+        sqlSession.update("com.example.neoheulge.purproduct.mapper.ProductMapper.updateProductStatus", params);
+        System.out.println("Products have been updated to status: " + status);
+    }
+    */
 }
