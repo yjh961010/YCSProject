@@ -9,7 +9,7 @@ h4 {
 }
 
 .ad_container {
-	width: 300px;
+	width: 250px;
 	height: 400px;
 	color: black;
 	background-color: white;
@@ -36,7 +36,7 @@ h4 {
 
 .ad-container {
 	position: relative;
-	width: 300px;
+	width: 100px;
 	height: 200px;
 }
 
@@ -97,16 +97,15 @@ h4 {
 	align-items: flex-start;
 	justify-content: center;
 	display: flex;
-	align-content: center;
+	align-content: cena
 }
-
 .main-container {
 	display: none;
 	margin: 20px;
 }
 
 .sidebar {
-	width: 300px;
+	width: 250px;
 	background-color: black;
 	padding: 20px;
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
