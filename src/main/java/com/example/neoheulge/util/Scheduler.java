@@ -24,8 +24,17 @@ public class Scheduler {
 
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public void schedulePayments() {
-        List<Map<String, Object>> members = purproductService.getActiveAuto();
-        schedulerService.scheduleAutoPayments(members);
+        try {
+            List<Map<String, Object>> members = purproductService.getActiveAuto();
+            if (members != null && !members.isEmpty()) {
+                schedulerService.scheduleAutoPayments(members);
+            } else {
+                System.out.println("No active auto payments found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error occurred while scheduling payments: " + e.getMessage());
+        }
     }
 }
 

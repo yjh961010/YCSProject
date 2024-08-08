@@ -154,7 +154,7 @@
 
 	<!-- 자동결제가 활성화된 회원 목록을 가져옴 -->
     <select id="getActiveAuto" resultType="Map">
-        SELECT member_id, product_code, auto_amount, auto_cycle
+        SELECT *
         FROM nepreSavProd
         WHERE auto_enabled = 'Y'
           AND status = '활성'

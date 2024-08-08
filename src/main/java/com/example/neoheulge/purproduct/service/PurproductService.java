@@ -59,6 +59,11 @@ public class PurproductService {
     public void addAdditionalAmount(Map<String, Object> params) {
         sqlSession.update("AdditionalAmount", params);
     }
+    
+    //날짜 업데이트
+    public void updateAutoDate(Map<String, Object> params) {
+    	sqlSession.update("updateAutoDate",params); 
+    }
 
     
     // 자동결제 등록
