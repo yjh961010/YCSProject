@@ -26,8 +26,8 @@ public class ProductService {
     }
 
     // 특정 상품 코드에 따른 상품 정보 가져오기
-    public NeSavProdDTO selectProductByCode(Map<String, Object> params) {
-        return sqlSession.selectOne("selectProductByCode", params);
+    public List<NeSavProdDTO> selectProductByCode(String product_code) {
+        return sqlSession.selectList("selectProductByCode", product_code);
     }
 
     // 전 회차 상금 가져오기
