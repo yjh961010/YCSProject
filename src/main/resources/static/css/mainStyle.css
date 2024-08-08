@@ -392,6 +392,7 @@ footer {
 }
 /* 광고  */
 .ad-left, .ad-right {
+	padding-top: 10px;
 	display: none; /* 초기에는 광고를 숨깁니다 */
     width: 250px;
     height: 900px;

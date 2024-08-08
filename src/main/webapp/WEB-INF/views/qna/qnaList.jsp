@@ -122,10 +122,10 @@
                 <div class="pagination">
                        
                     <%
-                        int pageSize = 5;
+                        int pageSize = 15;
                         int currentPage = (request.getParameter("pageNum") != null) ? Integer.parseInt(request.getParameter("pageNum")) : 1;
                         int count = (Integer) request.getAttribute("count");
-                        int pageBlock = 5;
+                        int pageBlock = 15;
                         int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
                         int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
                         int endPage = startPage + pageBlock - 1;

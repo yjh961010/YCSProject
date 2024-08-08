@@ -110,7 +110,7 @@
     <div class="ad-left">
     <button class="close-btn" onclick="closeAd('ad-left')">X</button>
     <a href="https://pokemongolive.com/ko" target="_blank">
-        <img src="${pageContext.request.contextPath}/img/poket1.jpg" alt="Left Advertisement" width="250" height="900" class="ad-image">
+        <img src="${pageContext.request.contextPath}/img/poket1.jpg" alt="Left Advertisement" width="250" height="700" class="ad-image">
     </a>
     <div class="ad-blocked">30분 동안 광고 차단</div>
 </div>
