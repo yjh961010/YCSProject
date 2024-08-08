@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Payments {
 
     /**
-     * ------요청 파라미터 예시-------
+     * ------ 파라미터 예시-------
      * method: "CARD", // 카드 결제
      * amount: {
      * currency: "KRW",
@@ -50,8 +50,10 @@ public class Payments {
     private String customerEmail;
     @Column(nullable = false, name = "customer_phone")
     private String customerMobilePhone;
+    @Column(name = "status")
+    private boolean successYN;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     @JsonIgnore
-    private Member member;
+    private Member customer;
 }
