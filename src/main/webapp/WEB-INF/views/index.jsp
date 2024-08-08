@@ -102,7 +102,7 @@
    
 
     
-        <div class="container">
+        <div class="commu-container">
             <h2>커뮤니티</h2>
             <div class="community-content">
                 <div class="community-posts">

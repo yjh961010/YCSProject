@@ -78,3 +78,8 @@
             </nav>
         </div>
     </header>
+    <div class="page-wrapper">
+    <div class="ad-left">
+        <img src="${pageContext.request.contextPath}/img/ad1.jpg" alt="Left Advertisement" width="250" height="900">
+    </div>
+    <div class="main-content">
