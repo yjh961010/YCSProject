@@ -96,8 +96,9 @@
                     ${dto.accumulated_amount}
                 </div>
             </div>
+            <h2><a href="/product/dd.do?product_code=${dto.product_code}">임시</a></h2>
         </c:forEach>
-        <h2><a href="/product/dd.do">임시</a></h2>
+
     </div>
 </div>
    
