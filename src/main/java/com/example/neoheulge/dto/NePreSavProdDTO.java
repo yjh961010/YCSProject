@@ -4,64 +4,63 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class NePreSavProdDTO {
-	private String subscriptionId;
-    private String memberId;
-    private String productCode;
-    private Date subscriptionDate;
-    private BigDecimal subscriptionAmount;
-    private String subscriptionSelect;
-    private Date terminationDate;
+    private String subscription_id;
+    private String member_id;
+    private String product_code;
+    private Date subscription_date;
+    private BigDecimal subscription_amount;
+    private String subscription_select;
+    private Date termination_date;
     private String status;
-    private BigDecimal earlyRefund;
-    private BigDecimal totalPayment;
-    private String autoEnabled;
-    private BigDecimal autoAmount;
-    private String autoCycle;
-    private String autoAccount;
-    private String autoDate;
+    private BigDecimal early_refund;
+    private BigDecimal total_payment;
+    private String auto_enabled;
+    private BigDecimal auto_amount;
+    private String auto_cycle;
+    private String auto_account;
+    private String auto_date;
     
-    
-	public String getSubscriptionId() {
-		return subscriptionId;
+	public String getSubscription_id() {
+		return subscription_id;
 	}
-	public void setSubscriptionId(String subscriptionId) {
-		this.subscriptionId = subscriptionId;
+	public void setSubscription_id(String subscription_id) {
+		this.subscription_id = subscription_id;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
-	public String getProductCode() {
-		return productCode;
+	public String getProduct_code() {
+		return product_code;
 	}
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
+	public void setProduct_code(String product_code) {
+		this.product_code = product_code;
 	}
-	public Date getSubscriptionDate() {
-		return subscriptionDate;
+	public Date getSubscription_date() {
+		return subscription_date;
 	}
-	public void setSubscriptionDate(Date subscriptionDate) {
-		this.subscriptionDate = subscriptionDate;
+	public void setSubscription_date(Date subscription_date) {
+		this.subscription_date = subscription_date;
 	}
-	public BigDecimal getSubscriptionAmount() {
-		return subscriptionAmount;
+	public BigDecimal getSubscription_amount() {
+		return subscription_amount;
 	}
-	public void setSubscriptionAmount(BigDecimal subscriptionAmount) {
-		this.subscriptionAmount = subscriptionAmount;
+	public void setSubscription_amount(BigDecimal subscription_amount) {
+		this.subscription_amount = subscription_amount;
 	}
-	public String getSubscriptionSelect() {
-		return subscriptionSelect;
+	public String getSubscription_select() {
+		return subscription_select;
 	}
-	public void setSubscriptionSelect(String subscriptionSelect) {
-		this.subscriptionSelect = subscriptionSelect;
+	public void setSubscription_select(String subscription_select) {
+		this.subscription_select = subscription_select;
 	}
-	public Date getTerminationDate() {
-		return terminationDate;
+	public Date getTermination_date() {
+		return termination_date;
 	}
-	public void setTerminationDate(Date terminationDate) {
-		this.terminationDate = terminationDate;
+	public void setTermination_date(Date termination_date) {
+		this.termination_date = termination_date;
 	}
 	public String getStatus() {
 		return status;
@@ -69,49 +68,49 @@ public class NePreSavProdDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public BigDecimal getEarlyRefund() {
-		return earlyRefund;
+	public BigDecimal getEarly_refund() {
+		return early_refund;
 	}
-	public void setEarlyRefund(BigDecimal earlyRefund) {
-		this.earlyRefund = earlyRefund;
+	public void setEarly_refund(BigDecimal early_refund) {
+		this.early_refund = early_refund;
 	}
-	public BigDecimal getTotalPayment() {
-		return totalPayment;
+	public BigDecimal getTotal_payment() {
+		return total_payment;
 	}
-	public void setTotalPayment(BigDecimal totalPayment) {
-		this.totalPayment = totalPayment;
+	public void setTotal_payment(BigDecimal total_payment) {
+		this.total_payment = total_payment;
 	}
-	public String getAutoEnabled() {
-		return autoEnabled;
+	public String getAuto_enabled() {
+		return auto_enabled;
 	}
-	public void setAutoEnabled(String autoEnabled) {
-		this.autoEnabled = autoEnabled;
+	public void setAuto_enabled(String auto_enabled) {
+		this.auto_enabled = auto_enabled;
 	}
-	public BigDecimal getAutoAmount() {
-		return autoAmount;
+	public BigDecimal getAuto_amount() {
+		return auto_amount;
 	}
-	public void setAutoAmount(BigDecimal autoAmount) {
-		this.autoAmount = autoAmount;
+	public void setAuto_amount(BigDecimal auto_amount) {
+		this.auto_amount = auto_amount;
 	}
-	public String getAutoCycle() {
-		return autoCycle;
+	public String getAuto_cycle() {
+		return auto_cycle;
 	}
-	public void setAutoCycle(String autoCycle) {
-		this.autoCycle = autoCycle;
+	public void setAuto_cycle(String auto_cycle) {
+		this.auto_cycle = auto_cycle;
 	}
-	public String getAutoAccount() {
-		return autoAccount;
+	public String getAuto_account() {
+		return auto_account;
 	}
-	public void setAutoAccount(String autoAccount) {
-		this.autoAccount = autoAccount;
+	public void setAuto_account(String auto_account) {
+		this.auto_account = auto_account;
 	}
-	public String getAutoDate() {
-		return autoDate;
+	public String getAuto_date() {
+		return auto_date;
 	}
-	public void setAutoDate(String autoDate) {
-		this.autoDate = autoDate;
+	public void setAuto_date(String auto_date) {
+		this.auto_date = auto_date;
 	}
-
- 
+    
+    
 }
 

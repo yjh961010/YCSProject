@@ -17,7 +17,7 @@
 	        product_code_seq.nextval, #{productName}, #{baseRate}, #{goldenballRate},
 	        #{subscriptionMethod}, #{subscriptionPeriod}, 0,
 	        #{terminationConditions}, #{earlyFee}, #{productStatus},
-	        #{minimumDeposit}, #{maximumDeposit}, #{startDate}, NULL,  <!-- end_date를 NULL로 설정(트리거) -->
+	        #{minimumDeposit}, #{maximumDeposit}, SYSDATE, NULL,  <!-- end_date를 NULL로 설정(트리거) -->
 	        #{productDescription}
 	    )
 	</insert>
@@ -25,11 +25,11 @@
 
     <!-- 모든 상품 정보 가져오기 -->
     <select id="selectAllProducts" resultType="NeSavProdDTO">
-        SELECT * FROM neSavProd
+        SELECT * FROM neSavProd 
     </select>
 
     <!-- 특정 상품 코드에 따른 상품 정보 가져오기 -->
-    <select id="selectProductByCode" parameterType="NeSavProdDTO" >
+    <select id="selectProductByCode" parameterType="String" resultType="NeSavProdDTO" >
         SELECT * FROM neSavProd
         WHERE product_code = #{productCode}
     </select>

@@ -71,6 +71,7 @@ BEGIN
         END CASE;
     END IF;
 END;
+/
 
 --시퀀스 생성(상품 코드)
 CREATE SEQUENCE product_code_seq

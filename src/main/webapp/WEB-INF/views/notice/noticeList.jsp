@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
-<link rel="stylesheet" type="text/css" href="/css/notice/noticeStyle.css">
+<link rel="stylesheet" type="text/css" href="/css/notice/noticeListStyle.css">
 <script>
     function performSearch() {
         var searchType = document.getElementById("searchType").value;
