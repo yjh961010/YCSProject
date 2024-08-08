@@ -3,7 +3,10 @@
 <!DOCTYPE html>
 </div>
 <div class="ad-right">
-        <img src="${pageContext.request.contextPath}/img/ad2.jpg" alt="Right Advertisement" width="250" height="900">
+ <button class="close-btn" onclick="closeAd('ad-right')">X</button>
+  <a href="https://pokemongolive.com/ko" target="_blank">
+        <img src="${pageContext.request.contextPath}/img/poket2.jpg" alt="Right Advertisement" width="250" height="900">
+    </a>
     </div>
 </div>
 	<footer>

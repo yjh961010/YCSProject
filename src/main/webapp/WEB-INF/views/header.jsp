@@ -41,6 +41,7 @@
 
     // 페이지 로드 시 초기값 설정
     window.onload = function() {
+       checkAdVisibility();
         // 슬라이드 쇼 초기화
         showSlides(slideIndex);
         autoShowSlides();
@@ -56,7 +57,24 @@
         initialValues.forEach(function(item) {
             updateFill(item.amount, item.goal, item.fillId, item.labelId);
         });
+        
     };
+    function closeAd(adClass) {
+        var hideUntil = new Date().getTime() + (30 * 60 * 1000); // 30분 후
+        localStorage.setItem('hideAdUntil_' + adClass, hideUntil);
+        document.querySelector('.' + adClass).style.display = 'none';
+    }
+
+    function checkAdVisibility() {
+        ['ad-left', 'ad-right'].forEach(function(adClass) {
+            var hideUntil = localStorage.getItem('hideAdUntil_' + adClass);
+            if (hideUntil && new Date().getTime() < hideUntil) {
+                document.querySelector('.' + adClass).style.display = 'none';
+            } else {
+                document.querySelector('.' + adClass).style.display = 'block';
+            }
+        });
+    }
 </script>
 </head>
 <body>
@@ -80,6 +98,9 @@
     </header>
     <div class="page-wrapper">
     <div class="ad-left">
-        <img src="${pageContext.request.contextPath}/img/ad1.jpg" alt="Left Advertisement" width="250" height="900">
+     <button class="close-btn" onclick="closeAd('ad-left')">X</button>
+    <a href="https://pokemongolive.com/ko" target="_blank">
+        <img src="${pageContext.request.contextPath}/img/poket1.jpg" alt="Left Advertisement" width="250" height="900">
+    </a>
     </div>
     <div class="main-content">
