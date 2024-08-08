@@ -45,8 +45,8 @@ body {
 
 /* 헤더 스타일 */
 header {
-    background: #004d99;
-    color: #fff;
+    background: RGB(198,231,253);
+    color: black;
     padding: 1em 0;
     
     
@@ -67,7 +67,7 @@ header h1 {
 
 /* 네비게이션 링크 스타일 */
 nav a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     margin: 0 10px;
     font-weight: bold;
@@ -144,8 +144,8 @@ main {
 
 /* 푸터 스타일 */
 footer {
-    background: #004d99;
-    color: white;
+    background: RGB(198,231,253);
+    color: black;
     padding: 1em 0;
     text-align: center;
   
@@ -390,8 +390,9 @@ footer {
     max-width: 1200px; /* 기존 컨테이너 최대 너비 */
     min-width: 1200px; /* 기존 컨테이너 최소 너비 */
 }
-
+/* 광고  */
 .ad-left, .ad-right {
+	display: none; /* 초기에는 광고를 숨깁니다 */
     width: 250px;
     height: 900px;
     position: sticky;
@@ -406,3 +407,33 @@ footer {
     margin-left: 20px;
 }
 
+
+
+
+/* 광고 닫기 버튼  */
+
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.ad-blocked {
+    background-color: rgba(0, 0, 0, 0.7);
+   	color: #fff;
+    padding: 20px;
+  	border-radius: 5px;
+  	text-align: center; /* 텍스트를 수평으로 중앙 정렬 */
+}

@@ -46,6 +46,7 @@
         showSlides(slideIndex);
         autoShowSlides();
 
+        
         // 퍼센트 채우기 초기화
         var initialValues = [
             { amount: 150000, goal: 1000000, fillId: 'box-fill-0', labelId: 'box-label-1' },
@@ -59,19 +60,28 @@
         });
         
     };
+    
     function closeAd(adClass) {
         var hideUntil = new Date().getTime() + (30 * 60 * 1000); // 30분 후
         localStorage.setItem('hideAdUntil_' + adClass, hideUntil);
-        document.querySelector('.' + adClass).style.display = 'none';
+        var adElement = document.querySelector('.' + adClass);
+        adElement.querySelector('.ad-image').style.display = 'none';
+        adElement.querySelector('.ad-blocked').style.display = 'block';
     }
 
     function checkAdVisibility() {
         ['ad-left', 'ad-right'].forEach(function(adClass) {
             var hideUntil = localStorage.getItem('hideAdUntil_' + adClass);
+            var adElement = document.querySelector('.' + adClass);
+
             if (hideUntil && new Date().getTime() < hideUntil) {
-                document.querySelector('.' + adClass).style.display = 'none';
+                adElement.querySelector('.ad-image').style.display = 'none';
+                adElement.querySelector('.ad-blocked').style.display = 'block';
+                adElement.style.display = 'block'; // 광고를 표시하여 텍스트를 표시
             } else {
-                document.querySelector('.' + adClass).style.display = 'block';
+                adElement.querySelector('.ad-image').style.display = 'block';
+                adElement.querySelector('.ad-blocked').style.display = 'none';
+                adElement.style.display = 'block'; // 광고를 표시
             }
         });
     }
@@ -98,9 +108,10 @@
     </header>
     <div class="page-wrapper">
     <div class="ad-left">
-     <button class="close-btn" onclick="closeAd('ad-left')">X</button>
+    <button class="close-btn" onclick="closeAd('ad-left')">X</button>
     <a href="https://pokemongolive.com/ko" target="_blank">
-        <img src="${pageContext.request.contextPath}/img/poket1.jpg" alt="Left Advertisement" width="250" height="900">
+        <img src="${pageContext.request.contextPath}/img/poket1.jpg" alt="Left Advertisement" width="250" height="900" class="ad-image">
     </a>
-    </div>
+    <div class="ad-blocked">30분 동안 광고 차단</div>
+</div>
     <div class="main-content">
