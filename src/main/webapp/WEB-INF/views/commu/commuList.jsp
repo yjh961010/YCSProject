@@ -43,24 +43,42 @@
 	<div class="sidebar">
 		<div class="ad_container">
 			<div class="login_container">
-			<img
-				src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
-				alt="프로필 이미지">
-			<div class="nick">
-				<strong class="itemfont col" id="nickNameArea">닉네임</strong> <br>
-				<span class="itemfont col"> <a id="blogDomainChange"
-					onclick="return false;" class="set_domain_btn"> 
-					<span class="blog_domain col"> 아이디</span> 
-					<spanclass="set_domain_icon col"></span>
-				</a>
-				</span>
-			</div>
-			<form action="/logout" method="post">
-				<button type="submit" class="login-button">로그아웃</button>
-			</form>
+				<sec:authorize access="isAuthenticated()">
+					<img
+						src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
+						alt="프로필 이미지">
+					<div class="nick">
+						<strong class="itemfont col" id="nickNameArea">닉네임</strong> <br>
+						<span class="itemfont col"> <a id="blogDomainChange"
+							onclick="return false;" class="set_domain_btn"> <span
+								class="blog_domain col"> 아이디</span> <spanclass ="set_domain_iconcol"></span>
+						</a> </span>
+					</div>
+					<form action="/logout" method="post">
+						<button type="submit" class="login-button">로그아웃</button>
+					</form>
 
-			<button onclick="performSearch()" class="login-button">채팅하기</button>
-</div>
+					<button onclick="performSearch()" class="login-button">채팅하기</button>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+ <!-- 로그인 폼을 표시합니다. -->
+                    <h1>neoheulge</h1>
+                    <h4>더 안전하고 </h4>
+                    <h4>편리하게 이용하세요</h4>
+                    <form action="<c:url value='/login' />" method="post">
+                        <input type="text" name="username" placeholder="사용자 이름" required>
+                        <input type="password" name="password" placeholder="비밀번호" required>
+                        <button type="submit" class="login-button">로그인</button>
+                    </form>
+                    <div class="links">
+                        <a href="${pageContext.request.contextPath}/member/findid.do">▶ 아이디 찾기</a>  <br>
+                        <a href="/find-password">▶ 비밀번호 찾기</a>  <br>
+                        <a href="${pageContext.request.contextPath}/member/signup.do">▶ 회원가입</a>
+                    </div>
+
+
+				</sec:authorize>
+			</div>
 		</div>
 		<div class="ad_container">
 			<button type="button" class="ad_mark" onclick="handleAdClick()">
@@ -74,16 +92,15 @@
 			<img src="/img/광고.jpg" alt="Advertisement"
 				style="position: relative; width: 200px; height: 180px; vertical-align: bottom; left: 29px;">
 			<div class="ad_containerinside">
-			<br> <br>
-			<strong>포켓몬X잇지 콜라보레이션</strong>
-			<p>포켓몬스터</p>
-			<div class="source_box">
-				<span class="content_landing">더 알아보기</span>
-			</div>
+				<br> <br> <strong>포켓몬X잇지 콜라보레이션</strong>
+				<p>포켓몬스터 게임을 핸드폰으로 플레이할 수 있다!</p>
+				<div class="source_box">
+					<span class="content_landing">더 알아보기</span>
+				</div>
 
+			</div>
 		</div>
 	</div>
-</div>
 	<div class="commu">
 		<h1>커뮤니티</h1>
 		<br>
