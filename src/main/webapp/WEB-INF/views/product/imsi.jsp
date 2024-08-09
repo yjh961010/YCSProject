@@ -4,7 +4,6 @@
 <jsp:include page="../header.jsp" />
 
 <main class="product-detail">
-    <c:forEach var="product" items="${product}">
         <div class="container">
             <section class="product-header">
                 <img src="${pageContext.request.contextPath}/img/product_image.jpg" alt="적금상품 이미지" class="product-image">
@@ -12,7 +11,7 @@
                     <h1>${product.product_name}</h1>
                     <span class="status-badge">${product.product_status}</span>
                     <p class="product-code">상품 코드: ${product.product_code}</p>
-                    <p class="product-code"><a href="/proProduct/does.do">가입하기</a></p>
+                    <p class="product-code"><a href="/proProduct/does.do?product_code=${product.product_code}">가입하기</a></p>
                 </div>
             </section>
 
@@ -71,7 +70,7 @@
 	        updateProgress(${product.accumulated_amount}, ${product.maximum_deposit});
 	    };
 	</script>
-    </c:forEach>
+
 </main>
 
 
