@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.neoheulge.commu.service.CommuService;
+import com.example.neoheulge.dto.CommuDTO;
+import com.example.neoheulge.dto.NoticeDTO;
 import com.example.neoheulge.dto.QnaDTO;
+import com.example.neoheulge.notice.service.NoticeService;
 import com.example.neoheulge.qna.service.QnaService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +26,12 @@ public class QnaController {
 
 	@Autowired
 	QnaService qnaService;
+	
+	@Autowired
+	CommuService commuService;
+	
+    @Autowired
+    private NoticeService noticeService;
 	
 	@GetMapping("/qnaList.do")
 	public String qnaList(HttpServletRequest req,@RequestParam(value = "search", required = false) String search,
@@ -66,6 +76,11 @@ public class QnaController {
 	public String qnaWriteForm(HttpServletRequest req, 
 			@RequestParam(value = "id", required = false, defaultValue = "0") Integer id) {
 		
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
 		 QnaDTO dto = new QnaDTO();
 			if(id !=0) {
 			 dto = qnaService.getQna(id);
@@ -99,6 +114,12 @@ public class QnaController {
 	
 	@GetMapping("/qnaContent.do")
 	public String content(HttpServletRequest req, int id) {
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
+		
 		int res = qnaService.qnaViews(id);
 		QnaDTO dto = qnaService.getQna(id);
 		req.setAttribute("getQna",dto);
@@ -114,6 +135,12 @@ public class QnaController {
 
 	@GetMapping("/qnaUpdate.do")
 	public String qnaUpdateForm(HttpServletRequest req, int id) {
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
+		
 		QnaDTO dto = qnaService.getQna(id);
 		req.setAttribute("getQna", dto);
 		return "qna/qnaUpdate";
