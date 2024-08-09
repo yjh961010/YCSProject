@@ -56,8 +56,8 @@ public class ProductService {
     }
 
     // 상품의 상태를 가입 기간에 따라 업데이트
-    public void updateProductStatus(Map<String, Object> params) {
-        sqlSession.update("updateProductStatus", params);
+    public void updateProductStatus() {
+        sqlSession.update("updateProductStatus");
     }
 
     // 상품 코드를 통한 상품 삭제

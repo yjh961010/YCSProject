@@ -22,6 +22,7 @@ public class Scheduler {
     @Autowired
     private SchedulerService schedulerService;
 
+    //추가금 넣기 
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public void schedulePayments() {
         try {
@@ -37,6 +38,7 @@ public class Scheduler {
         }
     }
     
+    //이자 계산 실행
     @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행
     public void applyMonthlyInterest() {
         try {
@@ -52,11 +54,10 @@ public class Scheduler {
         }
     }
     
-    /*
-    @Scheduled(cron = "0 1 0 * * *") // 매일 자정에 실행
+    //상품 종료 업데이트
+    @Scheduled(cron = "0 1 0 * * *") // 매일 12시 1분에 실행
     public void updateExpiredProductsStatus() {
         try {
-            // SQL 쿼리를 실행하여 end_date가 현재 날짜보다 이전인 상품의 상태를 '비활성'으로 변경
             sqlSession.update("updateProductStatus");
             System.out.println("Expired products have been deactivated.");
         } catch (Exception e) {
@@ -64,7 +65,9 @@ public class Scheduler {
             System.err.println("Error occurred while updating product statuses: " + e.getMessage());
         }
     }
-    */
+    
+    
+    
 }
 
 /*
