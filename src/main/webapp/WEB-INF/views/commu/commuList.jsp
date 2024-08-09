@@ -42,8 +42,13 @@
 <div class="total-area">
 <div class="sidebar">
       <div class="ad_container">
-         
-         
+         <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161" alt="프로필 이미지">
+<div class="nick"> <strong class="itemfont col" id="nickNameArea">닉네임</strong> <br> 
+<span class="itemfont col"> <a id="blogDomainChange" onclick="return false;" class="set_domain_btn"> <span class="blog_domain col"> 아이디</span><br>
+ <span class="set_domain_icon col"></span> </a> </span> </div>
+<button onclick="performSearch()" class="login-button">로그아웃</button>
+<button onclick="performSearch()" class="login-button">채팅하기</button>       
+  
       </div>
       <div class="ad_container">
          <button type="button" class="ad_mark" onclick="handleAdClick()">
