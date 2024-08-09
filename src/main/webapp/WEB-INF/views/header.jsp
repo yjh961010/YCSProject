@@ -100,7 +100,7 @@
             <nav>
                 <a href="${pageContext.request.contextPath}/commu/commuList.do">커뮤니티</a>
                 <a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a>
-                <a href="#products">상품 목록</a>
+                <a href="${pageContext.request.contextPath}/product/productList.do">상품 목록</a>
                 <a href="${pageContext.request.contextPath}/qna/qnaList.do">고객지원</a>
                 <a href="${pageContext.request.contextPath}/admin/adminMember.do">회원관리</a>
                 <a href="${pageContext.request.contextPath}/admin/adminProdcut.do">상품관리</a>

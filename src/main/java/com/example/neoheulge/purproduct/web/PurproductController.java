@@ -20,8 +20,11 @@ public class PurproductController {
 	ProductService productService;
 	
 	@GetMapping("/does.do")
-	public String product(HttpServletRequest req) {
-
-		return "proproduct/imsi";
+	public String productSignUp(HttpServletRequest req,@RequestParam String product_code,
+			@RequestParam(value="id", required=false, defaultValue="0")Integer id ) {
+		NeSavProdDTO prod = productService.selectProductByCode(product_code);
+		req.setAttribute("product", prod);
+		
+		return "proproduct/productSignUp";
 	}
 }

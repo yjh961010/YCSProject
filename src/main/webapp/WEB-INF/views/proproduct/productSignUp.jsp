@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -75,33 +77,32 @@
     <div class="main-content">
         <section id="product-info">
             <h2>상품 정보</h2>
-            <p><span class="icon">💰</span> 연 이율: 3.5%</p>
-            <p><span class="icon">📅</span> 가입 기간: 12개월 ~ 36개월</p>
-            <p><span class="icon">💸</span> 최소 납입금액: 10,000원</p>
-            <p><span class="icon">🏦</span> 최대 납입금액: 3,000,000원</p>
+            <p><span class="icon">💰</span> 기본 이율: ${product.base_rate} %</p>
+            <p><span class="icon">💰</span> 골든볼 이율: ${product.goldenball_rate} %</p>
+            <p><span class="icon">📅</span> 가입 기간: ${product.subscription_period}</p>
+            <p><span class="icon">💸</span> 최소 가입금액: ${product.minimum_deposit}원</p>
+            <p><span class="icon">🏦</span> 최대 가입금액: ${product.maximum_deposit}원</p>
         </section>
 
         <section id="registration-form">
             <h2>적금 가입</h2>
             <form id="savings-form">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="author" value="<sec:authentication property='principal.username'/>" readonly>
 
                 <label for="amount">월 납입금액</label>
-                <input type="number" id="amount" name="amount" min="10000" max="3000000" required>
-
-                <label for="period">가입 기간</label>
+                <input type="number" id="amount" name="amount" min="${product.minimum_deposit}" max="${product.maximum_deposit}" required>
+                
+                <label for="period">가입 선택</label>
                 <select id="period" name="period" required>
-                    <option value="12">12개월</option>
-                    <option value="24">24개월</option>
-                    <option value="36">36개월</option>
+                    <option value="base">기본 이율</option>
+                    <option value="goldenball">골든볼 이율</option>
                 </select>
-
                 <button type="submit">가입하기</button>
             </form>
         </section>
 
-        <section id="faq">
+         <section id="faq">
             <h2>자주 묻는 질문</h2>
             <details>
                 <summary>중도해지 시 불이익이 있나요?</summary>
@@ -112,15 +113,17 @@
                 <p>네, 고객센터를 통해 월 납입일 변경이 가능합니다.</p>
             </details>
         </section>
+
     </div>
 
-    <!-- 푸터 include -->
+	
+
     <%@ include file="../footer.jsp" %>
 
     <script>
         document.getElementById('savings-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('적금 가입이 완료되었습니다. 감사합니다!');
+            alert('${product.product_code} 님 적금 가입이 완료되었습니다. 감사합니다!');
         });
     </script>
 </body>
