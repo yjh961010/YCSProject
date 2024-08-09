@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.neoheulge.dto.NeSavProdDTO;
@@ -21,6 +22,8 @@ public class ProductService {
     }
 
     // 모든 상품 정보 가져오기
+    //윤장호 수정 상품정보가져올때 cache처리해서 가져오기
+    @Cacheable(value = "products")
     public List<NeSavProdDTO> selectAllProducts() {
         return sqlSession.selectList("selectAllProducts");
     }
