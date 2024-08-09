@@ -18,7 +18,7 @@ public class ProductService {
 
     // 상품 등록
     public void insertProduct(Map<String, Object> params) {
-        sqlSession.insert("product.insertProduct", params);
+        sqlSession.insert("insertProduct", params);
     }
 
     // 모든 상품 정보 가져오기
@@ -29,8 +29,8 @@ public class ProductService {
     }
 
     // 특정 상품 코드에 따른 상품 정보 가져오기
-    public NeSavProdDTO selectProductByCode(Map<String, Object> params) {
-        return sqlSession.selectOne("selectProductByCode", params);
+    public List<NeSavProdDTO> selectProductByCode(String product_code) {
+        return sqlSession.selectList("selectProductByCode", product_code);
     }
 
     // 전 회차 상금 가져오기
@@ -59,8 +59,8 @@ public class ProductService {
     }
 
     // 상품의 상태를 가입 기간에 따라 업데이트
-    public void updateProductStatus(Map<String, Object> params) {
-        sqlSession.update("updateProductStatus", params);
+    public void updateProductStatus() {
+        sqlSession.update("updateProductStatus");
     }
 
     // 상품 코드를 통한 상품 삭제
