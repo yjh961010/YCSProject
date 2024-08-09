@@ -103,5 +103,6 @@ public class AdminController {
             model.addAttribute("url", "/admin/updateMemberForm.do?memberID=" + dto.getMemberID());//"/admin/updateMemberForm.do?memberID=" + dto.getMemberID());
         }
         return "message";
+    
 }
 }
