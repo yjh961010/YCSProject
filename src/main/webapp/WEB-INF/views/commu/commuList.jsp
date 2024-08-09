@@ -42,6 +42,10 @@
 <div class="total-area">
 <div class="sidebar">
       <div class="ad_container">
+         
+         
+      </div>
+      <div class="ad_container">
          <button type="button" class="ad_mark" onclick="handleAdClick()">
             <span class="blind">AD | X </span>
          </button>
