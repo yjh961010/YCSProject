@@ -46,13 +46,16 @@
 <div class="nick"> <strong class="itemfont col" id="nickNameArea">닉네임</strong> <br> 
 <span class="itemfont col"> <a id="blogDomainChange" onclick="return false;" class="set_domain_btn"> <span class="blog_domain col"> 아이디</span><br>
  <span class="set_domain_icon col"></span> </a> </span> </div>
-<button onclick="performSearch()" class="login-button">로그아웃</button>
+ <form action="/logout" method="post">
+                        <button type="submit" class="login-button">로그아웃</button>
+                    </form>
+
 <button onclick="performSearch()" class="login-button">채팅하기</button>       
   
       </div>
       <div class="ad_container">
          <button type="button" class="ad_mark" onclick="handleAdClick()">
-            <span class="blind">AD | X </span>
+            <span class="blind" style= left: 9px;">AD | X </span>
          </button>
          <div class="confirm_btns" id="adModal" style="display: none;">
             <p class="feedback_title">이 광고를 그만 보시겠습니까?</p>
@@ -60,7 +63,7 @@
             <button type="button" class="confirm_btn" onclick="closeAdModal()">아니오</button>
          </div>
          <img src="/img/광고.jpg" alt="Advertisement" style="position: relative;
-         width: 200px;height: 180px;vertical-align: bottom;left: 25px;">
+         width: 200px;height: 180px;vertical-align: bottom;left: 29px;">
       </div>
    </div>
 
