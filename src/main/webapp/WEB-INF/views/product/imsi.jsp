@@ -12,6 +12,7 @@
                     <h1>${product.product_name}</h1>
                     <span class="status-badge">${product.product_status}</span>
                     <p class="product-code">상품 코드: ${product.product_code}</p>
+                    <p class="product-code"><a href="/proProduct/does.do">가입하기</a></p>
                 </div>
             </section>
 
