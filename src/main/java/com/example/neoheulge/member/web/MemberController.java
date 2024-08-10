@@ -35,4 +35,9 @@ public class MemberController {
     public String findId() {
     	return "member/findid";
     }
+    
+    @GetMapping("/myPage.do")
+    public String myPage() {
+    	return "member/myPage";
+    }
 }

@@ -28,6 +28,9 @@
     </script>
 <div class="qna">
     <div class="header-content">
+      <div class="vanner">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+        </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
                 <h2>로그아웃</h2>
@@ -50,9 +53,7 @@
                 </div>
             </sec:authorize>
         </div>
-        <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
-        </div>
+      
     </div>
     <h3>문의사항</h3>
         <div class="search-form">
