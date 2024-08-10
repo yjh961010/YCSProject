@@ -1,6 +1,7 @@
 package com.example.neoheulge.payments.entity;
 
 import com.example.neoheulge.member.entity.Member;
+import com.example.neoheulge.payments.dto.PayType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class Payments {
     private Long paymentId;
     @Column(nullable = false, name = "pay_type")
     @Enumerated(EnumType.STRING)
-    private final String paymentType = "card";
+    private PayType paymentType;
     @Column(nullable = false, name = "amount")
     private Long amount;
     @Column(nullable = false, name = "order_name")

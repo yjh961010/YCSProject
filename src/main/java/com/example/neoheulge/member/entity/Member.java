@@ -1,6 +1,7 @@
 package com.example.neoheulge.member.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.Immutable;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Immutable
 @Getter
 @Builder
+@AllArgsConstructor
 public class Member {
 
     @Id
