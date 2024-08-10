@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <jsp:include page="../header.jsp" />
 
-<main class="product-detail">
-    <c:forEach var="product" items="${product}">
+<div class="product-detail">
         <div class="container">
             <section class="product-header">
                 <img src="${pageContext.request.contextPath}/img/product_image.jpg" alt="적금상품 이미지" class="product-image">
@@ -12,6 +11,19 @@
                     <h1>${product.product_name}</h1>
                     <span class="status-badge">${product.product_status}</span>
                     <p class="product-code">상품 코드: ${product.product_code}</p>
+                    
+         <table align="right" style="margin-bottom: 20px">
+            <tr>
+               <td>
+               <sec:authorize access="isAuthenticated()">
+                     <a href="/proProduct/does.do?product_code=${product.product_code}">가입하기</a>
+                  </sec:authorize> 
+                  <sec:authorize access="isAnonymous()">
+                     <a href="javascript:void(0);" class="write-btn"
+                        onclick="checkLogin()">가입하기</a>
+                  </sec:authorize></td>
+            </tr>
+         </table>
                 </div>
             </section>
 
@@ -70,8 +82,8 @@
 	        updateProgress(${product.accumulated_amount}, ${product.maximum_deposit});
 	    };
 	</script>
-    </c:forEach>
-</main>
+
+</div>
 
 
 

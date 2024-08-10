@@ -7,6 +7,26 @@ h1 {
 h4 {
 	color: #808080;
 }
+.login_container{
+	background-color: #c0c0c0;
+	border: 15px solid hsla(0, 0%, 73%, .7);
+	margin: 0 auto;
+}
+.login-button {
+    background-color: #004D99;
+    color: white;
+    padding: 8px 2px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 95%;
+    display: block;
+    margin: 10px auto;
+}
 
 .ad_container {
 	width: 250px;
@@ -20,6 +40,12 @@ h4 {
 	right: 0;
 	top: 0;
 	bottom: 0;
+}
+.ad_containerinside {
+	background-color: #ffffff;
+	border: 10px solid #ffffff; 
+	margin: 0 auto;
+	width: 80%;
 }
 
 .ad-container img {
