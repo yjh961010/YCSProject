@@ -19,11 +19,11 @@
                 window.location.href =currentURL;
             }
         }
-        
+
         function checkLogin() {
             alert("로그인이 필요합니다.");
             window.location.href = "/index.do";
-        
+
     }
     </script>
 <div class="qna">
@@ -33,14 +33,24 @@
         </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
-                <h2>로그아웃</h2>
-                <sec:authentication property="principal.Username"/>
+                <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
+                     alt="프로필 이미지"/>
+                <div class="nick">
+                    <strong class="itemfont col" id="nickNameArea">현재 접속 아이디</strong> <br>
+                    <span class="itemfont col">
+                        <a id="blogDomainChange" onclick="return false;" class="set_domain_btn">
+                        <span class="blog_domain col"> <sec:authentication property="principal.username"/> </span>
+                        <span class ="set_domain_iconcol"></span>
+                        </a>
+                    </span>
+                </div>
                 <form action="<c:url value='/logout' />" method="post">
                     <button type="submit">로그아웃</button>
                 </form>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
-                <h2>로그인</h2>
+                <h1>neoheulge</h1>
+                <h4>더 안전하고 더 편리하게 </h4>
                 <form action="<c:url value='/login' />" method="post">
                     <input type="text" name="username" placeholder="사용자 이름" required>
                     <input type="password" name="password" placeholder="비밀번호" required>
@@ -53,8 +63,49 @@
                 </div>
             </sec:authorize>
         </div>
-      
     </div>
+
+    <div class="commu-container">
+            <div class="community-content">
+                <div class="community-posts">
+                    <div>
+                        <h3>공지글</h3>
+                        <c:forEach var="dto" items="${noticeList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <p>
+                                    <a href="/notice/noticeView.do?id=${dto.id}">
+                                            ${dto.subject}
+                                    </a>
+                                </p>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="community-posts">
+                    <div>
+                        <h3>커뮤니티</h3>
+                        <c:forEach var="dto" items="${commuList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <p>
+                                    <a href="/commu/commuContent.do?id=${dto.id}">
+                                            ${dto.subject}
+                                    </a>
+                                </p>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="community-prizes">
+                    <h3>전회차 상금</h3>
+                    <p>상품1 100,000원</p>
+                    <p>상품2 145,000원</p>
+                    <p>상품3 609,000원</p>
+                    <p>상품4 1,681,500원</p>
+                </div>
+            </div>
+    </div>
+
+
     <h3>문의사항</h3>
         <div class="search-form">
               <select id="searchType">
@@ -85,7 +136,7 @@
                     <th>제목</th>
                     <th>작성자</th>
                     <th>작성일</th>
-                    <th>조회수</th> 
+                    <th>조회수</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -121,7 +172,7 @@
 
             <c:if test="${not empty qnaList}">
                 <div class="pagination">
-                       
+
                     <%
                         int pageSize = 15;
                         int currentPage = (request.getParameter("pageNum") != null) ? Integer.parseInt(request.getParameter("pageNum")) : 1;
@@ -132,17 +183,17 @@
                         int endPage = startPage + pageBlock - 1;
                         if (endPage > pageCount) endPage = pageCount;
                     %>
-                       
+
                     <% if (startPage > pageBlock) { %>
                     <a href="/qna/qnaList.do?pageNum=<%=startPage-pageBlock%>">&laquo; 이전</a>
                     <% } %>
 
-                      
+
                     <% for (int i = startPage; i <= endPage; ++i) { %>
                     <a href="/qna/qnaList.do?pageNum=<%=i%>" class="<%= (i == currentPage) ? "active" : "" %>"><%=i%></a>
                     <% } %>
 
-                      
+
                     <% if (endPage < pageCount) { %>
                     <a href="/qna/qnaList.do?pageNum=<%=startPage+pageBlock%>">다음 &raquo;</a>
                     <% } %>
