@@ -48,6 +48,10 @@ public class MemberController {
     	req.setAttribute("member", dto);
     	return "member/findid_result";
     }
+    @GetMapping("/myPage.do")
+    public String myPage() {
+    	return "member/myPage";
+    }
     
 //    @ResponseBody
 //    @PostMapping("subCrtifi.ajax")
