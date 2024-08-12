@@ -1,15 +1,20 @@
 package com.example.neoheulge.member.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.neoheulge.dto.MemberDTO;
+import com.example.neoheulge.dto.NePreSavProdDTO;
 import com.example.neoheulge.member.service.MemberService;
+import com.example.neoheulge.purproduct.service.PurproductService;
 import com.example.neoheulge.util.SmsUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,8 +24,13 @@ import jakarta.servlet.http.HttpServletRequest;
 public class MemberController {
 	@Autowired
 	private MemberService memberservice;
+	
 	@Autowired
 	private SmsUtil sms;
+	
+	@Autowired
+	PurproductService purproductService;
+	
 	@GetMapping("/login.do")
 	public String login() {
 		return "member/login";
@@ -48,8 +58,13 @@ public class MemberController {
     	req.setAttribute("member", dto);
     	return "member/findid_result";
     }
+    
     @GetMapping("/myPage.do")
-    public String myPage() {
+    public String myPage(HttpServletRequest req,@RequestParam String user) {
+    	List<NePreSavProdDTO> userProducts = purproductService.getAllSubscriptionsByMemberId(user);
+    	req.setAttribute("userProducts", userProducts);
+    	
+    	System.out.println(user);
     	return "member/myPage";
     }
     
