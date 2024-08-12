@@ -150,18 +150,19 @@
                 </c:choose>
                 </div>
             </div>
-
+			${getByMemberId}
             <div class="card">
                 <div class="card-header">
                     <span class="material-icons">shopping_basket</span> 가입한 상품
                 </div>
                 <div class="card-body">
                 <div class="products">
-                    <c:forEach items="${userProducts}" var="product">
+                    <c:forEach items="${getByMemberId}" var="product">
+                    
                     <div class="product-card">
                     <div class="product-image">💰</div>
                     	<div class="product-info">
-                      		<h3>${product.product_code}</h3>
+                      		<h3>${product.PRODUCT_NAME}</h3>
                         	<p><strong>가입일:</strong>
                         		<fmt:formatDate value="${product.subscription_date}" pattern="yyyy-MM-dd"/>
 							</p>
@@ -169,14 +170,39 @@
                         		${product.status}
                         	</p>
                         	<div class="product-actions">
-                            	<form action="<c:url value='/product/cancel' />" method="post">
-                                	<input type="hidden" name="productId" value="${product.product_code}">
+                            	<form action="<c:url value='/proProduct/cancel' />" method="post">
+                            		<sec:authentication var="username" property="principal.username"/>
+									<input type="hidden" name="user" value="${username}"/>
+                                	<input type="hidden" name="product_code" value="${product.product_code}">
                                 	<button type="submit" class="btn btn-secondary">해지하기</button>
                             	</form>
                         	</div>
                         </div>
                     </div>
                 </c:forEach>
+                </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-icons">shopping_basket</span> 해지한 상품
+                </div>
+                <div class="card-body">
+                <div class="products">
+                    <c:forEach items="${getByMemberId}" var="product">
+                    <div class="product-card">
+                    <div class="product-image">💰</div>
+                    	<div class="product-info">
+                      		<h3>${product.product_code}</h3>
+                        	<p><strong>해지일:</strong>
+                        		<fmt:formatDate value="${product.termination_date}" pattern="yyyy-MM-dd"/>
+							</p>
+                        	<p><strong>상태:</strong> 
+                        		${product.status}
+                        	</p>
+                        </div>
+                    </div>
+                	</c:forEach>
                 </div>
                 </div>
             </div>

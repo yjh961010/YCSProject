@@ -63,10 +63,18 @@ public class PurproductController {
 	}
 	
 	@PostMapping("/cancel")
-	public String proCancle(NePreSavProdDTO dto,@RequestParam String user) {
-		int res = purproductService.terminateSubscription(user);
+	public String proCancle(NePreSavProdDTO dto,
+			@RequestParam String user,@RequestParam String product_code) {
 		
-		return "";
+		dto.setProduct_code(product_code);
+		dto.setMember_id(user);
+		
+		System.out.println(user);
+		System.out.println(product_code);
+		
+		int res = purproductService.terminateSubscription(dto);
+		
+		return "index";
 	}
 }
 

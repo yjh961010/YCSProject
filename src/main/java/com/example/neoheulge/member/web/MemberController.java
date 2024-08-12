@@ -61,9 +61,12 @@ public class MemberController {
     	return "member/findid_result";
     }
     @GetMapping("/myPage.do")
-    public String myPage(HttpServletRequest req,@RequestParam String user) {
-    	List<NePreSavProdDTO> userProducts = purproductService.getAllSubscriptionsByMemberId(user);
-    	req.setAttribute("userProducts", userProducts);
+    public String myPage(HttpServletRequest req,NePreSavProdDTO dto,
+    		@RequestParam String user) {
+    	dto.setMember_id(user);
+    	
+    	List<Map<String, Object>> getByMemberId = purproductService.getByMemberId(dto);
+    	req.setAttribute("getByMemberId", getByMemberId);
     	
     	System.out.println(user);
     	return "member/myPage";

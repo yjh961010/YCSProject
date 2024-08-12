@@ -20,13 +20,20 @@
 	    )
 	</insert>
 
-
-	
-	<!-- 전체정보 가져오기 (회원ID) -->
-	<select id="getAllSubscriptionsByMemberId" parameterType="String" resultType="NePreSavProdDTO">
-	    SELECT * 
-	    FROM nepreSavProd
-	    WHERE member_id = #{memberId}
+	<select id="getByMemberId" parameterType="NePreSavProdDTO" resultType="Map">
+	    SELECT *
+	    FROM nepreSavProd nsp
+	    JOIN neSavProd ns
+	    ON nsp.product_code = ns.product_code
+	    WHERE nsp.member_id = #{member_id}
+	    <choose>
+	        <when test="status != null">
+	            AND nsp.status = #{status}
+	        </when>
+	        <otherwise>
+	            AND nsp.status IN ('활성', '해지')
+	        </otherwise>
+	    </choose>
 	</select>
 	
 	<!-- 전체정보 가져오기 (회원ID,상품ID) -->
@@ -38,7 +45,7 @@
 	</select>
 	
 	<!-- 상품 해지(회원 상태변경, 포기 환급액, 해지 날짜 기록) -->
-	<update id="terminateSubscription" parameterType="String">
+	<update id="terminateSubscription" parameterType="NePreSavProdDTO">
 	    UPDATE nepreSavProd
 	    SET 
 	        status = '해지',
@@ -51,7 +58,8 @@
 	                            ELSE 0
 	                         END)
 	                       ) * (1 - (SELECT early_fee FROM neSavProd WHERE product_code = nepreSavProd.product_code) / 100)
-	    WHERE member_id = #{memberId}
+	    WHERE member_id = #{member_id}
+	    and product_code = #{product_code}
 	</update>
 
 
