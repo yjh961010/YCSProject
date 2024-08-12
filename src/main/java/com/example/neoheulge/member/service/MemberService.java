@@ -25,4 +25,7 @@ public class MemberService {
 		return memberDAO.signupPro(member);
 	}
 	
+	public MemberDTO findByName(String name) {
+		return memberDAO.findByName(name);
+	}
 }
