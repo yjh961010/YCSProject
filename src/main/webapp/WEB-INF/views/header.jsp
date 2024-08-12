@@ -72,20 +72,17 @@
     }
 
     function checkAdVisibility() {
-        ['ad-left', 'ad-right'].forEach(function(adClass) {
-            var hideUntil = localStorage.getItem('hideAdUntil_' + adClass);
-            var adElement = document.querySelector('.' + adClass);
+        var adElement = document.querySelector('.ad-left');
+        var hideUntil = localStorage.getItem('hideAdUntil_ad-left');
 
-            if (hideUntil && new Date().getTime() < hideUntil) {
-                adElement.querySelector('.ad-image').style.display = 'none';
-                adElement.querySelector('.ad-blocked').style.display = 'block';
-                adElement.style.display = 'block'; // 광고를 표시하여 텍스트를 표시
-            } else {
-                adElement.querySelector('.ad-image').style.display = 'block';
-                adElement.querySelector('.ad-blocked').style.display = 'none';
-                adElement.style.display = 'block'; // 광고를 표시
-            }
-        });
+        if (hideUntil && new Date().getTime() < hideUntil) {
+            adElement.querySelector('.ad-image').style.display = 'none';
+            adElement.querySelector('.ad-blocked').style.display = 'block';
+        } else {
+            adElement.querySelector('.ad-image').style.display = 'block';
+            adElement.querySelector('.ad-blocked').style.display = 'none';
+        }
+        adElement.style.display = 'block';
     }
 </script>
 </head>
