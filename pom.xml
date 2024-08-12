@@ -148,14 +148,18 @@
 			<version>6.3.1</version> 
 		</dependency>
 		<!--new relic-->
-		<dependency>
-    <groupId>com.newrelic.agent.java</groupId>
-    <artifactId>newrelic-java</artifactId>
-    <version>8.13.0</version>
-    <scope>provided</scope>
-    <type>zip</type>
-</dependency>
-
+				<dependency>
+		    <groupId>com.newrelic.agent.java</groupId>
+		    <artifactId>newrelic-java</artifactId>
+		    <version>8.13.0</version>
+		    <scope>provided</scope>
+		    <type>zip</type>
+		</dependency>
+	<dependency>
+            <groupId>net.nurigo</groupId>
+            <artifactId>sdk</artifactId>
+            <version>4.3.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
