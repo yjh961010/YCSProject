@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/member/myStyle.css">
@@ -154,19 +156,28 @@
                     <span class="material-icons">shopping_basket</span> 가입한 상품
                 </div>
                 <div class="card-body">
+                <div class="products">
                     <c:forEach items="${userProducts}" var="product">
-                    <div class="product-item">
-                        <h3>${product.product_code}</h3>
-                        <p><strong>가입일:</strong>${product.subscription_date} </p>
-                        <p><strong>상태:</strong> ${product.status}</p>
-                        <div class="product-actions">
-                            <form action="<c:url value='/product/cancel' />" method="post">
-                                <input type="hidden" name="productId" value="${product.product_code}">
-                                <button type="submit" class="btn btn-secondary">해지하기</button>
-                            </form>
+                    <div class="product-card">
+                    <div class="product-image">💰</div>
+                    	<div class="product-info">
+                      		<h3>${product.product_code}</h3>
+                        	<p><strong>가입일:</strong>
+                        		<fmt:formatDate value="${product.subscription_date}" pattern="yyyy-MM-dd"/>
+							</p>
+                        	<p><strong>상태:</strong> 
+                        		${product.status}
+                        	</p>
+                        	<div class="product-actions">
+                            	<form action="<c:url value='/product/cancel' />" method="post">
+                                	<input type="hidden" name="productId" value="${product.product_code}">
+                                	<button type="submit" class="btn btn-secondary">해지하기</button>
+                            	</form>
+                        	</div>
                         </div>
                     </div>
                 </c:forEach>
+                </div>
                 </div>
             </div>
         </div>

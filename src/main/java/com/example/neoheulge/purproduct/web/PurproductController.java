@@ -61,6 +61,13 @@ public class PurproductController {
 		int res = purproductService.insertSubscription(dto);
 		return "proproduct/productSignUp";
 	}
+	
+	@PostMapping("/cancel")
+	public String proCancle(NePreSavProdDTO dto,@RequestParam String user) {
+		int res = purproductService.terminateSubscription(user);
+		
+		return "";
+	}
 }
 
 
