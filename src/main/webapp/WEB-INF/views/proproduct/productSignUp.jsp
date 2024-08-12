@@ -8,73 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>neoheulge - 모던 적금 상품</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainStyle.css">
-    <style>
-        /* 메인 콘텐츠 스타일 */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/proproduct/productSignUp.css">
 
-        section {
-            margin-bottom: 2rem;
-        }
-
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-        }
-
-        form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        button {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #27ae60;
-        }
-
-        .icon {
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            margin-right: 0.5em;
-            vertical-align: middle;
-        }
-    </style>
 </head>
-<body>
+
     <!-- 헤더 include -->
     <%@ include file="../header.jsp" %>
 
-    <div class="main-content">
+
         <section id="product-info">
             <h2>상품 정보</h2>
             <p><span class="icon">💰</span> 기본 이율: ${product.base_rate} %</p>
@@ -84,21 +25,25 @@
             <p><span class="icon">🏦</span> 최대 가입금액: ${product.maximum_deposit}원</p>
         </section>
 
-        <section id="registration-form">
+        <section id="registration-form" >
             <h2>적금 가입</h2>
-            <form id="savings-form">
+            <form name="f" id="savings-form" action="/proProduct/input.do" method="post">
+                <sec:authentication var="username" property="principal.username"/>
+				<input type="hidden" name="user" value="${username}"/>
+            	<input type="hidden" name="product_code" value="${product.product_code}"/>
+            	
                 <label for="name">이름</label>
-                <input type="text" id="name" name="author" value="<sec:authentication property='principal.username'/>" readonly>
+                	<input type="text" id="name" name="author" value="<sec:authentication property='principal.username'/>" readonly>
 
                 <label for="amount">월 납입금액</label>
-                <input type="number" id="amount" name="amount" min="${product.minimum_deposit}" max="${product.maximum_deposit}" required>
+                	<input type="number" id="amount" name="amount" min="${product.minimum_deposit}" max="${product.maximum_deposit}" required>
                 
                 <label for="period">가입 선택</label>
-                <select id="period" name="period" required>
-                    <option value="base">기본 이율</option>
-                    <option value="goldenball">골든볼 이율</option>
-                </select>
-                <button type="submit">가입하기</button>
+	                <select id="period" name="select" required>
+	                    <option value="base">기본 이율</option>
+	                    <option value="goldenball">골든볼 이율</option>
+	                </select>
+                <input type="submit" value="가입하기">
             </form>
         </section>
 
@@ -114,17 +59,14 @@
             </details>
         </section>
 
-    </div>
 
 	
 
     <%@ include file="../footer.jsp" %>
 
     <script>
-        document.getElementById('savings-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('${product.product_code} 님 적금 가입이 완료되었습니다. 감사합니다!');
-        });
+        
+
     </script>
-</body>
+
 </html>

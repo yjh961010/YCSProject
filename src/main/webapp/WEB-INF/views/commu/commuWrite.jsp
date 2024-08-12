@@ -58,7 +58,6 @@
     </div>
     
     <form name="f" action="/commu/commuWrite.do" method="post" onsubmit="return check()">
-        <input type="hidden" name="id" value="${getCommu.id}" />
         <input type="hidden" name="re_step" value="${getCommu.re_step}" />
         <input type="hidden" name="re_level" value="${getCommu.re_level}" />
         <h2>글 쓰 기</h2>

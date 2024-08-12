@@ -108,25 +108,25 @@
 </div>
     --%>
     
-                <h2 class="section-title">적금 상품</h2>
-   <div class="container">
+       		<h2 class="section-title">적금 상품</h2>
+   			<div class="container">
                 <div class="products">
                 <c:forEach var="dto" items="${prodList}" varStatus="status">
-                    <a href="/product/dd.do?product_code=${dto.product_code}">
+                    <a href="/product/productDetail.do?product_code=${dto.product_code}">
                     <div class="product-card">
                         <div class="product-image">💰</div>
-                        <div class="product-info">
-                            <h3 class="product-title"> ${dto.product_name}</h3>
-                            <h5>누적금액-<fmt:formatNumber value="${dto.accumulated_amount}" type="number" groupingUsed="true"/>원</h5>
-                           <p class="product-description">
-                        연 ${dto.base_rate}% 금리, ${dto.subscription_period} 만기, 최소 
-                        <fmt:formatNumber value="${dto.minimum_deposit}" type="number" groupingUsed="true"/>원부터
-                    </p>
-                        </div>
+                        	<div class="product-info">
+                            	<h3 class="product-title"> ${dto.product_name}</h3>
+                            	<h5>누적금액-<fmt:formatNumber value="${dto.accumulated_amount}" type="number" groupingUsed="true"/>원</h5>
+                           		<p class="product-description">
+                           			연 ${dto.base_rate}% 금리, ${dto.subscription_period} 만기, 최소 
+                        			<fmt:formatNumber value="${dto.minimum_deposit}" type="number" groupingUsed="true"/>원부터
+                    			</p>
+                        	</div>
                     </div>
                     </a>
-                    </c:forEach>
-                </div>
+                </c:forEach>
+           		</div>
             </div>
    
    
