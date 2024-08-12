@@ -95,8 +95,11 @@ function checkWriteId(username){
                 <td colspan="3">${getQna.subject}</td>
             </tr>
             <tr>
-                <th>글내용</th>
-                <td colspan="3">${getQna.content}</td>
+                <td colspan="90">
+                    <div class="textarea-container">
+                        <textarea readonly>${getQna.content}</textarea>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align: right;">
