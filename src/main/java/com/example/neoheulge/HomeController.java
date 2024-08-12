@@ -41,8 +41,8 @@ public class HomeController {
 		List<CommuDTO> commulist = commuService.commuList();
 		req.setAttribute("commuList", commulist);
 		
-		List<NeSavProdDTO> prodList = productService.selectAllProducts();
-		req.setAttribute("prodList", prodList);
+//		List<NeSavProdDTO> prodList = productService.selectAllProducts();
+//		req.setAttribute("prodList", prodList);
 		
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String username = authentication.getName();
