@@ -1,11 +1,16 @@
 package com.example.neoheulge.member.web;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.neoheulge.dto.MemberDTO;
@@ -38,7 +43,8 @@ public class MemberController {
 	}
     
     @GetMapping("/findid.do")
-    public String findId() {
+    public String findId(HttpServletRequest req) {
+    	req.setAttribute("check", "!@#!@#");
     	return "member/findid";
     }
     
@@ -46,6 +52,7 @@ public class MemberController {
     public String findIdPro(HttpServletRequest req,MemberDTO member) {
     	MemberDTO dto = memberservice.findByName(member.getName());
     	req.setAttribute("member", dto);
+    	
     	return "member/findid_result";
     }
     @GetMapping("/myPage.do")
@@ -53,14 +60,22 @@ public class MemberController {
     	return "member/myPage";
     }
     
-//    @ResponseBody
-//    @PostMapping("subCrtifi.ajax")
-//    public ResponseEntity<?> sendSmsToFindEmail(String phone) {
-//        //수신번호 형태에 맞춰 "-"을 ""로 변환
-//        String phoneNum = phone.replaceAll("-","");
-//        
-//                
-//        sms.sendOne(phoneNum, "!12");
-//        return ResponseEntity.ok(new Message("SMS 전송 성공"));
-//    }
+    @ResponseBody
+    @PostMapping("/subCrtifi.ajax")
+    public ResponseEntity<?> sendSmsToFindEmail(@RequestParam("phone") String phone, HttpServletRequest req) {
+        //수신번호 형태에 맞춰 "-"을 ""로 변환
+        String phoneNum = phone.replaceAll("-","");
+        Random rand = new Random();
+        String randomNum = "";
+        for (int i = 0; i < 4; i++) {
+            String random = Integer.toString(rand.nextInt(10));
+            randomNum += random;
+        }        
+        sms.sendOne(phoneNum, randomNum);
+        Map<String, Object> response = new HashMap<>();
+        response.put("check", randomNum.toString());
+        req.setAttribute("check", randomNum);
+        
+        return ResponseEntity.ok(response);
+    }
 }
