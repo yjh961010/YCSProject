@@ -23,10 +23,17 @@ public class ProductController {
 		
 		@GetMapping("/dd.do")
 		public String product(HttpServletRequest req,@RequestParam String product_code) {
-			List<NeSavProdDTO> prodList = productService.selectProductByCode(product_code);
-			req.setAttribute("product", prodList); 
-			System.out.println(prodList);
+			NeSavProdDTO prod = productService.selectProductByCode(product_code);
+			req.setAttribute("product", prod); 
+			System.out.println(prod);
 			return "product/imsi";
+		}
+		
+		@GetMapping("/productList.do")
+		public String productList(HttpServletRequest req) {
+			List<NeSavProdDTO> prodList = productService.selectAllProducts();
+			req.setAttribute("product", prodList); 
+			return "product/productList";
 		}
 
 }
