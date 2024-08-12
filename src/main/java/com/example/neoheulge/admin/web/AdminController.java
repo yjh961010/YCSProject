@@ -165,4 +165,56 @@ public class AdminController {
          }
         return "message";
     }
+    @GetMapping("/updateProd.do")
+    public String updateProd(Model model) {
+    	List<NeSavProdDTO> prodList=adminservice.prodList();
+    	System.out.println("prodList="+prodList);
+    	model.addAttribute("prodList", prodList);
+    	return "admin/prodList";
+    }
+    @PostMapping("/updateProdPro.do")
+    public String updateProdPro(@RequestParam ("product_code")String product_code,Model model) {
+    	NeSavProdDTO PDTO = adminservice.prodInfo(product_code);
+    	model.addAttribute("PDTO", PDTO);
+    	return "admin/updateProd";
+    }
+    @PostMapping("/updateProdOk.do")
+    public String updateProdOk(@ModelAttribute NeSavProdDTO dto, BindingResult result, Model model) {
+    	 UploadFile uploadFile = new UploadFile(); 
+         try { 
+             if (dto.getFile() != null) {
+               if (uploadFile.uploadFile(dto.getFile())) {
+                     dto.setProduct_image(uploadFile.getFullName()); // 새 파일 이름으로 업데이트
+                 } 
+             }  
+        } catch (Exception e) {
+             e.printStackTrace();
+            }
+         if (result.hasErrors()) {
+        	 //System.out.println("date:" + dto.getStart_date());
+             System.out.println("BindingResult 오류");
+            }
+        int res=adminservice.updateProd(dto); 
+        if (res > 0) {
+            model.addAttribute("msg", "상품수정 완료");
+            model.addAttribute("url",  "/admin/updateProd.do");
+         } else {
+        	 model.addAttribute("msg", "상품수정 실패");
+             model.addAttribute("url", "/admin/updateProd.do");
+         }
+        return "message";
+    }
+    @PostMapping("/deleteProd.do")
+    public String deleteProd(@RequestParam("product_code") String product_code, Model model) {
+    	int res = adminservice.deleteProd(product_code);
+    	 if (res > 0) {
+             model.addAttribute("msg", "상품삭제 완료");
+             model.addAttribute("url",  "/admin/updateProd.do");
+          } else {
+         	 model.addAttribute("msg", "상품삭제 실패");
+              model.addAttribute("url", "/admin/updateProd.do");
+          }
+         return "message";
+    }
+    
 }

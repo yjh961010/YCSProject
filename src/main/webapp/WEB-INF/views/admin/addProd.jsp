@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
 상품추가
+<a href="/admin/updateProd.do">상품수정</a>
 <div align="center">
 
 <form name="f" action="/admin/addProdPro.do" method="POST" enctype="multipart/form-data">
@@ -60,6 +61,7 @@
 		<label for ="minimum_deposit">minimum_deposit(최소금액) :</label>
 		<input type="text" name="minimum_deposit" id="minimum_deposit" placeholder="소수점 두자리까지 입력가능합니다."></td>
 	</tr>
+	<tr>
 	<td>
 		<label for ="maximum_deposit">maximum_deposit (최대금액) :</label>
 		<input type="text" name="maximum_deposit " id="maximum_deposit " placeholder="소수점 두자리까지 입력가능합니다."></td>

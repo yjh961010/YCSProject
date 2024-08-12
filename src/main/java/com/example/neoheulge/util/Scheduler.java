@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.neoheulge.admin.service.AdminDAO;
 import com.example.neoheulge.purproduct.service.PurproductService;
 
 @Component
@@ -21,6 +22,8 @@ public class Scheduler {
 	
     @Autowired
     private SchedulerService schedulerService;
+    @Autowired
+    private AdminDAO admindao;
 
     //추가금 넣기 
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
@@ -64,6 +67,16 @@ public class Scheduler {
             e.printStackTrace();
             System.err.println("Error occurred while updating product statuses: " + e.getMessage());
         }
+    }
+    //상품 만기1년후 자동삭제
+    @Scheduled(cron = "0 0 0 1 * ?")//매달 1일 실행
+    public void deleteExpiredProduct() {
+    	try {
+    		admindao.deleteExpried();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		System.err.println("Error oddurred while running deleteExpired scheduling" +e.getMessage());
+    	}
     }
     
     
