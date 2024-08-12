@@ -6,17 +6,20 @@
 <mapper namespace="purproduct">
 
 	<!-- 상품 가입 -->
-	<insert id="insertSubscription" parameterType="Map">
+	<insert id="insertSubscription" parameterType="NePreSavProdDTO">
 	    INSERT INTO nepreSavProd (
-	        subscription_id, member_id, product_code, subscription_amount, 
-	        subscription_select,termination_date, status, early_refund, 
-	        interest_payment
+	        subscription_id, member_id, product_code, 
+	        subscription_amount, subscription_select, early_refund 
 	    ) VALUES (
-	       	subscription_id_seq.nextval, #{memberId}, #{productCode}, #{subscriptionAmount}, 
-	        #{subscription_select}, #{terminationDate}, #{status}, #{earlyRefund}, 
-	        #{interestPayment} 
+	        subscription_id_seq.nextval, 
+	        #{member_id, jdbcType=VARCHAR}, 
+	        #{product_code, jdbcType=VARCHAR}, 
+	        #{subscription_amount},
+	        #{subscription_select, jdbcType=VARCHAR}, 
+	        0
 	    )
 	</insert>
+
 
 	
 	<!-- 전체정보 가져오기 (회원ID) -->

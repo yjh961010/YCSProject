@@ -21,12 +21,12 @@ public class ProductController {
 		@Autowired
 		ProductService productService;
 		
-		@GetMapping("/dd.do")
+		@GetMapping("/productDetail.do")
 		public String product(HttpServletRequest req,@RequestParam String product_code) {
 			NeSavProdDTO prod = productService.selectProductByCode(product_code);
 			req.setAttribute("product", prod); 
 			System.out.println(prod);
-			return "product/imsi";
+			return "product/productDetail";
 		}
 		
 		@GetMapping("/productList.do")

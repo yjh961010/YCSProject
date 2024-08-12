@@ -16,8 +16,8 @@ public class PurproductService {
     private SqlSession sqlSession;
 
     // 상품 가입
-    public void insertSubscription(Map<String, Object> params) {
-        sqlSession.insert("insertSubscription", params);
+    public int insertSubscription(NePreSavProdDTO dto) {
+        return sqlSession.insert("insertSubscription", dto);
     }
 
     // 회원 ID로 모든 가입 정보 가져오기
