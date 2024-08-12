@@ -2,13 +2,11 @@
 <%@ include file="../header.jsp" %>
 
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>neoheulge - 적금 상품</title>
+<link rel="stylesheet" type="text/css" href="/css/member/myStyle.css">
     <style>
-        :root {
+    
+
+         :root {
             --primary-color: #4a90e2;
             --secondary-color: #f39c12;
             --background-color: #f5f7fa;
@@ -16,18 +14,6 @@
             --card-background: #fff;
         }
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
 
         .section-title {
             text-align: center;
@@ -122,9 +108,37 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
+
+<div class="myPage">
+<div class="header-content">
+      <div class="vanner">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+        </div>
+        <div class="login-form">
+            <sec:authorize access="isAuthenticated()">
+                <h2>로그아웃</h2>
+                <sec:authentication property="principal.Username"/>
+                <form action="<c:url value='/logout' />" method="post">
+                    <button type="submit">로그아웃</button>
+                </form>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <h2>로그인</h2>
+                <form action="<c:url value='/login' />" method="post">
+                    <input type="text" name="username" placeholder="사용자 이름" required>
+                    <input type="password" name="password" placeholder="비밀번호" required>
+                    <button type="submit">로그인</button>
+                </form>
+                <div class="links">
+                    <a href="/find-id">아이디 찾기</a> |
+                    <a href="/find-password">비밀번호 찾기</a> |
+                    <a href="${pageContext.request.contextPath}/member/signup.do">회원가입</a>
+                </div>
+            </sec:authorize>
+        </div>
+      
+    </div>
+
         <h2 class="section-title">적금 상품</h2>
         <div class="products">
             <div class="product-card">
@@ -193,6 +207,7 @@
             <!-- 다른 상품들도 위와 같은 구조로 추가 -->
         </div>
     </div>
+ 
 
     <script>
         function toggleDetails(button) {
@@ -206,7 +221,7 @@
             }
         }
     </script>
-</body>
-</html>
+
+
 
 <%@ include file="../footer.jsp" %>
