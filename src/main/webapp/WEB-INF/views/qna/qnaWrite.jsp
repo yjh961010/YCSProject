@@ -123,7 +123,7 @@
                     <p>상품4 1,681,500원</p>
                 </div>
             </div>
-        </div>
+    </div>
  </div>
 
 <jsp:include page="../footer.jsp"/>

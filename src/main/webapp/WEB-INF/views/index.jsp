@@ -63,7 +63,11 @@
                     <%-- <sec:authorize access="hasRole('ROLE_1')">
                  	123
                  	</sec:authorize> --%>
-                 	<div><a href="${pageContext.request.contextPath}/member/myPage.do">마이 페이지</a></div>
+                 	<div>
+                 		<a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>">
+                 			마이 페이지
+                 		</a>
+                 	</div>
                  	<div>대표 계좌 잔액 : 100원 </div>
                     <form action="<c:url value='/logout' />" method="post">
                         <button type="submit">로그아웃</button>

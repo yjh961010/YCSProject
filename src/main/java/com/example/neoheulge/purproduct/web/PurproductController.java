@@ -46,11 +46,13 @@ public class PurproductController {
 		dto.setMember_id(user);
 		dto.setProduct_code(product_code);
 		dto.setSubscription_amount(amount);
+		
 		if("goldenball".equals(select)) {
 			dto.setSubscription_select("골든볼");
 		}else if("base".equals(select)) {
 			dto.setSubscription_select("기본");
 		}
+		
 		System.out.println(select);
 		
 		//member_id, product_code, 
@@ -58,6 +60,13 @@ public class PurproductController {
 		
 		int res = purproductService.insertSubscription(dto);
 		return "proproduct/productSignUp";
+	}
+	
+	@PostMapping("/cancel")
+	public String proCancle(NePreSavProdDTO dto,@RequestParam String user) {
+		int res = purproductService.terminateSubscription(user);
+		
+		return "";
 	}
 }
 

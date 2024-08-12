@@ -7,6 +7,36 @@ h1 {
 h4 {
 	color: #808080;
 }
+.header-content {
+    display: flex;
+    justify-content: space-between; /* 양쪽에 내용을 분산 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-bottom: 20px; /* 밑에 공간 추가 */
+}
+
+.login-form {
+    flex: 0 0 20%;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 240px;
+}
+.qna {
+    background: #ffffff;
+    padding: 1em;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+
+
+
 .login_container{
 	background-color: #c0c0c0;
 	border: 15px solid hsla(0, 0%, 73%, .7);

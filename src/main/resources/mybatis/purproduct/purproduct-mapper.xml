@@ -38,7 +38,7 @@
 	</select>
 	
 	<!-- 상품 해지(회원 상태변경, 포기 환급액, 해지 날짜 기록) -->
-	<update id="terminateSubscription" parameterType="Map">
+	<update id="terminateSubscription" parameterType="String">
 	    UPDATE nepreSavProd
 	    SET 
 	        status = '해지',

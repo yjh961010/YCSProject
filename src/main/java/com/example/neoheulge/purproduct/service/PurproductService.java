@@ -31,8 +31,8 @@ public class PurproductService {
     }
 
     // 상품 해지 (회원 상태 변경, 포기 환급액, 해지 날짜 기록)
-    public void terminateSubscription(Map<String, Object> params) {
-        sqlSession.update("terminateSubscription", params);
+    public int terminateSubscription(String memberId) {
+        return sqlSession.update("terminateSubscription", memberId);
     }
 
     // 상품의 종료일 도래 시 골든볼 처리
