@@ -4,10 +4,7 @@ import com.example.neoheulge.member.entity.Member;
 import com.example.neoheulge.payments.dto.PayType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -15,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "NEPAYMENT")
+@Setter
 public class Payments {
 
     /**
@@ -57,4 +55,6 @@ public class Payments {
     @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Member customer;
+
+
 }
