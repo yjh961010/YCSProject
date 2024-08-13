@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="/css/member/myStyle.css">
@@ -42,6 +43,93 @@
             </sec:authorize>
         </div>
     </div>
+      
+
+
+    <div class="commu-container">
+            <div class="community-content">
+                <div class="community-posts">
+                    <div>
+                        <h3>공지글</h3>
+                        <table>
+				<thead>
+					<tr class="commu-header">
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+                        <c:forEach var="dto" items="${noticeList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <tr>
+                                 <td width="50%">
+                                <span>&nbsp;&nbsp;</span>
+                                    <a href="/notice/noticeView.do?id=${dto.id}">
+                                          ${dto.subject}
+                                    </a>
+                                    </td>
+                                <td align="center" width="25%">
+                                    ${dto.author}
+                                    </td>
+                               <td align="center">
+                                    <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        			<fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />		
+                                   </td>
+                               </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="community-posts">
+                    <div>
+                        <h3>커뮤니티</h3>
+                        <table>
+				<thead>
+					<tr class="commu-header">
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+                        
+                        <c:forEach var="dto" items="${commuList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                 <tr>
+                                <td width="50%">
+                                <span>&nbsp;&nbsp;</span>
+                                    <a href="/commu/commuContent.do?id=${dto.id}">
+                                           ${dto.subject}
+                                 </a>
+                                    </td>
+                                    <td align="center" width="25%">
+                                    ${dto.author}
+                                    </td>
+                               <td align="center">
+                                    <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        			<fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />		
+                                   </td>
+                               </tr>
+                            </c:if>
+                        </c:forEach>
+                         </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="community-prizes">
+                    <h3>전회차 상금</h3>
+                    <p>상품1 100,000원</p>
+                    <p>상품2 145,000원</p>
+                    <p>상품3 609,000원</p>
+                    <p>상품4 1,681,500원</p>
+                </div>
+            </div>
+    </div>
+
         <h2 class="section-title">적금 상품</h2>
         <div class="products">
             <div class="product-card">
@@ -110,46 +198,7 @@
             <!-- 다른 상품들도 위와 같은 구조로 추가 -->
         </div>
     </div>
-
-    <div class="commu-container">
-            <div class="community-content">
-                <div class="community-posts">
-                    <div>
-                        <h3>공지글</h3>
-                        <c:forEach var="dto" items="${noticeList}" varStatus="status">
-                            <c:if test="${status.index < 5}">
-                                <p>
-                                    <a href="/notice/noticeView.do?id=${dto.id}">
-                                            ${dto.subject}
-                                    </a>
-                                </p>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div>
-                <div class="community-posts">
-                    <div>
-                        <h3>커뮤니티</h3>
-                        <c:forEach var="dto" items="${commuList}" varStatus="status">
-                            <c:if test="${status.index < 5}">
-                                <p>
-                                    <a href="/commu/commuContent.do?id=${dto.id}">
-                                            ${dto.subject}
-                                    </a>
-                                </p>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div>
-                <div class="community-prizes">
-                    <h3>전회차 상금</h3>
-                    <p>상품1 100,000원</p>
-                    <p>상품2 145,000원</p>
-                    <p>상품3 609,000원</p>
-                    <p>상품4 1,681,500원</p>
-                </div>
-            </div>
-    </div><br>
+ 
 
     <script>
         function toggleDetails(button) {
