@@ -90,7 +90,7 @@
             <div class="product-card">
                 <div class="product-image">💰</div>
                 <div class="product-info">
-                    <h3 class="product-title">스마트 적금</h3>
+                    <a class="product-title" href="productDetail.do">초단기 적금</a>
                     <p><strong>금리:</strong> 연 3.5%</p>
                     <p><strong>만기:</strong> 12개월</p>
                     <p><strong>최소금액:</strong> 10만원부터</p>
@@ -106,7 +106,7 @@
             <div class="product-card">
                 <div class="product-image">💰</div>
                 <div class="product-info">
-                    <h3 class="product-title">스마트 적금</h3>
+                    <a class="product-title" href="productDetail.do">청년 적금</a>
                     <p><strong>금리:</strong> 연 3.5%</p>
                     <p><strong>만기:</strong> 12개월</p>
                     <p><strong>최소금액:</strong> 10만원부터</p>
@@ -122,7 +122,7 @@
             <div class="product-card">
                 <div class="product-image">💰</div>
                 <div class="product-info">
-                    <h3 class="product-title">스마트 적금</h3>
+                    <a class="product-title" href="productDetail.do">스마트 적금</a>
                     <p><strong>금리:</strong> 연 3.5%</p>
                     <p><strong>만기:</strong> 12개월</p>
                     <p><strong>최소금액:</strong> 10만원부터</p>
@@ -138,7 +138,7 @@
             <div class="product-card">
                 <div class="product-image">💰</div>
                 <div class="product-info">
-                    <h3 class="product-title">스마트 적금</h3>
+                    <a class="product-title" href="productDetail.do">연간 목표 달성 적금</a>
                     <p><strong>금리:</strong> 연 3.5%</p>
                     <p><strong>만기:</strong> 12개월</p>
                     <p><strong>최소금액:</strong> 10만원부터</p>
