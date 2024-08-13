@@ -150,7 +150,7 @@
                 </c:choose>
                 </div>
             </div>
-			${getByMemberId}
+
             <div class="card">
                 <div class="card-header">
                     <span class="material-icons">shopping_basket</span> 가입한 상품
@@ -158,27 +158,28 @@
                 <div class="card-body">
                 <div class="products">
                     <c:forEach items="${getByMemberId}" var="product">
-                    
-                    <div class="product-card">
-                    <div class="product-image">💰</div>
-                    	<div class="product-info">
-                      		<h3>${product.PRODUCT_NAME}</h3>
-                        	<p><strong>가입일:</strong>
-                        		<fmt:formatDate value="${product.subscription_date}" pattern="yyyy-MM-dd"/>
-							</p>
-                        	<p><strong>상태:</strong> 
-                        		${product.status}
-                        	</p>
-                        	<div class="product-actions">
-                            	<form action="<c:url value='/proProduct/cancel' />" method="post">
-                            		<sec:authentication var="username" property="principal.username"/>
-									<input type="hidden" name="user" value="${username}"/>
-                                	<input type="hidden" name="product_code" value="${product.product_code}">
-                                	<button type="submit" class="btn btn-secondary">해지하기</button>
-                            	</form>
-                        	</div>
-                        </div>
-                    </div>
+                    <c:if test="${product.STATUS == '활성'}">
+	                    <div class="product-card">
+	                    	<div class="product-image">💰</div>
+	                    	<div class="product-info">
+	                      		<h3>${product.PRODUCT_NAME}</h3>
+	                        	<p><strong>가입일:</strong>
+	                        		<fmt:formatDate value="${product.SUBSCRIPTION_DATE}" pattern="yyyy-MM-dd"/>
+								</p>
+	                        	<p><strong>상태:</strong> 
+	                        		${product.STATUS}
+	                        	</p>
+	                        	<div class="product-actions">
+	                            	<form action="<c:url value='/proProduct/cancel' />" method="post">
+	                            		<sec:authentication var="username" property="principal.username"/>
+										<input type="hidden" name="user" value="${username}"/>
+	                                	<input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
+	                                	<button type="submit" class="btn btn-secondary">해지하기</button>
+	                            	</form>
+	                        	</div>
+	                        </div>
+	                    </div>
+                    </c:if>
                 </c:forEach>
                 </div>
                 </div>
@@ -190,19 +191,26 @@
                 <div class="card-body">
                 <div class="products">
                     <c:forEach items="${getByMemberId}" var="product">
-                    <div class="product-card">
-                    <div class="product-image">💰</div>
-                    	<div class="product-info">
-                      		<h3>${product.product_code}</h3>
-                        	<p><strong>해지일:</strong>
-                        		<fmt:formatDate value="${product.termination_date}" pattern="yyyy-MM-dd"/>
-							</p>
-                        	<p><strong>상태:</strong> 
-                        		${product.status}
-                        	</p>
-                        </div>
-                    </div>
-                	</c:forEach>
+                    <c:if test="${product.STATUS == '해지'}">
+	                    <div class="product-card">
+	                    	<div class="product-image">💰</div>
+	                    	<div class="product-info">
+	                      		<h3>${product.PRODUCT_NAME}</h3>
+	                        	<p><strong>해지일:</strong>
+	                        		<fmt:formatDate value="${product.TERMINATION_DATE}" pattern="yyyy-MM-dd"/>
+								</p>
+	                        	<p><strong>상태:</strong> 
+	                        		${product.STATUS}
+	                        	</p>
+	               				<div class="product-actions">
+	                            	<form action="" method="post">
+	                                	<button type="submit" class="btn btn-secondary">삭제하기</button>
+	                            	</form>
+	                        	</div>
+	                        </div>
+	                    </div>
+                    </c:if>
+					</c:forEach>
                 </div>
                 </div>
             </div>
