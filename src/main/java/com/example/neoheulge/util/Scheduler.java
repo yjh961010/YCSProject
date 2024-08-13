@@ -25,14 +25,19 @@ public class Scheduler {
     @Autowired
     private AdminDAO admindao;
 
+    
     //추가금 넣기  
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")
+    @Scheduled(cron = "0/1 * * * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 * * *")
     public void schedulePayments() {
         try {
             List<Map<String, Object>> members = purproductService.getActiveAuto();
             if (members != null && !members.isEmpty()) {
                 schedulerService.scheduleAutoPayments(members);
-                System.out.println("1"+members);
+                for (Map<String, Object> member : members) {
+                    if (member.containsKey("TOTAL_PAYMENT")) {
+                        System.out.println("TOTAL_PAYMENT: " + member.get("TOTAL_PAYMENT"));
+                    }
+                }
             } else {
                 System.out.println("No active auto payments found.");
             }
@@ -42,22 +47,34 @@ public class Scheduler {
         }
     }
     
-    //이자 계산 실행
-    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행 (cron = "0/1 * * * * *")
+    /*
+    //이자 계산 실행(완료)
+    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 1 * ?")
     public void applyMonthlyInterest() {
         try {
+            //활성 상태의 멤버들을 가져옵니다.
             List<Map<String, Object>> members = purproductService.getStatusY();
+
+            //멤버가 존재하는지 확인합니다.
             if (members != null && !members.isEmpty()) {
+                //이자 계산 로직을 수행합니다.
                 schedulerService.applyInterestRates(members);
-                System.out.println("2"+members);
+
+                //TOTAL_PAYMENT 값을 출력합니다.
+                for (Map<String, Object> member : members) {
+                    if (member.containsKey("TOTAL_PAYMENT")) {
+                        System.out.println("TOTAL_PAYMENT: " + member.get("TOTAL_PAYMENT"));
+                    }
+                }
             } else {
                 System.out.println("No members found for interest calculation.");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error occurred while applying monthly interest2: " + e.getMessage());
+            System.err.println("Error occurred while applying monthly interest: " + e.getMessage());
         }
     }
+
     
     //상품 종료 업데이트
     //골든볼 처리
@@ -84,7 +101,7 @@ public class Scheduler {
     	}
     }
     
-    
+    */
     
 }
 

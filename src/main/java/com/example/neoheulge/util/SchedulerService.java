@@ -29,11 +29,18 @@ public class SchedulerService {
             LocalDate autoDate = LocalDate.of(today.getYear(), today.getMonth(), autoDateDay);
             DayOfWeek autoDateDayOfWeek = autoDate.getDayOfWeek();
 
+            // 디버깅 정보 출력
+            System.out.println("1 " + autoDateDay);
+            System.out.println("2 " + autoDate);
+            System.out.println("3 " + autoDateDayOfWeek); // enum의 문자열 출력
+            System.out.println("4 " + autoDateDayOfWeek.getValue());
+            System.out.println("5 " + today.getDayOfMonth());
+            System.out.println("6"+ today.getDayOfWeek());
+            
             if (shouldProcessPayment(today, autoDateDayOfWeek, autoCycle)) {
                 processPayment(member);
             }
         }
-        
     }
 
     public boolean shouldProcessPayment(LocalDate today, DayOfWeek autoDateDayOfWeek, String autoCycle) {
@@ -58,12 +65,15 @@ public class SchedulerService {
         switch (autoCycle) {
 	        case "매일":
 	            additionalAmount = autoAmount;
+	            System.out.println("추가금 넣기 실행: " + autoAmount);
 	            break;
 	        case "매주":
 	            additionalAmount = autoAmount;
+	            System.out.println("추가금 넣기 실행: " + autoAmount);
 	            break;
 	        case "매달":
 	            additionalAmount = autoAmount;
+	            System.out.println("추가금 넣기 실행: " + autoAmount);
 	            break;
 	    }
         
