@@ -1,20 +1,22 @@
 package com.example.neoheulge.payments.entity;
 
+import com.example.neoheulge.member.entity.Member;
+import com.example.neoheulge.payments.dto.PayType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "NEPAYMENT")
+@Setter
 public class Payments {
 
     /**
-     * ------요청 파라미터 예시-------
+     * ------ 파라미터 예시-------
      * method: "CARD", // 카드 결제
      * amount: {
      * currency: "KRW",
@@ -33,11 +35,26 @@ public class Payments {
     @Column(nullable = false, name = "payment_id", unique = true)
     private Long paymentId;
     @Column(nullable = false, name = "pay_type")
-    private String paymentType;
+    @Enumerated(EnumType.STRING)
+    private PayType paymentType;
     @Column(nullable = false, name = "amount")
     private Long amount;
-    @Column(nullable = false, name = "orderName")
+    @Column(nullable = false, name = "order_name")
     private String orderName;
-    @Column(nullable = false , name = "order_id")
+    @Column(nullable = false, name = "order_id")
     private String orderId;
+    @Column(nullable = false, name = "customer_name")
+    private String customerName;
+    @Column(nullable = false, name = "customer_email")
+    private String customerEmail;
+    @Column(nullable = false, name = "customer_phone")
+    private String customerMobilePhone;
+    @Column(name = "status")
+    private boolean successYN;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    @JsonIgnore
+    private Member customer;
+
+
 }
