@@ -155,13 +155,13 @@
                         <c:forEach var="dto" items="${noticeList}" varStatus="status">
                             <c:if test="${status.index < 5}">
                                 <tr>
-                                <td>
+                                 <td width="50%">
                                 <span>&nbsp;&nbsp;</span>
                                     <a href="/notice/noticeView.do?id=${dto.id}">
                                           ${dto.subject}
                                     </a>
                                     </td>
-                                <td align="center">
+                                <td align="center" width="25%">
                                     ${dto.author}
                                     </td>
                                <td align="center">
@@ -192,13 +192,13 @@
                         <c:forEach var="dto" items="${commuList}" varStatus="status">
                             <c:if test="${status.index < 5}">
                                  <tr>
-                                <td>
+                                <td width="50%">
                                 <span>&nbsp;&nbsp;</span>
                                     <a href="/commu/commuContent.do?id=${dto.id}">
                                            ${dto.subject}
                                  </a>
                                     </td>
-                                    <td align="center">
+                                    <td align="center" width="25%">
                                     ${dto.author}
                                     </td>
                                <td align="center">

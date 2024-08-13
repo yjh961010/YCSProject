@@ -260,7 +260,7 @@ footer {
 .community-posts th, .community-prizes th {
     background-color: RGB(198, 231, 253);
     font-weight: bold;
-    border: 2px solid #bbb; /* 테두리 추가 */
+    border: 1px solid #bbb; /* 테두리 추가 */
 }
 
 
