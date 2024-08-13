@@ -3,8 +3,13 @@ package com.example.neoheulge.admin.web;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,6 +29,9 @@ import com.example.neoheulge.admin.service.AdminService;
 import com.example.neoheulge.dto.MemberDTO;
 import com.example.neoheulge.dto.NeSavProdDTO;
 import com.example.neoheulge.util.UploadFile;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -217,4 +226,70 @@ public class AdminController {
          return "message";
     }
     
+    @GetMapping("/adminChart.do")
+    public String adminChart(Model model) {
+    	List<NeSavProdDTO> nList = adminservice.prodList();
+    	model.addAttribute("nList", nList);
+    	return "admin/adminChart";
+    }
+    @ResponseBody
+    @RequestMapping(value="/chartajax.do",method=RequestMethod.POST,produces="text/plain;charset=UTF-8")
+    public String chartAjax(String product_code) {
+    	List<NeSavProdDTO> NeList= adminservice.chartList(product_code);
+    	Gson gson = new Gson();
+		JsonArray jarray = new JsonArray();
+		System.out.println("prodcutcode:"+ product_code);
+		Iterator <NeSavProdDTO>it = NeList.iterator();
+		while(it.hasNext()) {
+			NeSavProdDTO ndto = it.next();
+			JsonObject jObject = new JsonObject();
+			BigDecimal accumulated_amount = ndto.getAccumulated_amount();
+			String product_code1 = ndto.getProduct_code();
+			int numberOfSubscribers = ndto.getNumberOfSubscribers();
+			jObject.addProperty("accumulated_amount",accumulated_amount);
+			jObject.addProperty("number_of_subscribers", numberOfSubscribers);
+			jObject.addProperty("product_code", product_code1);
+			jarray.add(jObject);
+			System.out.println("accumulated_amount="+ accumulated_amount);
+			System.out.println("number_of_subscribers="+ numberOfSubscribers);
+			System.out.println("prodcut_code="+product_code1);
+		}
+		String json = gson.toJson(jarray);
+		
+		return json;
+    }
+    @GetMapping("/calTest.do")
+    public String calTest() {
+    	return "admin/CalTest";
+    }
+    @PostMapping("/calculator.do")
+    public String calculate(@RequestParam("display") String display, Model model) {
+    	 String result;
+    	    try {
+    	        if (display != null && !display.isEmpty()) {
+    	            String cleanedExpression = display.replaceAll("\\s+", ""); // 공백 제거
+    	            result = evaluateExpression(cleanedExpression);
+    	        } else {
+    	            result = "";
+    	        }
+    	    } catch (Exception e) {
+    	        e.printStackTrace(); // 로그를 확인할 수 있도록
+    	        result = "Error";
+    	    }
+    	    model.addAttribute("display", display);
+    	    model.addAttribute("result", result);
+    	    return "admin/CalTest"; // View name only
+    	}
+
+    	private String evaluateExpression(String expression) {
+    	    ScriptEngineManager mgr = new ScriptEngineManager();
+    	    ScriptEngine engine = mgr.getEngineByName("JavaScript");
+
+    	    try {
+    	        Object result = engine.eval(expression);
+    	        return result.toString();
+    	    } catch (ScriptException e) {
+    	        return "Error";
+    	    }
+    	}
 }
