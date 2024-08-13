@@ -15,4 +15,7 @@
 	<select id="findByName" parameterType="String" resultType="MemberDTO">
 	select * from nemember where name = #{name}
 	</select>
+	<select id="findByIdName" parameterType="MemberDTO" resultType="MemberDTO">
+	select * from nemember where memberID #{memberID} and name = #{name}
+	</select>
 </mapper>

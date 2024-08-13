@@ -28,4 +28,8 @@ public class MemberService {
 	public MemberDTO findByName(String name) {
 		return memberDAO.findByName(name);
 	}
+	
+	public MemberDTO findById (MemberDTO member) {
+		return memberDAO.findById(member);
+	}
 }
