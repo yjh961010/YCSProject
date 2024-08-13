@@ -104,6 +104,7 @@
                 <a href="${pageContext.request.contextPath}/admin/adminMember.do">회원관리</a>
                 <a href="${pageContext.request.contextPath}/admin/adminProdcut.do">상품관리</a>
                 <a href="${pageContext.request.contextPath}/admin/adminChart.do">매출관리</a>
+                <a href="${pageContext.request.contextPath}/admin/updateProd.do">상품목록(관리자)</a>
             </nav>
         </div>
     </header>
