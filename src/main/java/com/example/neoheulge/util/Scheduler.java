@@ -25,49 +25,54 @@ public class Scheduler {
     @Autowired
     private AdminDAO admindao;
 
-    //추가금 넣기 
-    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
+    //추가금 넣기  
+    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")
     public void schedulePayments() {
         try {
             List<Map<String, Object>> members = purproductService.getActiveAuto();
             if (members != null && !members.isEmpty()) {
                 schedulerService.scheduleAutoPayments(members);
+                System.out.println("1"+members);
             } else {
                 System.out.println("No active auto payments found.");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error occurred while scheduling payments: " + e.getMessage());
+            System.err.println("Error occurred while scheduling payments1: " + e.getMessage());
         }
     }
     
     //이자 계산 실행
-    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행
+    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행 (cron = "0/1 * * * * *")
     public void applyMonthlyInterest() {
         try {
             List<Map<String, Object>> members = purproductService.getStatusY();
             if (members != null && !members.isEmpty()) {
                 schedulerService.applyInterestRates(members);
+                System.out.println("2"+members);
             } else {
                 System.out.println("No members found for interest calculation.");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error occurred while applying monthly interest: " + e.getMessage());
+            System.err.println("Error occurred while applying monthly interest2: " + e.getMessage());
         }
     }
     
     //상품 종료 업데이트
-    @Scheduled(cron = "0 1 0 * * *") // 매일 12시 1분에 실행
+    //골든볼 처리
+    @Scheduled(cron = "0 1 0 * * *") // 매일 12시 1분에 실행 (cron = "0/1 * * * * *")
     public void updateExpiredProductsStatus() {
         try {
             sqlSession.update("updateProductStatus");
-            System.out.println("Expired products have been deactivated.");
+            sqlSession.update("allocateGoldenBallAmount");
+            System.out.println("3");
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error occurred while updating product statuses: " + e.getMessage());
+            System.err.println("Error occurred while updating product statuses3: " + e.getMessage());
         }
     }
+    
     //상품 만기1년후 자동삭제
     @Scheduled(cron = "0 0 0 1 * ?")//매달 1일 실행
     public void deleteExpiredProduct() {

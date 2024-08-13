@@ -20,24 +20,23 @@ public class PurproductService {
         return sqlSession.insert("insertSubscription", dto);
     }
 
-    // 회원 ID로 모든 가입 정보 가져오기
-    public List<NePreSavProdDTO> getAllSubscriptionsByMemberId(String memberId) {
-        return sqlSession.selectList("getAllSubscriptionsByMemberId", memberId);
+    public List<Map<String, Object>> getByMemberId(NePreSavProdDTO dto) {
+        return sqlSession.selectList("getByMemberId", dto);
     }
-
+    
     // 회원 ID와 상품 코드로 모든 가입 정보 가져오기
     public List<NePreSavProdDTO> getAllSubscriptionsByMemberIdAndProductCode(Map<String, Object> params) {
         return sqlSession.selectList("getAllSubscriptionsIDPROD", params);
     }
 
     // 상품 해지 (회원 상태 변경, 포기 환급액, 해지 날짜 기록)
-    public int terminateSubscription(String memberId) {
-        return sqlSession.update("terminateSubscription", memberId);
+    public void terminateSubscription(NePreSavProdDTO dto) {
+        sqlSession.update("terminateSubscription", dto);
     }
 
     // 상품의 종료일 도래 시 골든볼 처리
-    public void allocateGoldenBallAmount(Map<String, Object> params) {
-        sqlSession.update("allocateGoldenBallAmount", params);
+    public void allocateGoldenBallAmount(String product_code) {
+        sqlSession.update("allocateGoldenBallAmount", product_code);
     }
 
     // 만기 시 골든볼 이율 적용

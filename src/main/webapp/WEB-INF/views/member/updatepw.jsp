@@ -4,9 +4,10 @@
 <jsp:include page="../header.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="login-form" style="width: 35%; margin: auto; margin-top: 150px; height: 50%;">
-	<h2 style="text-align: center">아이디찾기</h2>
-	<form action="findid.do" method="post" name="frm">
+	<h2 style="text-align: center">비밀번호변경하기</h2>
+	<form action="updatepw.do" method="post" name="frm">
 		<input type="text" name="name" placeholder="이름을 입력해주세요">
+		<input type="text" name="memberID" placeholder="아이디를 입력해주세요">
 		<input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요" style="width: 60%;">
 		<button type="button" onclick="subCertifi()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호발송</button>
 		<input type="text" name="certi" id="certi" placeholder="인증번호를 입력해주세요" style="width: 60%;">

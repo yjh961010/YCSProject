@@ -79,10 +79,12 @@
     }
 
     // 페이지 로드 시 초기 진행 상황 설정
+   
     window.onload = function() {
+    	checkAdVisibility();
         updateProgress(${product.accumulated_amount}, ${product.maximum_deposit});
     };
-
+ 
     function checkLogin() {
         alert('로그인이 필요한 서비스입니다.');
         // 여기에 로그인 페이지로 리디렉션하는 코드를 추가할 수 있습니다.

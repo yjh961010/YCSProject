@@ -22,4 +22,8 @@ public class MemberDAO {
 	 public MemberDTO findByName(String name) {
 		 return sqlSession.selectOne("member.findByName", name);	 
 	 }
+	 
+	 public MemberDTO findById(MemberDTO member) {
+		 return sqlSession.selectOne("member.findByIdName", member);
+	 }
 }

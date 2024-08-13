@@ -49,7 +49,6 @@ public class MemberController {
     
     @GetMapping("/findid.do")
     public String findId(HttpServletRequest req) {
-    	req.setAttribute("check", "!@#!@#");
     	return "member/findid";
     }
     
@@ -61,9 +60,12 @@ public class MemberController {
     	return "member/findid_result";
     }
     @GetMapping("/myPage.do")
-    public String myPage(HttpServletRequest req,@RequestParam String user) {
-    	List<NePreSavProdDTO> userProducts = purproductService.getAllSubscriptionsByMemberId(user);
-    	req.setAttribute("userProducts", userProducts);
+    public String myPage(HttpServletRequest req,NePreSavProdDTO dto,
+    		@RequestParam String user) {
+    	dto.setMember_id(user);
+    	
+    	List<Map<String, Object>> getByMemberId = purproductService.getByMemberId(dto);
+    	req.setAttribute("getByMemberId", getByMemberId);
     	
     	System.out.println(user);
     	return "member/myPage";
@@ -83,8 +85,17 @@ public class MemberController {
         sms.sendOne(phoneNum, randomNum);
         Map<String, Object> response = new HashMap<>();
         response.put("check", randomNum.toString());
-        req.setAttribute("check", randomNum);
         
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/updatepw.do")
+    public String updatepw() {
+    	return "member/updatepw";
+    }
+    @PostMapping("/updatepw.do")
+    public String updatepwView(HttpServletRequest req, MemberDTO member) {
+    	MemberDTO dto = memberservice.findById(member);
+    	req.setAttribute("member", dto);
+    	return "member/updatePro";
     }
 }
