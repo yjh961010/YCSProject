@@ -7,15 +7,16 @@
 	<h2 style="text-align: center">아이디찾기</h2>
 	<form action="findid.do" method="post" name="frm">
 		<input type="text" name="name" placeholder="이름을 입력해주세요">
-		<input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요">
-		<input type="text" name="certi" id="certi" placeholder="인증번호를 입력해주세요" style="width: 60%;">
+		<input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요" style="width: 60%;">
 		<button type="button" onclick="subCertifi()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호발송</button>
-		<button type="button" onclick="check()" style="width: 45%; margin-left: 15px;">인증번호확인</button>
-		<button type="button" onclick="sub()" style="width: 45%;" disabled="disabled">찾기</button>
+		<input type="text" name="certi" id="certi" placeholder="인증번호를 입력해주세요" style="width: 60%;">
+		<button type="button" onclick="check()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호확인</button>
+		<button type="button" onclick="sub()">찾기</button>
 	</form>
 </div>
 <script type="text/javascript">
 	let ck = false;
+	let serverCheck = '';
 	function subCertifi(){
 		var csrfToken = $("meta[name='_csrf']").attr("content");
 		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
@@ -31,6 +32,8 @@
 			}, */
 			success : function(response) {
 				console.log(response);
+				serverCheck = response.check;
+				alert("인증번호가 전송되었습니다. 문자를 확인해주세요");
 			},
 			error : function(xhr, status, error) {
 				console.error('주문 데이터 전송 실패:', error);
@@ -42,8 +45,9 @@
 		)
 	}
 	function check(){
-		if('${check}'==document.getElementById("certi").value){
+		if(serverCheck==document.getElementById("certi").value && serverCheck != ''){
 			ck = true;
+			alert("인증완료!");
 		}else{
 			alert("인증번호가 다릅니다!!");
 		}
@@ -51,6 +55,8 @@
 	function sub(){
 		if(ck == true){
 			document.frm.submit();
+		}else{
+			alert("문자 인증을 마쳐주세요!");
 		}
 	}
 </script>

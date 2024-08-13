@@ -49,7 +49,6 @@ public class MemberController {
     
     @GetMapping("/findid.do")
     public String findId(HttpServletRequest req) {
-    	req.setAttribute("check", "!@#!@#");
     	return "member/findid";
     }
     
@@ -86,7 +85,6 @@ public class MemberController {
         sms.sendOne(phoneNum, randomNum);
         Map<String, Object> response = new HashMap<>();
         response.put("check", randomNum.toString());
-        req.setAttribute("check", randomNum);
         
         return ResponseEntity.ok(response);
     }
