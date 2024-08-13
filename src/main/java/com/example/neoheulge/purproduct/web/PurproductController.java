@@ -57,22 +57,25 @@ public class PurproductController {
 		
 		//member_id, product_code, 
         //subscription_amount, subscription_select, early_refund 
+		//총 금액에 더해줘야됨
 		
 		int res = purproductService.insertSubscription(dto);
 		return "proproduct/productSignUp";
 	}
 	
 	@PostMapping("/cancel")
-	public String proCancle(NePreSavProdDTO dto,
+	public String proCancle(NePreSavProdDTO pdto,
 			@RequestParam String user,@RequestParam String product_code) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("product_code",product_code);
+		params.put("member_id",user);
 		
-		dto.setProduct_code(product_code);
-		dto.setMember_id(user);
+		pdto.setProduct_code(product_code);
+		pdto.setMember_id(user);
 		
-		System.out.println(user);
-		System.out.println(product_code);
 		
-		int res = purproductService.terminateSubscription(dto);
+		purproductService.terminateSubscription(pdto);
+		productService.updateAccumulatedAmount(params);
 		
 		return "index";
 	}

@@ -150,7 +150,7 @@
                 </c:choose>
                 </div>
             </div>
-
+${getByMemberId}
             <div class="card">
                 <div class="card-header">
                     <span class="material-icons">shopping_basket</span> 가입한 상품
@@ -169,6 +169,16 @@
 	                        	<p><strong>상태:</strong> 
 	                        		${product.STATUS}
 	                        	</p>
+	                        	<p><strong>가입 금액:</strong> 
+	                        		${product.SUBSCRIPTION_AMOUNT}
+	                        	</p>
+	                        	<p><strong>가입 금액:</strong> 
+	                        		${product.AUTO_CYCLE}
+	                        	</p>
+	                        	<p><strong>가입 금액:</strong> 
+	                        		${product.AUTO_AMOUNT}
+	                        	</p>
+	                        	  
 	                        	<div class="product-actions">
 	                            	<form action="<c:url value='/proProduct/cancel' />" method="post">
 	                            		<sec:authentication var="username" property="principal.username"/>

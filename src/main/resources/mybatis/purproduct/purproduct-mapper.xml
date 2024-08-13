@@ -26,14 +26,7 @@
 	    JOIN neSavProd ns
 	    ON nsp.product_code = ns.product_code
 	    WHERE nsp.member_id = #{member_id}
-	    <choose>
-	        <when test="status != null">
-	            AND nsp.status = #{status}
-	        </when>
-	        <otherwise>
-	            AND nsp.status IN ('활성', '해지')
-	        </otherwise>
-	    </choose>
+	    AND nsp.status IN ('활성', '해지')
 	</select>
 	
 	<!-- 전체정보 가져오기 (회원ID,상품ID) -->
@@ -64,33 +57,31 @@
 
 
 	<!-- 상품의 종료일이 도래한 경우 골든볼에 대한 처리를 수행 -->
-	<!-- productCode만 주면 됨 -->
-    <update id="allocateGoldenBallAmount" parameterType="Map">
+	<update id="allocateGoldenBallAmount">
 	    UPDATE nepreSavProd
 	    SET total_payment = NVL(total_payment, 0) + (
 	        SELECT np.accumulated_amount
 	        FROM neSavProd np
-	        WHERE np.product_code = nepreSavProd.product_code
+	        WHERE end_date = SYSDATE
 	    )
 	    WHERE member_id = (
 	        SELECT member_id FROM (
 	            SELECT member_id
 	            FROM nepreSavProd
-	            WHERE product_code = #{productCode}
-	            AND status = '활성'
+	            WHERE status = '활성'
 	            ORDER BY DBMS_RANDOM.VALUE
 	        ) WHERE ROWNUM = 1
 	    )
 	    AND EXISTS (
 	        SELECT 1 FROM neSavProd
-	        WHERE product_code = #{productCode}
-	        AND end_date = SYSDATE
+	        WHERE  end_date &lt; SYSDATE
 	    )
 	</update>
 
 
 
-	<!-- 만기시 골든볼 이율만 반환 -->
+
+	<!-- 골든볼 이율만 반환 -->
 	<!-- memberId,productCode -->
 	<update id="applyGoldenBallRate" parameterType="Map">
 	    UPDATE nepreSavProd
@@ -101,28 +92,27 @@
 	            WHEN auto_cycle = '매달' THEN auto_amount
 	            ELSE 0
 	        END * 
-	        (SELECT np.goldenball_rate / 100 
-	         FROM neSavProd np 
-	         WHERE np.product_code = nepreSavProd.product_code) *
+	        (SELECT neSavProd.goldenball_rate / 100 
+	         FROM neSavProd 
+	         WHERE neSavProd.product_code = nepreSavProd.product_code) *
 	        (SELECT CASE 
-	            WHEN nps.subscription_period LIKE '%개월%' THEN
-	                TO_NUMBER(SUBSTR(nps.subscription_period, 1, INSTR(nps.subscription_period, '개월') - 1))
-	            WHEN nps.subscription_period LIKE '%년%' THEN
-	                TO_NUMBER(SUBSTR(nps.subscription_period, 1, INSTR(nps.subscription_period, '년') - 1)) * 12
+	            WHEN neSavProd.subscription_period LIKE '%개월%' THEN
+	                TO_NUMBER(SUBSTR(neSavProd.subscription_period, 1, INSTR(neSavProd.subscription_period, '개월') - 1))
+	            WHEN neSavProd.subscription_period LIKE '%년%' THEN
+	                TO_NUMBER(SUBSTR(neSavProd.subscription_period, 1, INSTR(neSavProd.subscription_period, '년') - 1)) * 12
 	            ELSE 0
 	        END
-	        FROM nepreSavProd nps 
-	        WHERE nps.member_id = #{memberId}
-	        AND nps.product_code = #{productCode}
+	        FROM neSavProd
+	        WHERE neSavProd.product_code = #{productCode}
 	        )
 	    )
 	    WHERE member_id = #{memberId}
 	    AND product_code = #{productCode}
 	    AND subscription_select = '골든볼'
 	    AND EXISTS (
-	        SELECT 1 FROM neSavProd np
-	        WHERE np.product_code = nepreSavProd.product_code
-	        AND np.goldenball_rate IS NOT NULL
+	        SELECT 1 FROM neSavProd 
+	        WHERE neSavProd.product_code = nepreSavProd.product_code
+	        AND neSavProd.goldenball_rate IS NOT NULL
 	    )
 	</update>
 

@@ -30,13 +30,13 @@ public class PurproductService {
     }
 
     // 상품 해지 (회원 상태 변경, 포기 환급액, 해지 날짜 기록)
-    public int terminateSubscription(NePreSavProdDTO dto) {
-        return sqlSession.update("terminateSubscription", dto);
+    public void terminateSubscription(NePreSavProdDTO dto) {
+        sqlSession.update("terminateSubscription", dto);
     }
 
     // 상품의 종료일 도래 시 골든볼 처리
-    public void allocateGoldenBallAmount(Map<String, Object> params) {
-        sqlSession.update("allocateGoldenBallAmount", params);
+    public void allocateGoldenBallAmount(String product_code) {
+        sqlSession.update("allocateGoldenBallAmount", product_code);
     }
 
     // 만기 시 골든볼 이율 적용
