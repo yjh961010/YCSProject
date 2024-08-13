@@ -44,8 +44,73 @@
         </div>
     </div>
 
+    <h2 class="section-title">적금 상품</h2>
+    <div class="products">
+        <div class="product-card">
+            <div class="product-image">💰</div>
+            <div class="product-info">
+                <a class="product-title" href="productDetail.do">초단기 적금</a>
+                <p><strong>금리:</strong> 연 3.5%</p>
+                <p><strong>만기:</strong> 12개월</p>
+                <p><strong>최소금액:</strong> 10만원부터</p>
+                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
+                <div class="product-details">
+                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
+                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
+                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="product-card">
+            <div class="product-image">💰</div>
+            <div class="product-info">
+                <a class="product-title" href="productDetail.do">청년 적금</a>
+                <p><strong>금리:</strong> 연 3.5%</p>
+                <p><strong>만기:</strong> 12개월</p>
+                <p><strong>최소금액:</strong> 10만원부터</p>
+                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
+                <div class="product-details">
+                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
+                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
+                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="product-card">
+            <div class="product-image">💰</div>
+            <div class="product-info">
+                <a class="product-title" href="productDetail.do">스마트 적금</a>
+                <p><strong>금리:</strong> 연 3.5%</p>
+                <p><strong>만기:</strong> 12개월</p>
+                <p><strong>최소금액:</strong> 10만원부터</p>
+                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
+                <div class="product-details">
+                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
+                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
+                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">💰</div>
+            <div class="product-info">
+                <a class="product-title" href="productDetail.do">연간 목표 달성 적금</a>
+                <p><strong>금리:</strong> 연 3.5%</p>
+                <p><strong>만기:</strong> 12개월</p>
+                <p><strong>최소금액:</strong> 10만원부터</p>
+                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
+                <div class="product-details">
+                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
+                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
+                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
+                </div>
+            </div>
+        </div>
+        <!-- 다른 상품들도 위와 같은 구조로 추가 -->
+    </div>
     <div class="commu-container">
         <div class="community-content">
             <div class="community-posts">
@@ -128,74 +193,6 @@
                 <p>상품4 1,681,500원</p>
             </div>
         </div>
-    </div>
-
-    <h2 class="section-title">적금 상품</h2>
-    <div class="products">
-        <div class="product-card">
-            <div class="product-image">💰</div>
-            <div class="product-info">
-                <a class="product-title" href="productDetail.do">초단기 적금</a>
-                <p><strong>금리:</strong> 연 3.5%</p>
-                <p><strong>만기:</strong> 12개월</p>
-                <p><strong>최소금액:</strong> 10만원부터</p>
-                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
-                <div class="product-details">
-                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
-                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
-                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">💰</div>
-            <div class="product-info">
-                <a class="product-title" href="productDetail.do">청년 적금</a>
-                <p><strong>금리:</strong> 연 3.5%</p>
-                <p><strong>만기:</strong> 12개월</p>
-                <p><strong>최소금액:</strong> 10만원부터</p>
-                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
-                <div class="product-details">
-                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
-                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
-                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">💰</div>
-            <div class="product-info">
-                <a class="product-title" href="productDetail.do">스마트 적금</a>
-                <p><strong>금리:</strong> 연 3.5%</p>
-                <p><strong>만기:</strong> 12개월</p>
-                <p><strong>최소금액:</strong> 10만원부터</p>
-                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
-                <div class="product-details">
-                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
-                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
-                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">💰</div>
-            <div class="product-info">
-                <a class="product-title" href="productDetail.do">연간 목표 달성 적금</a>
-                <p><strong>금리:</strong> 연 3.5%</p>
-                <p><strong>만기:</strong> 12개월</p>
-                <p><strong>최소금액:</strong> 10만원부터</p>
-                <button class="show-details" onclick="toggleDetails(this)">상세 정보</button>
-                <div class="product-details">
-                    <p><strong>월 납입액:</strong> 10만원 ~ 300만원</p>
-                    <p><strong>중도해지 금리:</strong> 기본금리의 50%</p>
-                    <p><strong>특징:</strong> 스마트폰 앱을 통한 간편 가입 및 관리</p>
-                </div>
-            </div>
-        </div>
-        <!-- 다른 상품들도 위와 같은 구조로 추가 -->
     </div>
 </div>
 
