@@ -238,6 +238,7 @@ footer {
 }
 
 /* 커뮤니티 섹션 스타일 */
+
 .community {
     padding: 2rem 0;
 }
@@ -247,6 +248,31 @@ footer {
     justify-content: space-between;
     gap: 0;
     height: 100%;
+}
+
+.community-posts table, .community-prizes table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+
+}
+
+.community-posts th, .community-prizes th {
+    background-color: RGB(198, 231, 253);
+    font-weight: bold;
+    border: 2px solid #bbb; /* 테두리 추가 */
+}
+
+
+.community-posts td a, .community-prizes td a {
+    color: #004d99;
+    text-decoration: none;
+  
+}
+
+.community-posts td a:hover, .community-prizes td a:hover {
+    text-decoration: underline;
+    
 }
 
 /* 커뮤니티 포스트 및 상금 정보 스타일 */

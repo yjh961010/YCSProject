@@ -181,7 +181,7 @@
 
     .progress-text {
         position: absolute;
-        top: 50%;
+        top: 0px;
         left: 1rem;
         transform: translateY(-50%);
         color: var(--text-color);

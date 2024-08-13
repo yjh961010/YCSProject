@@ -32,6 +32,8 @@
     function viewNotice() {
         window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=650");
     }
+    
+    
 </script>
 
 <div class="img-container-size">
@@ -132,43 +134,82 @@
                 </c:forEach>
            		</div>
             </div>
-   
-   
-   
-   
-   
 
-    
+		
         <div class="commu-container">
-           <br>
-           <br>
+		<br>
+		<br>
             <div class="community-content">
                 <div class="community-posts">
                     <div>
                         <h3>공지글</h3>
+                        <table>
+				<thead>
+					<tr class="commu-header">
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
                         <c:forEach var="dto" items="${noticeList}" varStatus="status">
                             <c:if test="${status.index < 5}">
-                                <p>
+                                <tr>
+                                <td>
+                                <span>&nbsp;&nbsp;</span>
                                     <a href="/notice/noticeView.do?id=${dto.id}">
-                                            ${dto.subject}
+                                          ${dto.subject}
                                     </a>
-                                </p>
+                                    </td>
+                                <td align="center">
+                                    ${dto.author}
+                                    </td>
+                               <td align="center">
+                                    <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        			<fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />		
+                                   </td>
+                               </tr>
                             </c:if>
                         </c:forEach>
+                        </tbody>
+                        </table>
                     </div>
                 </div>
+                
                 <div class="community-posts">
                     <div>
                         <h3>커뮤니티</h3>
+                        <table>
+				<thead>
+					<tr class="commu-header">
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+                        
                         <c:forEach var="dto" items="${commuList}" varStatus="status">
                             <c:if test="${status.index < 5}">
-                                <p>
+                                 <tr>
+                                <td>
+                                <span>&nbsp;&nbsp;</span>
                                     <a href="/commu/commuContent.do?id=${dto.id}">
-                                            ${dto.subject}
-                                    </a>
-                                </p>
+                                           ${dto.subject}
+                                 </a>
+                                    </td>
+                                    <td align="center">
+                                    ${dto.author}
+                                    </td>
+                               <td align="center">
+                                    <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        			<fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />		
+                                   </td>
+                               </tr>
                             </c:if>
                         </c:forEach>
+                         </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="community-prizes">
