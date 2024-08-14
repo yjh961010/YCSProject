@@ -65,8 +65,8 @@
 		</div>
 	</div>
 
-
-		<h3>커뮤니티</h3>
+<div class="total-box" style="background-color: #e0f5fc;">
+		<h2 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">커뮤니티</h2>
 		<div class="search-form">
 			<select id="searchType">
 				<option value="all"
@@ -78,12 +78,12 @@
 			</select> <input type="text" placeholder="검색어를 입력하세요" id="search"
 				value="${search}">
 			<button onclick="performSearch()">검색</button>
+			<a href="/commu/commuWrite.do" class="write-btn"><button>글쓰기</button></a>
 		</div>
 		<div id="commu">
 			<table align="right">
 				<tr>
 					<td><sec:authorize access="isAuthenticated()">
-							<a href="/commu/commuWrite.do" class="write-btn">글쓰기</a>
 						</sec:authorize> <sec:authorize access="isAnonymous()">
 							<a href="javascript:void(0);" class="write-btn"
 								onclick="checkLogin()">글쓰기</a>
@@ -175,8 +175,10 @@
 					<%
 					}
 					%>
+					<br>
 				</div>
 			</c:if>
+		</div>
 		</div>
 	 <br>
     <div class="commu-container">
