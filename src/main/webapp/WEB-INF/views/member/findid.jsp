@@ -2,20 +2,25 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/findid.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<div class="login-form" style="width: 35%; margin: auto; margin-top: 150px; height: 50%;">
-	<h2 style="text-align: center">아이디찾기</h2>
+
+<h2 style="text-align: center;">아이디찾기</h2>
+<div class="content_header">
+</div> 
+<div class="login-form">
+	
 	<form action="findid.do" method="post" name="frm">
 		<input type="text" name="name" placeholder="이름을 입력해주세요">
 		<input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요" style="width: 60%;">
-		<button type="button" onclick="subCertifi()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호발송</button>
+		<button type="button" onclick="subCertifi()" style="width: 30%; margin-left: 10px; padding: 7px;" disabled>인증번호발송</button>
 		<input type="text" name="certi" id="certi" placeholder="인증번호를 입력해주세요" style="width: 60%;">
 		<button type="button" onclick="check()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호확인</button>
 		<button type="button" onclick="sub()">찾기</button>
 	</form>
 </div>
 <script type="text/javascript">
-	let ck = false;
+	let ck = true;
 	let serverCheck = '';
 	function subCertifi(){
 		var csrfToken = $("meta[name='_csrf']").attr("content");
@@ -59,5 +64,9 @@
 			alert("문자 인증을 마쳐주세요!");
 		}
 	}
+	
 </script>
+<p style="text-align: center;">아이디 찾기에 어려움이 있으신가요? 도움말 펼치기</p>
+<p style="text-align: center;">아이디 찾기 시 문제가 있나요?         바로가기</p>
+
 <jsp:include page="../footer.jsp" />
