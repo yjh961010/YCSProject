@@ -27,12 +27,6 @@ public class SchedulerService {
             // 날짜를 정수로 변환
             int autoDateDay = Integer.parseInt(autoDateStr);
 
-            // 디버깅 정보 출력
-            System.out.println("1 " + autoDateDay);
-            System.out.println("2 " + today.getDayOfMonth());
-            System.out.println("3 " + today.getDayOfWeek());
-            System.out.println("4"+(today.getDayOfMonth() == autoDateDay));
-            
             if (shouldProcessPayment(today, autoDateDay, autoCycle)) {
                 processPayment(member);
             }
