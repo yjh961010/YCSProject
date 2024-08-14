@@ -35,8 +35,8 @@ public class PurproductService {
     }
 
     // 상품의 종료일 도래 시 골든볼 처리
-    public void allocateGoldenBallAmount(String product_code) {
-        sqlSession.update("allocateGoldenBallAmount", product_code);
+    public void allocateGoldenBallAmount() {
+        sqlSession.update("allocateGoldenBallAmount");
     }
 
     // 만기 시 골든볼 이율 적용

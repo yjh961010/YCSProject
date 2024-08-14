@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.example.neoheulge.admin.service.AdminDAO;
+import com.example.neoheulge.product.service.ProductService;
 import com.example.neoheulge.purproduct.service.PurproductService;
 
 @Component
@@ -20,12 +21,15 @@ public class Scheduler {
 	@Autowired
 	PurproductService purproductService;
 	
+	@Autowired
+	ProductService productService;
+	
     @Autowired
     private SchedulerService schedulerService;
     @Autowired
     private AdminDAO admindao;
 
-   /* 
+  
     //추가금 넣기(완료)
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 * * *")
     public void schedulePayments() {
@@ -74,15 +78,15 @@ public class Scheduler {
             System.err.println("Error occurred while applying monthly interest: " + e.getMessage());
         }
     }
-*/
+
     
     //상품 종료 업데이트
     //골든볼 처리
-    @Scheduled(cron = "0/1 * * * * *") // 매일 12시 5분에 실행 (cron = "0/1 * * * * *") (cron = "0 5 0 * * *")
+    @Scheduled(cron = "0 5 0 * * *") // 매일 12시 5분에 실행 (cron = "0/1 * * * * *") (cron = "0 5 0 * * *")
     public void updateExpiredProductsStatus() {
         try {
-            sqlSession.update("updateProductStatus");
-            sqlSession.update("allocateGoldenBallAmount");
+        	productService.updateProductStatus();
+        	purproductService.allocateGoldenBallAmount();
             System.out.println("3");
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +94,7 @@ public class Scheduler {
         }
     }
     
-    /*
+   
     //상품 만기1년후 자동삭제
     @Scheduled(cron = "0 0 0 1 * ?")//매달 1일 실행
     public void deleteExpiredProduct() {
@@ -102,7 +106,7 @@ public class Scheduler {
     	}
     }
     
-  */
+ 
     
 }
 

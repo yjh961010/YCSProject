@@ -1,6 +1,6 @@
 package com.example.neoheulge.dto;
 
-public class AcountDTO {
+public class NeAcountDTO {
 	private String acount_id;
 	private String acount_number;
 	private String member_id;
