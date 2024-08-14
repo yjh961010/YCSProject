@@ -5,9 +5,8 @@
 
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
-<link rel="stylesheet" type="text/css" href="/css/member/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<main>
     <div class="myPage">
         <div class="header-content">
             <div class="vanner">
@@ -45,24 +44,20 @@
                 </sec:authorize>
             </div>
         </div>
-
-        <div class="main-content">
-            <div class="card">
-                <div class="card-header">
-                    <span class="material-icons">account_balance</span> 계좌 정보
-                </div>
-                <div class="card-body">
-                    <c:choose>
+        <div class="Account">
+            <div class="Account-header">
+                <span class="material-icons"></span> 계좌 정보
+            </div>
+            <div class="Account-body">
+                <c:choose>
                     <c:when test="${empty account}">
                         <p>등록된 계좌가 없습니다.</p>
                         <form action="<c:url value='/account/add'/>" method="get">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="material-icons">add_circle</span> 계좌 추가하기
-                            </button>
+                            <button type="submit" class="btn btn-primary">계좌 추가하기</button>
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <div class="account-info">
+                        <div class="Account-info">
                             <p><strong>계좌 번호:</strong> ${account.number}</p>
                             <p><strong>현재 잔액:</strong> ${account.balance}원</p>
                             <div class="account-actions">
@@ -76,82 +71,82 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
-                </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="material-icons">shopping_basket</span> 가입한 상품
-                </div>
-                <div class="card-body">
+        </div>
+        <br>
+        <div class="subscription">
+            <div class="subscription-header">
+                <span class="material-icons">가입한 상품</span>
+            </div>
+            <div class="subscription-body">
                 <div class="products">
                     <c:forEach items="${getByMemberId}" var="product">
-                    <c:if test="${product.STATUS == '활성'}">
-	                    <div class="product-card">
-	                    	<div class="product-image">💰</div>
-	                    	<div class="product-info">
-	                      		<h3>${product.PRODUCT_NAME}</h3>
-	                        	<p><strong>가입일:</strong>
-	                        		<fmt:formatDate value="${product.SUBSCRIPTION_DATE}" pattern="yyyy-MM-dd"/>
-								</p>
-	                        	<p><strong>상태:</strong> 
-	                        		${product.STATUS}
-	                        	</p>
-	                        	<p><strong>가입 금액:</strong> 
-	                        		${product.SUBSCRIPTION_AMOUNT}
-	                        	</p>
-	                        	<p><strong>가입 금액:</strong>
-	                        		${product.AUTO_CYCLE}
-	                        	</p>
-	                        	<p><strong>가입 금액:</strong>
-	                        		${product.AUTO_AMOUNT}
-	                        	</p>
-	                        	  
-	                        	<div class="product-actions">
-	                            	<form action="<c:url value='/proProduct/cancel' />" method="post">
-	                            		<sec:authentication var="username" property="principal.username"/>
-										<input type="hidden" name="user" value="${username}"/>
-	                                	<input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
-	                                	<button type="submit" class="btn btn-secondary">해지하기</button>
-	                            	</form>
-	                        	</div>
-	                        </div>
-	                    </div>
-                    </c:if>
-                </c:forEach>
-                </div>
+                        <c:if test="${product.STATUS == '활성'}">
+                            <div class="product-card">
+                                <div class="product-image">💰</div>
+                                <div class="product-info">
+                                    <h3>${product.PRODUCT_NAME}</h3>
+                                    <p><strong>가입일:</strong>
+                                        <fmt:formatDate value="${product.SUBSCRIPTION_DATE}" pattern="yyyy-MM-dd"/>
+                                    </p>
+                                    <p><strong>상태:</strong>
+                                            ${product.STATUS}
+                                    </p>
+                                    <p><strong>가입 금액:</strong>
+                                            ${product.SUBSCRIPTION_AMOUNT}
+                                    </p>
+                                    <p><strong>가입 금액:</strong>
+                                            ${product.AUTO_CYCLE}
+                                    </p>
+                                    <p><strong>가입 금액:</strong>
+                                            ${product.AUTO_AMOUNT}
+                                    </p>
+
+                                    <div class="product-actions">
+                                        <form action="<c:url value='/proProduct/cancel' />" method="post">
+                                            <sec:authentication var="username" property="principal.username"/>
+                                            <input type="hidden" name="user" value="${username}"/>
+                                            <input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
+                                            <button type="submit" class="btn btn-secondary">해지하기</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="material-icons">shopping_basket</span> 해지한 상품
+        </div>
+        <div class="cancellation">
+                <div class="cancellation-header">
+                    <span class="material-icons">해지한 상품</span>
                 </div>
-                <div class="card-body">
+            <div class="cancellation-body">
                 <div class="products">
                     <c:forEach items="${getByMemberId}" var="product">
-                    <c:if test="${product.STATUS == '해지'}">
-	                    <div class="product-card">
-	                    	<div class="product-image">💰</div>
-	                    	<div class="product-info">
-	                      		<h3>${product.PRODUCT_NAME}</h3>
-	                        	<p><strong>해지일:</strong>
-	                        		<fmt:formatDate value="${product.TERMINATION_DATE}" pattern="yyyy-MM-dd"/>
-								</p>
-	                        	<p><strong>상태:</strong> 
-	                        		${product.STATUS}
-	                        	</p>
-	               				<div class="product-actions">
-	                            	<form action="" method="post">
-	                                	<button type="submit" class="btn btn-secondary">삭제하기</button>
-	                            	</form>
-	                        	</div>
-	                        </div>
-	                    </div>
-                    </c:if>
-					</c:forEach>
-                </div>
+                        <c:if test="${product.STATUS == '해지'}">
+                            <div class="product-card">
+                                <div class="product-image">💰</div>
+                                <div class="product-info">
+                                    <h3>${product.PRODUCT_NAME}</h3>
+                                    <p><strong>해지일:</strong>
+                                        <fmt:formatDate value="${product.TERMINATION_DATE}" pattern="yyyy-MM-dd"/>
+                                    </p>
+                                    <p><strong>상태:</strong>
+                                            ${product.STATUS}
+                                    </p>
+                                    <div class="product-actions">
+                                        <form action="" method="post">
+                                            <button type="submit" class="btn btn-secondary">삭제하기</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </div>
         </div>
     </div>
-</main>
+
 <jsp:include page="../footer.jsp" />
