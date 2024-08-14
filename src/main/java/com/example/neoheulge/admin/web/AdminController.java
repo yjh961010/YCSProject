@@ -305,6 +305,7 @@ public class AdminController {
     	        return "Error";
     	    }
     	}
+
     	@PostMapping("/saveNote.do")
         public String saveNote(@RequestParam("note") String note) {
             if (note != null && !note.trim().isEmpty()) {
@@ -383,4 +384,11 @@ public class AdminController {
             }
             return "redirect:/admin/calTest.do";
         }
+        @GetMapping("/adminPage.do")
+    	public String adminPage() {
+    		return "admin/adminPage";
+    	} 	
     }
+
+    	
+

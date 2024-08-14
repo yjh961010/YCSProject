@@ -150,7 +150,6 @@
                 </c:choose>
                 </div>
             </div>
-${getByMemberId}
             <div class="card">
                 <div class="card-header">
                     <span class="material-icons">shopping_basket</span> 가입한 상품

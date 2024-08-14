@@ -23,7 +23,10 @@ public class MemberDAO {
 		 return sqlSession.selectOne("member.findByName", name);	 
 	 }
 	 
-	 public MemberDTO findById(MemberDTO member) {
+	 public MemberDTO findByIdName(MemberDTO member) {
 		 return sqlSession.selectOne("member.findByIdName", member);
+	 }
+	 public int updatePw(MemberDTO member) {
+		 return sqlSession.update("member.updatePw", member);
 	 }
 }

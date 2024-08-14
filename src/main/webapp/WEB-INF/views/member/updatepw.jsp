@@ -12,7 +12,7 @@
 		<button type="button" onclick="subCertifi()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호발송</button>
 		<input type="text" name="certi" id="certi" placeholder="인증번호를 입력해주세요" style="width: 60%;">
 		<button type="button" onclick="check()" style="width: 30%; margin-left: 10px; padding: 7px;">인증번호확인</button>
-		<button type="button" onclick="sub()">찾기</button>
+		<button type="button" onclick="sub()">변경하기</button>
 	</form>
 </div>
 <script type="text/javascript">

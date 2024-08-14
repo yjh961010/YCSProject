@@ -51,6 +51,9 @@
 
 <div class="qna">
     <div class="header-content">
+        <div class="vanner">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+        </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
                 <h2>로그아웃</h2>
@@ -72,9 +75,6 @@
                     <a href="${pageContext.request.contextPath}/member/signup.do">회원가입</a>
                 </div>
             </sec:authorize>
-        </div>
-        <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
         </div>
     </div>
     <h2>글내용 보기</h2>
