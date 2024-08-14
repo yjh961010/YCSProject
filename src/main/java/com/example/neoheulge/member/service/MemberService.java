@@ -29,7 +29,12 @@ public class MemberService {
 		return memberDAO.findByName(name);
 	}
 	
-	public MemberDTO findById (MemberDTO member) {
-		return memberDAO.findById(member);
+	public MemberDTO findByIdName (MemberDTO member) {
+		return memberDAO.findByIdName(member);
+	}
+	
+	public int updatePw(MemberDTO member) {
+		member.setPassword(bcryptPasswordEncoder.encode(member.getPassword()));
+		return memberDAO.updatePw(member);
 	}
 }
