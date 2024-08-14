@@ -24,6 +24,7 @@
 	1개월 기본금리: 3개월 기본금리: 6개월 기본금리: 1년 기본금리:<br>
 	1개월 골든볼금리: 3개월 골든볼금리: 6개월 골든볼금리: 1년 골든볼금리:
 	</div>
+	
     <script>
         $(document).ready(function() {
             $('#submitButton').click(function() {
@@ -119,6 +120,9 @@
                 }
             });
         }
+        
+        
+        
     </script>
 </body>
 <jsp:include page="../footer.jsp"/>

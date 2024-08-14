@@ -1,11 +1,20 @@
 package com.example.neoheulge.admin.web;
 
+import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -37,6 +46,7 @@ import com.google.gson.JsonObject;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	private static final String DIRECTORY = "src/main/resources/static/notes/";
 	@Autowired 
 	private AdminService adminservice;
 	
@@ -259,26 +269,29 @@ public class AdminController {
 		return json;
     }
     @GetMapping("/calTest.do")
-    public String calTest() {
+    public String calTest(Model model) {
+    	 File folder = new File(DIRECTORY);
+         File[] files = folder.listFiles();
+         model.addAttribute("files", files != null ? files : new File[0]);
     	return "admin/CalTest";
     }
-    @PostMapping("/calculator.do")
+    @RequestMapping("/calculator.do")
     public String calculate(@RequestParam("display") String display, Model model) {
     	 String result;
     	    try {
     	        if (display != null && !display.isEmpty()) {
-    	            String cleanedExpression = display.replaceAll("\\s+", ""); // 공백 제거
+    	            String cleanedExpression = display.replaceAll("\\s+", "");
     	            result = evaluateExpression(cleanedExpression);
     	        } else {
     	            result = "";
     	        }
     	    } catch (Exception e) {
-    	        e.printStackTrace(); // 로그를 확인할 수 있도록
+    	        e.printStackTrace(); 
     	        result = "Error";
     	    }
     	    model.addAttribute("display", display);
     	    model.addAttribute("result", result);
-    	    return "admin/CalTest"; // View name only
+    	    return "admin/CalTest"; 
     	}
 
     	private String evaluateExpression(String expression) {
@@ -292,4 +305,82 @@ public class AdminController {
     	        return "Error";
     	    }
     	}
-}
+    	@PostMapping("/saveNote.do")
+        public String saveNote(@RequestParam("note") String note) {
+            if (note != null && !note.trim().isEmpty()) {
+                File dir = new File(DIRECTORY);
+                if (!dir.exists()) dir.mkdirs();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String dateTime = dateFormat.format(new Date());
+                // 번호를 찾기 위한 패턴
+                Pattern pattern = Pattern.compile("^note_(\\d+)_(" + dateTime + ")\\.txt$");
+                File[] existingFiles = dir.listFiles((d, name) -> pattern.matcher(name).matches());
+                //가장큰수찾아서 +1해서 새파일이름 설정함
+                int maxNumber = 0; 
+                if (existingFiles != null) {
+                    for (File file : existingFiles) {
+                        Matcher matcher = pattern.matcher(file.getName());
+                        if (matcher.matches()) {
+                            int number = Integer.parseInt(matcher.group(1));
+                            maxNumber = Math.max(maxNumber, number);
+                        }
+                    }
+                }
+                int nextNumber = maxNumber + 1;
+                
+                String fileName = "note_" + nextNumber + "_" + dateTime + ".txt";
+                // 저장할 파일 객체
+                File fileToSave = new File(dir, fileName); 
+                try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileToSave), "UTF-8"))) {
+                    writer.write(note);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("파일생성/입력중 오류발생");
+                }
+            }
+            return "redirect:/admin/calTest.do";
+        }
+    	
+        @PostMapping("/updateNote.do")
+        public String updateNote(@RequestParam("fileName") String fileName, @RequestParam("note") String note) {
+            File file = new File(DIRECTORY, fileName);
+            if (file.exists() && note != null && !note.trim().isEmpty()) {
+                try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
+                    writer.write(note);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "redirect:/admin/calTest.do";
+        }
+
+        @PostMapping("/deleteNote.do")
+        public String deleteNote(@RequestParam("fileName") String fileName) {
+            File file = new File(DIRECTORY, fileName);
+            if (file.exists()) {
+                file.delete();
+            }
+            return "redirect:/admin/calTest.do";
+        }
+
+        @GetMapping("/viewNote.do")
+        public String viewNote(@RequestParam("fileName") String fileName, Model model) {
+            File file = new File(DIRECTORY, fileName);
+            if (file.exists()) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+                    StringBuilder content = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        content.append(line).append("\n");
+                        //readLine은 한줄씩읽어오기때문에 줄개행해줘야함!
+                    }
+                    model.addAttribute("content", content.toString());
+                    model.addAttribute("fileName", fileName);
+                    return "admin/viewNote";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "redirect:/admin/calTest.do";
+        }
+    }
