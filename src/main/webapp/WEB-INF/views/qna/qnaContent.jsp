@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <meta charset="UTF-8">
@@ -51,6 +52,9 @@
 
 <div class="qna">
     <div class="header-content">
+        <div class="vanner">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+        </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
                 <h2>로그아웃</h2>
@@ -73,12 +77,9 @@
                 </div>
             </sec:authorize>
         </div>
-        <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
-        </div>
     </div>
     <h2>글내용 보기</h2>
-    <table>
+   <table class="content-table">
         <tr>
             <th>글번호</th>
             <td>${getQna.id}</td>
@@ -124,29 +125,87 @@
             <div class="community-posts">
                 <div>
                     <h3>공지글</h3>
-                    <c:forEach var="dto" items="${noticeList}" varStatus="status">
-                        <c:if test="${status.index < 5}">
-                            <p>
-                                <a href="/notice/noticeView.do?id=${dto.id}">
-                                        ${dto.subject}
-                                </a>
-                            </p>
-                        </c:if>
-                    </c:forEach>
+                    <table>
+                        <thead>
+                        <tr class="commu-header">
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="dto" items="${noticeList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <tr>
+                                    <td width="50%">
+                                        <span>&nbsp;&nbsp;</span>
+                                        <a href="/notice/noticeView.do?id=${dto.id}">
+                                            <c:choose>
+                                        <c:when test="${fn:length(dto.subject) > 8}">
+                                            ${fn:substring(dto.subject, 0, 8)}...
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${dto.subject}
+                                        </c:otherwise>
+                                    </c:choose>
+                                        </a>
+                                    </td>
+                                    <td align="center" width="25%">
+                                            ${dto.author}
+                                    </td>
+                                    <td align="center">
+                                        <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
             <div class="community-posts">
                 <div>
                     <h3>커뮤니티</h3>
-                    <c:forEach var="dto" items="${commuList}" varStatus="status">
-                        <c:if test="${status.index < 5}">
-                            <p>
-                                <a href="/commu/commuContent.do?id=${dto.id}">
-                                        ${dto.subject}
-                                </a>
-                            </p>
-                        </c:if>
-                    </c:forEach>
+                    <table>
+                        <thead>
+                        <tr class="commu-header">
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="dto" items="${commuList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <tr>
+                                    <td width="50%">
+                                        <span>&nbsp;&nbsp;</span>
+                                        <a href="/commu/commuContent.do?id=${dto.id}">
+                                            <c:choose>
+                                        <c:when test="${fn:length(dto.subject) > 8}">
+                                            ${fn:substring(dto.subject, 0, 8)}...
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${dto.subject}
+                                        </c:otherwise>
+                                    </c:choose>
+                                        </a>
+                                    </td>
+                                    <td align="center" width="25%">
+                                            ${dto.author}
+                                    </td>
+                                    <td align="center">
+                                        <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="community-prizes">

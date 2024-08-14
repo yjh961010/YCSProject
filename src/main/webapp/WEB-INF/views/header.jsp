@@ -89,9 +89,9 @@
 <body>
 <header>
         <div class="container">
-         <img alt ="main"
+         <a href="/index.do"><img alt ="main"
             src="${pageContext.request.contextPath}/img/logo.jpg"
-            style="width: 70px; height: 60px; vertical-alignt: bottom">
+            style="width: 70px; height: 60px; vertical-alignt: bottom"></a>
             <h1><a href="/index.do">neoheulge</a></h1>
             <div class="scrolling-text-container">
             <div class="scrolling-text">상품1의 당첨자 xxx님,상품2의 당첨자 xxx님</div>
@@ -101,8 +101,7 @@
                 <a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a>
                 <a href="${pageContext.request.contextPath}/product/productList.do">상품 목록</a>
                 <a href="${pageContext.request.contextPath}/qna/qnaList.do">고객지원</a>
-                <a href="${pageContext.request.contextPath}/admin/adminMember.do">회원관리</a>
-                <a href="${pageContext.request.contextPath}/admin/adminProdcut.do">상품관리</a>
+                <a href="${pageContext.request.contextPath}/admin/adminPage.do">관리자 페이지</a>
             </nav>
         </div>
     </header>

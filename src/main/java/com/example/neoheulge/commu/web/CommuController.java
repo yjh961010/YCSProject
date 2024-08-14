@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.neoheulge.commu.service.CommuService;
 import com.example.neoheulge.dto.CommuDTO;
+import com.example.neoheulge.dto.NoticeDTO;
+import com.example.neoheulge.notice.service.NoticeService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -22,14 +24,15 @@ public class CommuController {
 
 	@Autowired
 	CommuService commuService;
-	
+	@Autowired
+    private NoticeService noticeService;
 	
 	
 	@GetMapping("/commuList.do")
 	public String commuList(HttpServletRequest req, @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "searchType", required = false, defaultValue = "all") String searchType) {
 		
-		int pageSize = 5; // 한 페이지당 보여줄 게시물 수
+		int pageSize = 15; // 한 페이지당 보여줄 게시물 수
 	    String pageNumStr = req.getParameter("pageNum"); // 현재 페이지 번호를 파라미터로 받아옴
 
 	    int pageNum = (pageNumStr == null) ? 1 : Integer.parseInt(pageNumStr); // 현재 페이지 번호, 기본값은 1
@@ -50,10 +53,14 @@ public class CommuController {
 	    List<CommuDTO> paginatedList = list.subList(start, end);
 	    
 	    int pageCount = (int) Math.ceil((double) totalCount / pageSize); // 전체 페이지 수
-	    int pageBlock = 5; // 페이지 블록 사이즈
+	    int pageBlock = 15; // 페이지 블록 사이즈
 	    int startPage = (pageNum - 1) / pageBlock * pageBlock + 1; // 시작 페이지 번호
 	    int endPage = Math.min(startPage + pageBlock - 1, pageCount); // 끝 페이지 번호
 
+	    
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+	    
 	    // 결과를 request에 저장
 	    req.setAttribute("count", totalCount);
 	    req.setAttribute("commuList", paginatedList); // 현재 페이지에 해당하는 게시판 목록
@@ -78,6 +85,13 @@ public class CommuController {
 		        dto.setRe_step(0);
 		        dto.setRe_level(0);
 			}
+			
+			List<NoticeDTO> noticelist = noticeService.noticeList();
+			req.setAttribute("noticeList", noticelist);
+			
+			List<CommuDTO> commulist = commuService.commuList();
+			req.setAttribute("commuList", commulist);
+			
 			req.setAttribute("getCommu",dto);
 			return "commu/commuWrite";
 		
@@ -106,6 +120,12 @@ public class CommuController {
 		int res = commuService.commuViews(id);
 		CommuDTO dto = commuService.getCommu(id);
 		req.setAttribute("getCommu",dto);
+		
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
 
 		return "commu/commuContent";
 	}
@@ -120,6 +140,12 @@ public class CommuController {
 	public String commuUpdateForm(HttpServletRequest req, int id) {
 		CommuDTO dto = commuService.getCommu(id);
 		req.setAttribute("getCommu", dto);
+		
+		List<NoticeDTO> noticelist = noticeService.noticeList();
+		req.setAttribute("noticeList", noticelist);
+		
+		List<CommuDTO> commulist = commuService.commuList();
+		req.setAttribute("commuList", commulist);
 		return "commu/commuUpdate";
 	}
 	

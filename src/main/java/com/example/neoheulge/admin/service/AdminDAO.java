@@ -22,4 +22,5 @@ public interface AdminDAO {
     int updateProd(NeSavProdDTO dto);
     int deleteProd(String product_code);
     public void deleteExpried();
+    List<NeSavProdDTO> chartList(String product_code);
     }

@@ -20,29 +20,29 @@ h2 {
 }
 
 /* 테이블 스타일 */
-table {
+.content-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-th {
+.content-table th {
     background-color: #004d99;
     color: #ffffff;
     padding: 10px;
     text-align: left;
 }
 
-td {
+.content-table td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
     text-align: center;
 }
 
-tr:nth-child(even) {
+.content-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-tr:hover {
+.content-table tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -61,4 +61,18 @@ input[type="button"] {
 
 input[type="button"]:hover {
     background-color: #003366;
+}
+
+textarea{
+    width: 100%;
+    height: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    background-color: #f9f9f9;
+    resize: none; /* 사용자가 크기 조절을 하지 못하도록 설정 */
+    margin-top: 3px;
+    margin-bottom: 3px;
 }

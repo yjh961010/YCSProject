@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-
+<!DOCTYPE html>
 <jsp:include page="../header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/commu/commuStyle.css">
 <script>
@@ -28,7 +29,7 @@
         
     }
     </script>
-<div class="qna">
+<div class="commu">
 	<div class="header-content">
 		<div class="vanner">
 			<img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
@@ -66,9 +67,8 @@
 		</div>
 	</div>
 
-	<div class="commu">
-		<h1>커뮤니티</h1>
-		<br>
+<div class="total-box" style="background-color: #e0f5fc;">
+		<h2 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">커뮤니티</h2>
 		<div class="search-form">
 			<select id="searchType">
 				<option value="all"
@@ -80,12 +80,12 @@
 			</select> <input type="text" placeholder="검색어를 입력하세요" id="search"
 				value="${search}">
 			<button onclick="performSearch()">검색</button>
+			<a href="/commu/commuWrite.do" class="write-btn"><button>글쓰기</button></a>
 		</div>
 		<div id="commu">
-			<table align="right" style="margin-bottom: 20px">
+			<table align="right">
 				<tr>
 					<td><sec:authorize access="isAuthenticated()">
-							<a href="/commu/commuWrite.do" class="write-btn">글쓰기</a>
 						</sec:authorize> <sec:authorize access="isAnonymous()">
 							<a href="javascript:void(0);" class="write-btn"
 								onclick="checkLogin()">글쓰기</a>
@@ -131,7 +131,6 @@
 							<td align="right">${dto.views}</td>
 						</tr>
 					</c:forEach>
-
 				</tbody>
 			</table>
 
@@ -139,10 +138,10 @@
 				<div class="pagination">
 
 					<%
-					int pageSize = 5;
+					int pageSize = 15;
 					int currentPage = (request.getParameter("pageNum") != null) ? Integer.parseInt(request.getParameter("pageNum")) : 1;
 					int count = (Integer) request.getAttribute("count");
-					int pageBlock = 5;
+					int pageBlock = 15;
 					int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 					int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 					int endPage = startPage + pageBlock - 1;
@@ -178,40 +177,102 @@
 					<%
 					}
 					%>
+					<br>
 				</div>
 			</c:if>
 		</div>
-	</div>
-	<div class="commu-container">
-		<div class="community-content">
-			<div class="community-posts">
-				<div>
-					<h3>공지글</h3>
-					<c:forEach var="dto" items="${noticeList}" varStatus="status">
-						<c:if test="${status.index < 5}">
-							<p>
-								<a href="/notice/noticeView.do?id=${dto.id}">
-										${dto.subject}
-								</a>
-							</p>
-						</c:if>
-					</c:forEach>
-				</div>
-			</div>
-			<div class="community-posts">
-				<div>
-					<h3>커뮤니티</h3>
-					<c:forEach var="dto" items="${commuList}" varStatus="status">
-						<c:if test="${status.index < 5}">
-							<p>
-								<a href="/commu/commuContent.do?id=${dto.id}">
-										${dto.subject}
-								</a>
-							</p>
-						</c:if>
-					</c:forEach>
-				</div>
-			</div>
+		</div>
+	 <br>
+    <div class="commu-container">
+        <div class="community-content">
+            <div class="community-posts">
+                <div>
+                    <h3>공지글</h3>
+                    <table>
+                        <thead>
+                        <tr class="commu-header">
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="dto" items="${noticeList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <tr>
+                                    <td width="50%">
+                                        <span>&nbsp;&nbsp;</span>
+                                        <a href="/notice/noticeView.do?id=${dto.id}">
+                                                <c:choose>
+                                        <c:when test="${fn:length(dto.subject) > 8}">
+                                            ${fn:substring(dto.subject, 0, 8)}...
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${dto.subject}
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                        </a>
+                                    </td>
+                                    <td align="center" width="25%">
+                                            ${dto.author}
+                                    </td>
+                                    <td align="center">
+                                        <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="community-posts">
+                <div>
+                    <h3>커뮤니티</h3>
+                    <table>
+                        <thead>
+                        <tr class="commu-header">
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="dto" items="${commuList}" varStatus="status">
+                            <c:if test="${status.index < 5}">
+                                <tr>
+                                    <td width="50%">
+                                        <span>&nbsp;&nbsp;</span>
+                                        <a href="/commu/commuContent.do?id=${dto.id}">
+                                               <c:choose>
+                                        <c:when test="${fn:length(dto.subject) > 8}">
+                                            ${fn:substring(dto.subject, 0, 8)}...
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${dto.subject}
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                        </a>
+                                    </td>
+                                    <td align="center" width="25%">
+                                            ${dto.author}
+                                    </td>
+                                    <td align="center">
+                                        <fmt:parseDate var="parsedDate" value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${parsedDate}" pattern="MM-dd HH:mm" />
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 			<div class="community-prizes">
 				<h3>전회차 상금</h3>
 				<p>상품1 100,000원</p>

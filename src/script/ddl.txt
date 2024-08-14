@@ -21,7 +21,7 @@ CREATE TABLE nepreSavProd (
     status                  VARCHAR2(20) DEFAULT '활성',  		-- 가입 상태 (예: 활성, 해지)
     early_refund 		NUMBER(15, 2),          			-- 중도 포기 시 환급 금액
     total_payment 		NUMBER(15, 2),                  		-- # 지급된 총 금액
-    auto_enabled    CHAR(1) DEFAULT 'Y',            			-- 자동결제 가능 여부 ('Y' or 'N')
+    auto_enabled    CHAR(1) DEFAULT 'N',            			-- 자동결제 가능 여부 ('Y' or 'N')
     auto_amount     NUMBER(15, 2),                  			-- 자동결제 금액
     auto_cycle      VARCHAR2(20),                   			-- 자동결제 주기 (예: '매일', '매주', '매월')
     auto_account    VARCHAR2(50),                   			-- 자동결제 계좌 정보
@@ -120,3 +120,16 @@ CREATE TABLE neq_a (
 
 --시퀀스 생성(Q&A)
 create sequence neq_a_seq;
+
+CREATE TABLE neacount(
+	acount_id		VARCHAR2(20) PRIMARY KEY, 		-- 식별코드
+	acount_number	VARCHAR2(20) NOT NULL,		-- 계좌번호
+	member_id		VARCHAR2(20) NOT NULL,		-- 회원ID
+	money		NUMBER(15),				-- 돈
+	acount_status	CHAR(1) DEFAULT 'N'			-- 주계좌 상태(ex. Y : 주 계좌, N : 주 계좌X)
+);
+
+CREATE SEQUENCE neacount_seq
+START WITH 1
+INCREMENT BY 1;
+

@@ -4,6 +4,9 @@
 <jsp:include page="../header.jsp"/>
 상품리스트(보이는건 수정가능)
 
+<h1>
+<a href="${pageContext.request.contextPath}/admin/adminProdcut.do">상품추가</a>
+</h1>
 
 <c:forEach var="dto" items="${prodList}">
 <form name="f" action="/admin/updateProdPro.do" method="POST">

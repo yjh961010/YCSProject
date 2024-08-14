@@ -88,4 +88,19 @@ public class MemberController {
         
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/updatepw.do")
+    public String updatepw() {
+    	return "member/updatepw";
+    }
+    @PostMapping("/updatepw.do")
+    public String updatepwView(HttpServletRequest req, MemberDTO member) {
+    	MemberDTO dto = memberservice.findByIdName(member);
+    	req.setAttribute("member", dto);
+    	return "member/updatePro";
+    }
+    @PostMapping("/updatepwPro.do")
+    public String updatePwPro(MemberDTO member) {
+    	memberservice.updatePw(member);
+    	return "redirect:/index.do";
+    }
 }

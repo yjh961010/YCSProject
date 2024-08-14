@@ -28,4 +28,13 @@ public class MemberService {
 	public MemberDTO findByName(String name) {
 		return memberDAO.findByName(name);
 	}
+	
+	public MemberDTO findByIdName (MemberDTO member) {
+		return memberDAO.findByIdName(member);
+	}
+	
+	public int updatePw(MemberDTO member) {
+		member.setPassword(bcryptPasswordEncoder.encode(member.getPassword()));
+		return memberDAO.updatePw(member);
+	}
 }

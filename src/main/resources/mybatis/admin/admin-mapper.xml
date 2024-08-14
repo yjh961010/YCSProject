@@ -135,5 +135,25 @@
 <delete id ="deleteExpired">
 DELETE FROM NESAVPROD WHERE END_DATE &lt; ADD_MONTHS(SYSDATE,-12)
 </delete>
+<select id="chartList" resultType="neSavProdDTO" parameterType="String">
+<!-- SELECT chart화 쿼리-->
+	   Select
+	    p.product_code,
+	    p.accumulated_amount,
+	    COUNT(s.MEMBER_ID) AS numberOfSubscribers
+	FROM 
+	    neSavProd p
+	LEFT JOIN 
+	    nepreSavProd s 
+	ON 
+	    p.product_code = s.product_code
+	WHERE 
+	    p.product_code = #{product_code}
+	GROUP BY 
+	    p.product_code, p.accumulated_amount
+	ORDER BY 
+	    p.product_code
+
+</select>
 
 </mapper>

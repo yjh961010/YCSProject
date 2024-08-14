@@ -88,4 +88,7 @@ public class AdminService {
    public void deleteExpired() {
 	    admindao.deleteExpried();
    }
+   public List<NeSavProdDTO> chartList(String product_code){
+	   return admindao.chartList(product_code);
+   }
 }
