@@ -24,37 +24,35 @@ public class SchedulerService {
             String autoCycle = (String) member.get("AUTO_CYCLE");
             String autoDateStr = (String) member.get("AUTO_DATE"); // 사용자 입력 날짜 (예: "17")
             
-            // 날짜를 정수로 변환하고 해당 날짜의 요일을 추출
+            // 날짜를 정수로 변환
             int autoDateDay = Integer.parseInt(autoDateStr);
-            LocalDate autoDate = LocalDate.of(today.getYear(), today.getMonth(), autoDateDay);
-            DayOfWeek autoDateDayOfWeek = autoDate.getDayOfWeek();
 
             // 디버깅 정보 출력
             System.out.println("1 " + autoDateDay);
-            System.out.println("2 " + autoDate);
-            System.out.println("3 " + autoDateDayOfWeek); // enum의 문자열 출력
-            System.out.println("4 " + autoDateDayOfWeek.getValue());
-            System.out.println("5 " + today.getDayOfMonth());
-            System.out.println("6"+ today.getDayOfWeek());
+            System.out.println("2 " + today.getDayOfMonth());
+            System.out.println("3 " + today.getDayOfWeek());
+            System.out.println("4"+(today.getDayOfMonth() == autoDateDay));
             
-            if (shouldProcessPayment(today, autoDateDayOfWeek, autoCycle)) {
+            if (shouldProcessPayment(today, autoDateDay, autoCycle)) {
                 processPayment(member);
             }
         }
     }
 
-    public boolean shouldProcessPayment(LocalDate today, DayOfWeek autoDateDayOfWeek, String autoCycle) {
+    public boolean shouldProcessPayment(LocalDate today, int autoDateDay, String autoCycle) {
         switch (autoCycle) {
             case "매일":
                 return true; // 매일 실행되므로 항상 true
             case "매주":
+                DayOfWeek autoDateDayOfWeek = LocalDate.of(today.getYear(), today.getMonth(), autoDateDay).getDayOfWeek();
                 return today.getDayOfWeek().equals(autoDateDayOfWeek); // 오늘 요일과 자동 결제 요일이 같은지 확인
             case "매달":
-                return today.getDayOfMonth() == autoDateDayOfWeek.getValue(); // 현재 일이 자동 결제 설정일과 같을 때
+                return today.getDayOfMonth() == autoDateDay; // 현재 일이 자동 결제 설정일과 같을 때
             default:
                 return false;
         }
     }
+
 
     public void processPayment(Map<String, Object> member) {
         // 결제 처리 로직

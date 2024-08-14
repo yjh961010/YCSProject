@@ -26,8 +26,8 @@ public class Scheduler {
     private AdminDAO admindao;
 
     
-    //추가금 넣기  
-    @Scheduled(cron = "0/1 * * * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 * * *")
+    //추가금 넣기(완료)
+    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 * * *")
     public void schedulePayments() {
         try {
             List<Map<String, Object>> members = purproductService.getActiveAuto();
@@ -47,9 +47,9 @@ public class Scheduler {
         }
     }
     
-    /*
+    
     //이자 계산 실행(완료)
-    @Scheduled(cron = "0 0 0 1 * ?") // 매달 1일 0시에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 1 * ?")
+    @Scheduled(cron = "0 3 0 1 * ?") // 매달 1일 0시 3분에 실행 (cron = "0/1 * * * * *")(cron = "0 0 0 1 * ?")
     public void applyMonthlyInterest() {
         try {
             //활성 상태의 멤버들을 가져옵니다.
@@ -78,7 +78,7 @@ public class Scheduler {
     
     //상품 종료 업데이트
     //골든볼 처리
-    @Scheduled(cron = "0 1 0 * * *") // 매일 12시 1분에 실행 (cron = "0/1 * * * * *")
+    @Scheduled(cron = "0 5 0 * * *") // 매일 12시 1분에 실행 (cron = "0/1 * * * * *")
     public void updateExpiredProductsStatus() {
         try {
             sqlSession.update("updateProductStatus");
@@ -101,7 +101,7 @@ public class Scheduler {
     	}
     }
     
-    */
+  
     
 }
 
