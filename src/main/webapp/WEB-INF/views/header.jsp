@@ -101,10 +101,7 @@
                 <a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a>
                 <a href="${pageContext.request.contextPath}/product/productList.do">상품 목록</a>
                 <a href="${pageContext.request.contextPath}/qna/qnaList.do">고객지원</a>
-                <a href="${pageContext.request.contextPath}/admin/adminMember.do">회원관리</a>
-                <a href="${pageContext.request.contextPath}/admin/adminProdcut.do">상품관리</a>
-                <a href="${pageContext.request.contextPath}/admin/adminChart.do">매출관리</a>
-                <a href="${pageContext.request.contextPath}/admin/updateProd.do">상품목록(관리자)</a>
+                <a href="${pageContext.request.contextPath}/admin/adminPage.do">관리자 페이지</a>
             </nav>
         </div>
     </header>

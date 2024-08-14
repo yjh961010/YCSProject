@@ -292,4 +292,11 @@ public class AdminController {
     	        return "Error";
     	    }
     	}
+    	
+    	@GetMapping("/adminPage.do")
+    	public String adminPage() {
+    		return "admin/adminPage";
+    	}
+    	
+   
 }
