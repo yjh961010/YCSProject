@@ -5,9 +5,9 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productDetail.css">
 
-
+<main>
 <div class="product-detail">
-    <div class="container">
+  
         <section class="product-header">
             <img src="${pageContext.request.contextPath}/img/product_image.jpg" alt="적금상품 이미지" class="product-image">
             <div class="product-title">
@@ -64,8 +64,7 @@
             </div>
         </section>
     </div>
-</div>
-
+</main>
 
 <script>
     function updateProgress(currentAmount, goalAmount) {
