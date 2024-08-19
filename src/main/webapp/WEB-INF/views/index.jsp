@@ -242,9 +242,9 @@
 					</table>
 				</div>
 				<div class="button" style="text-align: ceter;">
-				<a href="/commu/commuList.do">
-				커뮤니티 바로가기 </a>
-			</div>
+					<a href="/commu/commuList.do">
+					커뮤니티 바로가기 </a>
+				</div>
 			</div>
 			<div class="community-prizes">
 				<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">전회차
