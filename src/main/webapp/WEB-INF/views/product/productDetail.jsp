@@ -16,12 +16,15 @@
                 <p class="product-code">상품 코드: ${product.product_code}</p>
             </div>
             <div class="signup-container">
-                <sec:authorize access="isAuthenticated()">
-                    <a href="/proProduct/does.do?product_code=${product.product_code}" class="signup-btn">가입하기</a>
-                </sec:authorize> 
-                <sec:authorize access="isAnonymous()">
-                    <a href="javascript:void(0);" class="signup-btn" onclick="checkLogin()">가입하기</a>
-                </sec:authorize>
+            	<c:if test="${product.product_status == '활성'}">
+	                <sec:authorize access="isAuthenticated()">
+	                    <a href="/proProduct/does.do?product_code=${product.product_code}" class="signup-btn">가입하기</a>
+	                </sec:authorize> 
+	                
+	                <sec:authorize access="isAnonymous()">
+	                    <a href="javascript:void(0);" class="signup-btn" onclick="checkLogin()">가입하기</a>
+	                </sec:authorize>
+                </c:if>
             </div>
         </section>
 
