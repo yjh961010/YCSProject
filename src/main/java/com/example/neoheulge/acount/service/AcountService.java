@@ -27,8 +27,8 @@ public class AcountService {
     }
 
     // 계좌 리스트 조회 (회원 ID로)
-    public List<NeAcountDTO> getAccountsByMemberId(String memberId) {
-        return sqlSession.selectList("memberAcount", memberId);
+    public List<NeAcountDTO> getAccountsByMemberId(String member_id) {
+        return sqlSession.selectList("memberAcount", member_id);
     }
 
     // 주 계좌 상태 변경
