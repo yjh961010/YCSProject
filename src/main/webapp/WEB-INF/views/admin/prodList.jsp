@@ -50,7 +50,7 @@
 <div class="container">
     <h1>상품 리스트</h1>
     
-    <a href="${pageContext.request.contextPath}/admin/adminProdcut.do" class="add-product">상품 추가</a>
+   
     
     <div class="product-list">
         <c:forEach var="dto" items="${prodList}">
