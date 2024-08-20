@@ -187,7 +187,7 @@
              </div>
         <div id="quick" class="quick">
             <ul class="list">
-                <li><a href="${pageContext.request.contextPath}/member/editProfile.do">회원정보 수정</a></li>
+                <li><a href="${pageContext.request.contextPath}/member/editProfile.do" right="300">회원정보 수정</a></li>
             </ul>
         </div>
     </div>

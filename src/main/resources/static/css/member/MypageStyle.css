@@ -103,6 +103,7 @@
     cursor: pointer;
 }
 
+/* 기본 설정 */
 .quick {
     position: fixed; /* 사이드바를 스크롤 시에도 고정 */
     top: 400px; /* 상단에서의 위치 조정 */
@@ -112,6 +113,12 @@
     padding-top: 20px;
 }
 
+@media (max-width: 1800px) {
+    .quick {
+        right: 300px; /* 창모드일 때 메인 콘텐츠와 겹치지 않도록 조정 */
+    }
+}
+
 .list {
     padding: 5px 0 29px;
 }
@@ -119,4 +126,3 @@
 .list li {
     margin: 0;
 }
-
