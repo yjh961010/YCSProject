@@ -6,14 +6,13 @@
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
-<link rel="stylesheet" type="text/css" href="/css/sidebar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="myPage">
         <div class="header-content">
             <div class="vanner">
                 <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
             </div>
-            <div class="login-form">
+            <div class="mylogin-form">
                 <sec:authorize access="isAuthenticated()">
                     <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
                          alt="프로필 이미지"/>
@@ -26,9 +25,13 @@
                         </a>
                     </span>
                     </div>
+                    <div>
+                        <button type="submit">회원정보수정</button><br>
+
                     <form action="<c:url value='/logout' />" method="post">
                         <button type="submit">로그아웃</button>
                     </form>
+                    </div>
                 </sec:authorize>
                 <sec:authorize access="isAnonymous()">
                     <h4>neoheulge <br> 더 안전하고 더 편리하게</h4>
@@ -159,6 +162,13 @@
                     <div class="expiration-header">
                         <span class="material-icons">만기 상품</span>
                     </div>
+                    <div>
+                        <c:choose>
+                            <c:when test="${empty account}">
+                                <p>만기된 상품이 없습니다.</p>
+                            </c:when>
+                        </c:choose>
+                    </div>
                     <div class="expiration-body">
                         <div class="products">
                             <c:forEach items="${getByMemberId}" var="product">
@@ -185,11 +195,6 @@
                     </div>
                 </div>
              </div>
-        <div id="quick" class="quick">
-            <ul class="list">
-                <li><a href="${pageContext.request.contextPath}/member/editProfile.do" right="300">회원정보 수정</a></li>
-            </ul>
-        </div>
     </div>
 
 <jsp:include page="../footer.jsp" />

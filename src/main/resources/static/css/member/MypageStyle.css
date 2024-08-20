@@ -7,6 +7,37 @@
     margin-bottom: 20px;
 }
 
+.mylogin-form {
+    flex: 0 0 20%;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 240px; /* 원하는 높이로 설정 */
+}
+
+.mylogin-form h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.mylogin-form input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.mylogin-form button {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background: #004d99;
+    color: #fff;
+    cursor: pointer;
+}
 .myPage {
     background: #ffffff;
     padding: 1em;
@@ -113,9 +144,10 @@
     padding-top: 20px;
 }
 
-@media (max-width: 1800px) {
+@media (max-width: 2000px) {
     .quick {
-        right: 300px; /* 창모드일 때 메인 콘텐츠와 겹치지 않도록 조정 */
+        right: 0px; /* 창모드일 때 메인 콘텐츠와 겹치지 않도록 조정 */
+        width: 150px;
     }
 }
 
