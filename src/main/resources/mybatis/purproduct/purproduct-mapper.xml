@@ -25,7 +25,7 @@
 	    FROM nepreSavProd nsp
 	    JOIN neSavProd ns
 	    ON nsp.product_code = ns.product_code
-	    WHERE nsp.member_id = #{memberId}
+	    WHERE nsp.member_id = #{member_id}
 	    AND nsp.status IN ('활성', '해지', '만기')
 	</select>
 	

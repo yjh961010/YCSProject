@@ -164,13 +164,7 @@
                     <div class="expiration-header">
                         <span class="material-icons">만기 상품</span>
                     </div>
-                    <div>
-                        <c:choose>
-                            <c:when test="${empty account}">
-                                <p>만기된 상품이 없습니다.</p>
-                            </c:when>
-                        </c:choose>
-                    </div>
+
                     <div class="expiration-body">
                         <div class="products">
                             <c:forEach items="${getByMemberId}" var="product">
