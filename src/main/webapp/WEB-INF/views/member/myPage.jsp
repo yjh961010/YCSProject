@@ -57,14 +57,15 @@
                     <c:choose>
                         <c:when test="${empty account}">
                             <p>등록된 계좌가 없습니다.</p>
-                            <form action="<c:url value='/account/add'/>" method="get">
+                            <form action="<c:url value='/account/add.do'/>" method="get">
                                 <button type="submit" class="btn btn-primary">계좌 추가하기</button>
                             </form>
                         </c:when>
                         <c:otherwise>
+                        	<c:forEach items="${acount}" var="acount">
                             <div class="Account-info">
-                                <p><strong>계좌 번호:</strong> ${account.number}</p>
-                                <p><strong>현재 잔액:</strong> ${account.balance}원</p>
+                                <p><strong>계좌 번호:</strong> ${acount.acount_number}</p>
+                                <p><strong>현재 잔액:</strong> ${acount.money}원</p>
                                 <div class="account-actions">
                                     <form action="<c:url value='/account/add' />" method="get">
                                         <button type="submit" class="btn btn-primary">계좌 추가</button>
@@ -74,6 +75,7 @@
                                     </form>
                                 </div>
                             </div>
+                            </c:forEach>
                         </c:otherwise>
                     </c:choose>
                 </div>
