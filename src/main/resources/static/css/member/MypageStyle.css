@@ -27,5 +27,96 @@
     width: 100%;
     height: auto;
 }
+.container1 {
+    max-width: 1200px;
+    width: 100%;
+    min-width: 800px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 2rem;
+}
+
+.product-info{
+    max-height: 300px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Account-header{
+    background-color: #004d99;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.subscription-header{
+    background-color: #004d99;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom : 10px;
+}
+.subscription-body, .cancellation-body, .expiration-body{
+    font-weight : bold;
+}
+.cancellation-header{
+    background-color: #004d99;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom : 10px;
+}
+.expiration-header{
+    background-color: #004d99;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom : 10px;
+}
+.product-actions{
+    margin-bottom : 10px;
+}
+.btn-primary{
+    padding: 5px;
+    background: #004d99;
+    color: #fff;
+    font-size: 1em;
+}
+
+.btn-secondary{
+    padding: 5px;
+    background: #000000;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.quick {
+    position: fixed; /* 사이드바를 스크롤 시에도 고정 */
+    top: 400px; /* 상단에서의 위치 조정 */
+    right: 300px;
+    width: 150px; /* 사이드바의 너비 조정 */
+    min-height: 200px;
+    padding-top: 20px;
+}
+
+.list {
+    padding: 5px 0 29px;
+}
+
+.list li {
+    margin: 0;
+}
 
