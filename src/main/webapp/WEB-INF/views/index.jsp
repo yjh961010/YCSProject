@@ -160,13 +160,18 @@
 		<div class="community-content">
 			<div class="community-posts">
 				<div>
-					<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">공지사항</h3>
+					<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c0c0c0; margin-bottom: 8px;">
+					    <span style="text-align: left;"><h3 style="margin: 0;">공지사항</h3></span>
+					    <span style="text-align: left;"><a href="/notice/noticeList.do"> 더보기 >> </a></span>
+					</div>
 					<table>
+
 						<thead>
 							<tr class="commu-header">
 								<th>제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
+													
 							</tr>
 						</thead>
 						<tbody>
@@ -196,15 +201,15 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="button" style="text-align: ceter;">
-				<a href="/notice/noticeList.do">
-				공지사항 바로가기 </a>
-			</div>
+
 			</div>
 
 			<div class="community-posts">
 				<div>
-					<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">커뮤니티</h3>
+					<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c0c0c0; margin-bottom: 8px;">
+					    <span style="text-align: left;"><h3 style="margin: 0;">커뮤니티</h3></span>
+					    <span style="text-align: left;"><a href="/commu/commuList.do">더보기 >></a></span>
+					</div>
 					<table>
 						<thead>
 							<tr class="commu-header">
@@ -241,10 +246,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="button" style="text-align: ceter;">
-				<a href="/commu/commuList.do">
-				커뮤니티 바로가기 </a>
-			</div>
+
 			</div>
 			<div class="community-prizes">
 				<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">전회차

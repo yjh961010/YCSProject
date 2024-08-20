@@ -8,10 +8,10 @@
 	<!-- 계좌 추가 -->
 	<insert id="insertNeacount" parameterType="NeAcountDTO">
         INSERT INTO neacount (
-            neacount_seq.nextval, acount_number,member_id,
+           	acount_id, acount_number,member_id,
             money,acount_status
         ) VALUES (
-            #{acount_id}, #{acount_number}, #{member_id},
+            neacount_seq.nextval, #{acount_number}, #{member_id},
             0, #{acount_status}
         )
     </insert>
