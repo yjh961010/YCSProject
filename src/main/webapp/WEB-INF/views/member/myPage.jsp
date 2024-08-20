@@ -162,7 +162,7 @@
                     <div class="expiration-body">
                         <div class="products">
                             <c:forEach items="${getByMemberId}" var="product">
-                                <c:if test="${product.STATUS == '해지'}">
+                                <c:if test="${product.STATUS == '만기'}">
                                     <div class="product-card">
                                         <div class="product-info">
                                             <h3>${product.PRODUCT_NAME}</h3>

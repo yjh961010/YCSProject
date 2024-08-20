@@ -124,6 +124,7 @@
                         <c:choose>
                             <c:when test="${not empty PDTO.product_image}">
                                 <img src="${pageContext.request.contextPath}/img/${PDTO.product_image}" alt="현재 상품 이미지" id="currentImage"/>
+                                <p>Debug: ${pageContext.request.contextPath}/img/${PDTO.product_image}</p>
                             </c:when>
                             <c:otherwise>
                                 <p id="noImageText">현재 사진 없음</p>
