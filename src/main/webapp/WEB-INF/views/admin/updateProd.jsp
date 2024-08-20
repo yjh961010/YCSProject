@@ -3,25 +3,7 @@
 <jsp:include page="../header.jsp"/>
 
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-    .container {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 30px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-        color: #2c3e50;
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 28px;
-    }
+    
     form {
         margin-bottom: 30px;
     }
@@ -105,7 +87,7 @@
     }
 </style>
 
-<div class="container">
+<main>
     <h1>상품 수정</h1>
 
     <!-- 상품 수정 폼 -->
@@ -132,6 +114,7 @@
                         </c:choose>
                     </div>
                     <input type="file" name="file" id="product_image" accept="image/*" />
+                    <input type="hidden" id="previousImg" name="previousImg" value="${PDTO.product_image}">
                     <img id="imagePreview" src="#" alt="이미지 미리보기" style="display:none;"/>
                 </td>
             </tr>
@@ -212,7 +195,7 @@
             <input type="submit" value="삭제" class="delete-btn">
         </div>
     </form>
-</div>
+</main>
 
 <script>
     document.getElementById('product_image').onchange = function (evt) {
