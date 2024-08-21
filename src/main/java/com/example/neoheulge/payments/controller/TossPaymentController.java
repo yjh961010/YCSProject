@@ -24,7 +24,7 @@ public class TossPaymentController {
     private final PaymentService paymentService;
     private final TossPaymentConfig tossPaymentConfig;
 
-
+    //추후 @AuthenticationPrincipal 어노테이션 통해서 로그인 상태에서 결제 할 수 있게 보완 해야함
     @PostMapping("/toss")
     public ResponseEntity<PaymentResponseDTO> requestPayment(@RequestBody PaymentsRequestDTO request) {
         String testEmail = "kim@kim.com";
