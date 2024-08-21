@@ -73,6 +73,8 @@ public class PurproductController {
 		pdto.setProduct_code(product_code);
 		pdto.setMember_id(user);
 		
+		System.out.println(product_code);
+		System.out.println(user);
 		
 		purproductService.terminateSubscription(pdto);
 		productService.updateAccumulatedAmount(params);
