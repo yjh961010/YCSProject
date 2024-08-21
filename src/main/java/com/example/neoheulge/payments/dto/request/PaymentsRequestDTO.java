@@ -1,10 +1,10 @@
 package com.example.neoheulge.payments.dto.request;
 
 
+import com.example.neoheulge.payments.dto.PayType;
 import com.example.neoheulge.payments.entity.Payments;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PaymentsRequestDTO {
 
     @NonNull
-    private String payType;
+    private PayType payType;
     @NonNull
     private Long amount;
     @NonNull
@@ -26,6 +26,7 @@ public class PaymentsRequestDTO {
 
     public Payments toEntity() {
         return Payments.builder()
+                .paymentType(payType)
                 .amount(this.amount)
                 .orderId(UUID.randomUUID().toString())
                 .orderName(orderName)

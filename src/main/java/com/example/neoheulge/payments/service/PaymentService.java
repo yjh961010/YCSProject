@@ -1,117 +1,105 @@
 package com.example.neoheulge.payments.service;
 
+import com.example.neoheulge.member.entity.Member;
+import com.example.neoheulge.member.service.MemberService;
 import com.example.neoheulge.payments.config.TossPaymentConfig;
-import com.example.neoheulge.payments.dto.request.PaymentApproveRequestDTO;
-import com.example.neoheulge.payments.dto.request.PaymentsRequestDTO;
-import com.example.neoheulge.payments.dto.response.PaymentResponseDTO;
-import com.example.neoheulge.payments.dto.response.SuccessDTO;
 import com.example.neoheulge.payments.entity.Payments;
-import com.example.neoheulge.payments.repository.PaymentRepository;
-import com.example.neoheulge.payments.util.TossPaymentAuthUtil;
-import jakarta.transaction.Transactional;
+import com.example.neoheulge.payments.repository.JpaPaymentRepository;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
 
-
-
-
-
-    private final PaymentRepository paymentRepository;
-    private final TossPaymentConfig tossPaymentConfig;
-    private final TossPaymentAuthUtil tossPaymentAuthUtil;
+    private final JpaPaymentRepository paymentRepository;
     private final RestTemplate restTemplate;
+    private final TossPaymentConfig tossPaymentConfig;
+    private final MemberService memberService;
 
-    public PaymentResponseDTO createPaymentRequest(PaymentsRequestDTO request) {
-        Payments payment = request.toEntity();
-        payment = paymentRepository.save(payment);
-
-        Map<String, Object> tossRequest = new HashMap<>();
-        tossRequest.put("amount", payment.getAmount());
-        tossRequest.put("orderId", payment.getOrderId());
-        tossRequest.put("orderName", payment.getOrderName());
-        tossRequest.put("successUrl", request.getMySuccessUrl() != null ? request.getMySuccessUrl() : tossPaymentConfig.getSuccessUrl());
-        tossRequest.put("failUrl", request.getMyFailUrl() != null ? request.getMyFailUrl() : tossPaymentConfig.getFailUrl());
-        tossRequest.put("method", request.getPayType());
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.set("Authorization", tossPaymentAuthUtil.getBasicAuthHeader());
-
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(tossRequest, headers);
-
-        PaymentResponseDTO response = restTemplate.exchange(
-                TossPaymentConfig.URL,
-                HttpMethod.POST,
-                entity,
-                PaymentResponseDTO.class
-        ).getBody();
-
-
-
-        return response;
+    public Payments createPaymentRequest(Payments payments, String userEmail) {
+            Member member = memberService.findMember(userEmail);
+            if (member == null) {
+                member = memberService.findDefaultMember();
+            }
+            if (payments.getAmount() < 1000) {
+                throw new RuntimeException("금액이 안됨");
+            }
+            payments.setCustomer(member);
+            return paymentRepository.save(payments);
       }
+      @Transactional
+      public JSONObject confirmPayment(String paymentKey, String orderId, Long amount) {
+        Payments payment = verifyPayment(orderId, amount);
 
-
-    @Transactional
-    public PaymentResponseDTO approvePayment(String paymentKey, String orderId, Long amount) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.set("Authorization", tossPaymentAuthUtil.getBasicAuthHeader());
-
-        Map<String, Object> requestBody = new HashMap<>();
+        HttpHeaders headers = getHeaders();
+        JSONObject requestBody = new JSONObject();
         requestBody.put("orderId", orderId);
         requestBody.put("amount", amount);
+        requestBody.put("paymentKey", paymentKey);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-
-        PaymentResponseDTO response = restTemplate.exchange(
-                TossPaymentConfig.URL + "/" + paymentKey,
-                HttpMethod.POST,
-                entity,
-                PaymentResponseDTO.class
-        ).getBody();
-
-        // Update payment status
-        Payments payment = paymentRepository.findByOrderId(orderId)
-                .orElseThrow(() -> new RuntimeException("Payment not found"));
-        payment.setSuccessYN(true);
-        paymentRepository.save(payment);
-
-        return response;
+        HttpEntity<String> request = new HttpEntity<>(requestBody.toString(), headers);
+        try {
+            ResponseEntity<JSONObject> response = restTemplate.postForEntity(
+                    TossPaymentConfig.URL + "/confirm",
+                    request,
+                    JSONObject.class
+            );
+            JSONObject result = response.getBody();
+            if (response.getStatusCode() == HttpStatus.OK) {
+                payment.setPaymentKey(paymentKey);
+                payment.setSuccessYN(true);
+                paymentRepository.save(payment);
+            } else {
+                payment.setSuccessYN(false);
+                payment.setFailReason(result.getAsString("message"));
+                paymentRepository.save(payment);
+            }
+            return result;
+        } catch (Exception e) {
+            payment.setSuccessYN(false);
+            payment.setFailReason(e.getMessage());
+            paymentRepository.save(payment);
+            throw new RuntimeException("Payment confirmation failed", e);
+        }
     }
 
+
+    public Payments verifyPayment(String orderId, Long amount) {
+        Payments payment = paymentRepository.findByOrderId(orderId).orElseThrow(() -> {
+            throw new RuntimeException("payment not found");
+        });
+        if (!payment.getAmount().equals(amount)) {
+            throw new RuntimeException("payment not match");
+        }
+        return payment;
+    }
     @Transactional
-    public PaymentResponseDTO getPayment(SuccessDTO successDTO) {
+    public void tossPaymentFail(String code, String message, String orderId) {
+        Payments payment = paymentRepository.findByOrderId(orderId).orElseThrow(() -> {
+            throw new RuntimeException("payment not found");
+        });
+        payment.setSuccessYN(false);
+        payment.setFailReason(message);
+    }
 
-        paymentRepository.findByOrderId(successDTO.getOrderId())
-                .orElseThrow(() -> new RuntimeException("주문 정보를 찾을 수 없습니다. " + successDTO.getOrderId()));
 
+    private HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
+        String encodedAuthKey = new String(
+                Base64.getEncoder().encode((tossPaymentConfig.getTestSecretKey() + ":").getBytes(StandardCharsets.UTF_8)));
+        headers.setBasicAuth(encodedAuthKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.set("Authorization", tossPaymentAuthUtil.getBasicAuthHeader());
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        return restTemplate.exchange(
-                TossPaymentConfig.URL + "/" + successDTO.getPaymentKey(),
-                HttpMethod.GET,
-                entity,
-                PaymentResponseDTO.class
-        ).getBody();
-     }
+        return headers;
+    }
     }
 

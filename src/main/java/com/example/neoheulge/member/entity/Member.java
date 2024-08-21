@@ -7,8 +7,6 @@ import lombok.Getter;
 import org.hibernate.annotations.Immutable;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "NEMEMBER")

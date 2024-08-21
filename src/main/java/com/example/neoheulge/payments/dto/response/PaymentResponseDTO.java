@@ -1,7 +1,10 @@
 package com.example.neoheulge.payments.dto.response;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
@@ -29,5 +32,9 @@ public class PaymentResponseDTO {
 
     private String failUrl;
 
+    private String createdAt;
 
+    private String failReason;
+
+    private boolean cancelYN;
 }

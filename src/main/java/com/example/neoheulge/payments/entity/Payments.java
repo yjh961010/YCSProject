@@ -1,7 +1,8 @@
 package com.example.neoheulge.payments.entity;
-
 import com.example.neoheulge.member.entity.Member;
 import com.example.neoheulge.payments.dto.PayType;
+import com.example.neoheulge.payments.dto.response.PaymentResponseDTO;
+import com.example.neoheulge.payments.util.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,25 +12,9 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "NEPAYMENT")
 @Setter
-public class Payments {
-
-    /**
-     * ------ 파라미터 예시-------
-     * method: "CARD", // 카드 결제
-     * amount: {
-     * currency: "KRW",
-     * value: 50000,
-     * },
-     * orderId: "JK1NXAUTfYB2lKDBnYtDo", // 고유 주문번호
-     * orderName: "토스 티셔츠 외 2건",
-     * successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-     * failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
-     * customerEmail: "customer123@gmail.com",
-     * customerName: "김토스",
-     * customerMobilePhone: "01012341234",
-     **/
+@Table(name = "NEPAYMENT")
+public class Payments extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "payment_id", unique = true)
@@ -43,18 +28,34 @@ public class Payments {
     private String orderName;
     @Column(nullable = false, name = "order_id")
     private String orderId;
-    @Column(nullable = false, name = "customer_name")
+    @Column(nullable = true, name = "customer_name")
     private String customerName;
-    @Column(nullable = false, name = "customer_email")
+    @Column(nullable = true, name = "customer_email")
     private String customerEmail;
-    @Column(nullable = false, name = "customer_phone")
+    @Column(nullable = true, name = "customer_mobile_phone")
     private String customerMobilePhone;
-    @Column(name = "status")
+    @Column
+    private String paymentKey;
+    @Column(name = "success_yn")
     private boolean successYN;
+    @Column
+    private String failReason;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Member customer;
 
-
+    public PaymentResponseDTO toPaymentResDto() {
+        return PaymentResponseDTO.builder()
+                .payType(paymentType.getDescription())
+                .amount(amount)
+                .orderName(orderName)
+                .orderId(orderId)
+                .customerEmail(customer.getEmail())
+                .customerName(customer.getName())
+                .createdAt(String.valueOf(getCreatedAt()))
+                .cancelYN(successYN)
+                .failReason(failReason)
+                .build();
+    }
 }
