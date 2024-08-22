@@ -23,7 +23,10 @@
 
     <!-- 계좌 리스트(회원ID) -->
     <select id="memberAcount" parameterType="String" resultType="NeAcountDTO">
-        SELECT * FROM neacount WHERE member_id = #{member_id, jdbcType=VARCHAR}
+		SELECT * 
+		FROM neacount 
+		WHERE member_id = #{member_id, jdbcType=VARCHAR}
+		ORDER BY CASE WHEN acount_status = 'Y' THEN 1 ELSE 2 END
     </select>
 
     <!-- 주 계좌 상태 변경 -->
