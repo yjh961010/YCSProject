@@ -37,9 +37,9 @@ public class TossPaymentController {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	String username = authentication.getName();
     	
-        String testEmail = memberService.IdEmail(username);
+        String Email = memberService.IdEmail(username);
         
-        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), testEmail).toPaymentResDto();
+        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), Email).toPaymentResDto();
         paymentResDto.setSuccessUrl(request.getMySuccessUrl() == null ? tossPaymentConfig.getSuccessUrl() : request.getMySuccessUrl());
         paymentResDto.setFailUrl(request.getMyFailUrl() == null ? tossPaymentConfig.getFailUrl() : request.getMyFailUrl());
         System.out.println("paymentResDto = " + paymentResDto.getPayType() + " " + paymentResDto.getAmount());
