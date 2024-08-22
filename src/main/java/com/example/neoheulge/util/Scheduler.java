@@ -43,15 +43,15 @@ public class Scheduler {
                 schedulerService.scheduleAutoPayments(members);
                 for (Map<String, Object> member : members) {
                     if (member.containsKey("TOTAL_PAYMENT")) {
-                        logger.info("TOTAL_PAYMENT: {}", member.get("TOTAL_PAYMENT"));
+                        //logger.info("TOTAL_PAYMENT: {}", member.get("TOTAL_PAYMENT"));
                     }
                 }
-                logger.info("schedulePayments completed successfully.");
+                //logger.info("schedulePayments completed successfully.");
             } else {
-                logger.warn("No active auto payments found.");
+                //logger.warn("No active auto payments found.");
             }
         } catch (Exception e) {
-            logger.error("Error occurred while scheduling payments: {}", e.getMessage(), e);
+            //logger.error("Error occurred while scheduling payments: {}", e.getMessage(), e);
         }
     }
 
@@ -64,15 +64,15 @@ public class Scheduler {
                 schedulerService.applyInterestRates(members);
                 for (Map<String, Object> member : members) {
                     if (member.containsKey("TOTAL_PAYMENT")) {
-                        logger.info("TOTAL_PAYMENT: {}", member.get("TOTAL_PAYMENT"));
+                        //logger.info("TOTAL_PAYMENT: {}", member.get("TOTAL_PAYMENT"));
                     }
                 }
-                logger.info("applyMonthlyInterest completed successfully.");
+                //logger.info("applyMonthlyInterest completed successfully.");
             } else {
-                logger.warn("No members found for interest calculation.");
+                //logger.warn("No members found for interest calculation.");
             }
         } catch (Exception e) {
-            logger.error("Error occurred while applying monthly interest: {}", e.getMessage(), e);
+            //logger.error("Error occurred while applying monthly interest: {}", e.getMessage(), e);
         }
     }
 
@@ -82,9 +82,9 @@ public class Scheduler {
         try {
             productService.updateProductStatus();
             purproductService.allocateGoldenBallAmount();
-            logger.info("updateExpiredProductsStatus completed successfully.");
+            //logger.info("updateExpiredProductsStatus completed successfully.");
         } catch (Exception e) {
-            logger.error("Error occurred while updating product statuses: {}", e.getMessage(), e);
+            //logger.error("Error occurred while updating product statuses: {}", e.getMessage(), e);
         }
     }
 
@@ -93,9 +93,9 @@ public class Scheduler {
     public void deleteExpiredProduct() {
         try {
             admindao.deleteExpried();
-            logger.info("deleteExpiredProduct completed successfully.");
+            //logger.info("deleteExpiredProduct completed successfully.");
         } catch (Exception e) {
-            logger.error("Error occurred while deleting expired products: {}", e.getMessage(), e);
+            //logger.error("Error occurred while deleting expired products: {}", e.getMessage(), e);
         }
     }
 }
