@@ -1,18 +1,23 @@
 package com.example.neoheulge.acount.web;
 
+import com.example.neoheulge.dto.MemberDTO;
 import com.example.neoheulge.dto.NeAcountDTO;
+import com.example.neoheulge.member.service.MemberService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import com.example.neoheulge.acount.service.AcountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Random;
+
 
 @Controller
 @RequestMapping("/acount")
@@ -20,6 +25,9 @@ public class AcountController {
 
 	@Autowired
 	private AcountService acountService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@PostMapping("/insertNeacount.do")
 	public String addAccount(NeAcountDTO dto) {
@@ -51,7 +59,12 @@ public class AcountController {
 	}
 
 	@GetMapping("/add.do")
-	public String addAccount() {
+	public String addAccount(HttpServletRequest req,@RequestParam String member) {
+		String email = memberService.IdEmail(member);
+		System.out.println("id :"+member);
+		System.out.println("메일 :"+email);
+		req.setAttribute("id", member);
+		req.setAttribute("mail", email);
 		return "checkMe";
 	}
 

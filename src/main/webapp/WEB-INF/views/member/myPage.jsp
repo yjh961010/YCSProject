@@ -66,7 +66,7 @@
                     <c:choose>
                         <c:when test="${empty acount}">
                             <p>등록된 계좌가 없습니다.</p>
-              				<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do')">계좌 추가하기</button>
+              				<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do?member=<sec:authentication property="principal.username"/>')">계좌 추가하기</button>
                         </c:when>
                         <c:otherwise>
                         <div class="products">
