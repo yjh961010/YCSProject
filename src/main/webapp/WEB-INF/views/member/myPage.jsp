@@ -5,6 +5,11 @@
 
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
+<script>
+    function openPopup(url) {
+        window.open(url, "popupWindow", "width=600,height=400,scrollbars=yes");
+    }
+</script>
 <link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="myPage">
@@ -67,7 +72,7 @@
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                                 <div class="account-actions">
                                     <form action="<c:url value='/acount/add' />" method="get">
-                                        <button type="submit" class="btn btn-primary">계좌 추가</button>
+										<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do')">계좌 추가하기</button>
                                     </form>
                                     <form action="<c:url value='/acount/delete' />" method="post">
                                         <button type="submit" class="btn btn-secondary">계좌 삭제</button>

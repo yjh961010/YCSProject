@@ -2,12 +2,16 @@ package com.example.neoheulge.acount.web;
 
 import com.example.neoheulge.dto.NoticeDTO;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.neoheulge.acount.service.AcountService;
 import com.example.neoheulge.dto.NeAcountDTO;
@@ -37,13 +41,40 @@ public class AcountController {
 		return "member/acount";
 	}
 	
-	@PostMapping("/add.do")
-	public String addAcount(NeAcountDTO dto, NePreSavProdDTO pdto) {
-		
-		dto.setAcount_number("");
-		dto.setMember_id("");
-		dto.setAcount_status("");
-		acountService.addAccount(dto);
-		return "";
+	@GetMapping("/add.do")
+	public String addAcount() {
+		return "checkMe";
 	}
+	
+	@PostMapping("/mail.do")
+    public String sendMail(@RequestParam("email") String email,String id, Model model) {
+        // 6자리 랜덤 숫자 생성
+        Random rand = new Random();
+        int randomNum = rand.nextInt(900000) + 100000;  // 100000(최소값)부터 999999(최대값) 사이의 숫자
+
+        // 세션에 랜덤 숫자 저장
+        model.addAttribute("randomNum", randomNum);
+        model.addAttribute("email",email);
+        model.addAttribute("id",id);
+
+        // 이메일 전송
+        acountService.sendSimpleEmail(email, "인증번호", "인증번호 : " + randomNum + "입니다.");
+        System.out.println("저장된 값 : "+model);
+        return "checkMe";
+    }
+	
+	
+	
+
+	
+    @PostMapping("/confirmCheckNumber")
+    public String confirmCheckNumber(@RequestParam String checkNumber, Model model) {
+        String sessionCheckNumber = (String) model.getAttribute("checkNumber");
+        if (sessionCheckNumber != null && sessionCheckNumber.equals(checkNumber)) {
+            return "인증번호가 확인되었습니다.";
+        } else {
+            return "인증번호가 일치하지 않습니다.";
+        }
+    }
+
 }

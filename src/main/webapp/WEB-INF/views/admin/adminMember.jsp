@@ -31,6 +31,7 @@
         border-radius: 4px;
         cursor: pointer;
         font-size: 14px;
+         margin-right: 10px; /* 버튼들 사이의 간격을 조절합니다 */
     }
     button:hover {
         background-color: #0056b3;
@@ -141,6 +142,7 @@
                         resultHtml += '<strong>닉네임:</strong> ' + member.nickname + '<br>';
                         resultHtml += '<strong>이메일:</strong> ' + member.email + '<br>';
                         resultHtml += '<button type="button" onclick="doUpdate(\'' + member.memberID + '\')">회원수정</button>';
+                        resultHtml += '<button type="button" onclick="doDelete(\'' + member.memberID + '\')">회원삭제</button>';
                         resultHtml += '<hr>';
                         resultHtml += '</div>';
                     });
@@ -199,6 +201,11 @@
     function doUpdate(memberID) {
         var updateUrl = '/admin/updateMemberForm.do?memberID=' + encodeURIComponent(memberID);
         window.location.href = updateUrl;
+    }
+    
+    function doDelete(memberID) {
+        var deleteUrl = '/admin/deleteMember.do?memberID=' + encodeURIComponent(memberID);
+        window.location.href = deleteUrl;
     }
 </script>
 
