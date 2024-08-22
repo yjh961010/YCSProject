@@ -132,10 +132,12 @@ public class MemberController {
         session.setAttribute("randomNum", randomNum);
         session.setAttribute("email",email);
         session.setAttribute("id",id);
+        session.setAttribute("timestamp", System.currentTimeMillis()); // 현재 시간을 밀리초 단위로 저장
+
 
         // 이메일 전송
         acountService.sendSimpleEmail(email, "인증번호", "인증번호 : " + randomNum + "입니다.");
-        System.out.println("저장된 값 : "+session.getAttribute("email"));
+        System.out.println("저장된 값 : "+session.getAttribute("timestamp"));
         return "checkMe";
     }
 	
@@ -145,15 +147,28 @@ public class MemberController {
 	
     @PostMapping("/confirmCheckNumber.do")
     public ResponseEntity<String> confirmCheckNumber(@RequestParam int checkNumber, HttpServletRequest req) {
-        HttpSession session = req.getSession();
+    	HttpSession session = req.getSession();
         Integer sessionCheckNumber = (Integer) session.getAttribute("randomNum"); // Integer로 가져오기
-
-        if (sessionCheckNumber != null && sessionCheckNumber == checkNumber) {
-            return new ResponseEntity<>("success", HttpStatus.OK); // 인증 성공
+        Long timestamp = (Long) session.getAttribute("timestamp"); // 타임스탬프 가져오기
+        
+        if (sessionCheckNumber == null || timestamp == null) {
+            return new ResponseEntity<>("failure", HttpStatus.OK); // 인증번호나 타임스탬프가 없는 경우 실패
+        }
+        
+        long currentTime = System.currentTimeMillis();
+        long elapsedTime = currentTime - timestamp; // 현재 시간과 저장된 시간의 차이
+        
+        
+        if (sessionCheckNumber == checkNumber) {
+        	if (elapsedTime > 180000) { // 3분이 경과한 경우
+        		return new ResponseEntity<>("over", HttpStatus.OK); // 인증번호가 만료됨
+        	}else {
+        		return new ResponseEntity<>("success", HttpStatus.OK); // 인증 성공
+        	}
         } else {
             return new ResponseEntity<>("failure", HttpStatus.OK); // 인증 실패
         }
+        
     }
-
     
 }
