@@ -121,6 +121,8 @@
                             window.opener.location.href = "/acount/insertNeacountform.do";
                             window.close(); // 팝업 닫기
                         }
+                    } else if (responseText === "over") {
+                        alert('인증번호가 만료되었습니다'); // 인증번호가 만료된 경우
                     } else {
                         alert('인증실패'); // 인증번호가 틀린 경우
                     }
