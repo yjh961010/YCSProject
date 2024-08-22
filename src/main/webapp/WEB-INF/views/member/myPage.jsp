@@ -11,47 +11,7 @@
         window.open(url, "popupWindow", "width=600,height=400,scrollbars=yes");
     }
 </script>
-<<style>
-.product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-    position: relative;
-    transition: all 0.3s ease;
-}
 
-.primary-account {
-    border: 2px solid #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-    background: linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%);
-}
-
-.badge {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background-color: #007bff;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    font-weight: bold;
-}
-
-.primary-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #ffd700;
-    font-size: 1.2em;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="myPage">
         <div class="header-content">
@@ -100,6 +60,7 @@
                 <div class="Account-header">
                     <span class="material-icons"></span> 계좌 정보
                 </div>
+                <br>
                 <div class="Account-body">
                 
                     <c:choose>
@@ -110,7 +71,7 @@
                         <c:otherwise>
                         <div class="products">
 							<c:forEach items="${acount}" var="ac">
-							    <div class="product-card ${ac.acount_status eq 'Y' ? 'primary-account' : ''}">
+							    <div class="acount-card ${ac.acount_status eq 'Y' ? 'primary-account' : ''}">
 							        <c:if test="${ac.acount_status eq 'Y'}">
 							            <span class="badge">주 계좌</span>
 							            <i class="fas fa-star primary-icon"></i>
