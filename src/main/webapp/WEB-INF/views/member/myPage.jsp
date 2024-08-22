@@ -55,18 +55,20 @@
                     <span class="material-icons"></span> 계좌 정보
                 </div>
                 <div class="Account-body">
+                
                     <c:choose>
                         <c:when test="${empty acount}">
                             <p>등록된 계좌가 없습니다.</p>
                                 <a href="/acount/insertNeacountform.do" >계좌추가</a>
                         </c:when>
                         <c:otherwise>
+                        <div class="products">
                         	<c:forEach items="${acount}" var="ac">
-                            <div class="Account-info">
+                            <div class="product-card">
                                 <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                                 <div class="account-actions">
-                                    <a href="/acount/insertNeacountform.do" >계좌추가</a>
+
                                     <form action="/acount/deleteNeacount.do" method="post" style="display:inline;">
                                         <input type="hidden" name="acount_id" value="${ac.acount_id}" />
                                         <button type="submit">계좌삭제</button>
@@ -74,9 +76,13 @@
                                 </div>
                             </div>
                             </c:forEach>
+                            </div>
+							<a href="/acount/insertNeacountform.do" >계좌추가</a>
                         </c:otherwise>
                     </c:choose>
+                    
                 </div>
+
             </div>
         </div>
         <br>
