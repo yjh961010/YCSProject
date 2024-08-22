@@ -1,7 +1,10 @@
 package com.example.neoheulge.acount.web;
 
+import com.example.neoheulge.dto.NoticeDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +23,18 @@ public class AcountController {
 	
 	@Autowired
 	PurproductService purproductService;
-	
-	@GetMapping("/dd")
-	public String name() {
-		return "";
+
+
+
+	@PostMapping("/insertNeacount.do")
+	public String addAccount(NeAcountDTO dto) {
+		acountService.addAccount(dto);
+		return "member/acount";
+	}
+
+	@GetMapping("/insertNeacountform.do")
+	public String addAccountform(NeAcountDTO dto) {
+		return "member/acount";
 	}
 	
 	@PostMapping("/add.do")

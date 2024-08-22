@@ -26,8 +26,9 @@
                     </span>
                     </div>
                     <div>
-                        <button type="submit">회원정보수정</button><br>
-
+                        <button>
+                            <a href="">회원정보수정</a><br>
+                        </button>
                     <form action="<c:url value='/logout' />" method="post">
                         <button type="submit">로그아웃</button>
                     </form>
@@ -57,9 +58,7 @@
                     <c:choose>
                         <c:when test="${empty acount}">
                             <p>등록된 계좌가 없습니다.</p>
-                            <form action="<c:url value='/account/add.do'/>" method="get">
-                                <button type="submit" class="btn btn-primary">계좌 추가하기</button>
-                            </form>
+                                <a href="/acount/insertNeacountform.do" >계좌추가</a>
                         </c:when>
                         <c:otherwise>
                         	<c:forEach items="${acount}" var="ac">
@@ -67,10 +66,10 @@
                                 <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                                 <div class="account-actions">
-                                    <form action="<c:url value='/account/add' />" method="get">
+                                    <form action="<c:url value='/acount/add' />" method="get">
                                         <button type="submit" class="btn btn-primary">계좌 추가</button>
                                     </form>
-                                    <form action="<c:url value='/account/delete' />" method="post">
+                                    <form action="<c:url value='/acount/delete' />" method="post">
                                         <button type="submit" class="btn btn-secondary">계좌 삭제</button>
                                     </form>
                                 </div>
@@ -128,6 +127,7 @@
                 </div>
             </div>
         </div>
+
         <br>
             <div class="container1">
                 <div class="cancellation">
