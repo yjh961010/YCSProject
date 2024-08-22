@@ -52,4 +52,9 @@ public class MemberService {
 		member.setPassword(bcryptPasswordEncoder.encode(member.getPassword()));
 		return memberDAO.updatePw(member);
 	}
+	
+	public String IdEmail(String member) {
+		return memberDAO.IdEmail(member);
+	}
+
 }
