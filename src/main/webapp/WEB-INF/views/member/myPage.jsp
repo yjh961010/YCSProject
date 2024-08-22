@@ -5,6 +5,11 @@
 
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
+<script>
+    function openPopup(url) {
+        window.open(url, "popupWindow", "width=600,height=400,scrollbars=yes");
+    }
+</script>
 <link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="myPage">
@@ -59,7 +64,7 @@
                     <c:choose>
                         <c:when test="${empty acount}">
                             <p>등록된 계좌가 없습니다.</p>
-                                <a href="/acount/insertNeacountform.do" >계좌추가</a>
+                                <button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do')">계좌 추가하기</button>
                         </c:when>
                         <c:otherwise>
                         <div class="products">

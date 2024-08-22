@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import com.example.neoheulge.purproduct.service.PurproductService;
 import com.example.neoheulge.util.SmsUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/member")
@@ -115,4 +117,43 @@ public class MemberController {
     	memberservice.updatePw(member);
     	return "redirect:/index.do";
     }
+    
+    
+    
+    @PostMapping("/mail.do")
+    public String sendMail(String email,String id, HttpServletRequest req) {
+        // 6자리 랜덤 숫자 생성
+        Random rand = new Random();
+        int randomNum = rand.nextInt(900000) + 100000;  // 100000(최소값)부터 999999(최대값) 사이의 숫자
+        
+        HttpSession session = req.getSession();
+
+        // 세션에 랜덤 숫자 저장
+        session.setAttribute("randomNum", randomNum);
+        session.setAttribute("email",email);
+        session.setAttribute("id",id);
+
+        // 이메일 전송
+        acountService.sendSimpleEmail(email, "인증번호", "인증번호 : " + randomNum + "입니다.");
+        System.out.println("저장된 값 : "+session.getAttribute("email"));
+        return "checkMe";
+    }
+	
+	
+	
+
+	
+    @PostMapping("/confirmCheckNumber.do")
+    public ResponseEntity<String> confirmCheckNumber(@RequestParam int checkNumber, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Integer sessionCheckNumber = (Integer) session.getAttribute("randomNum"); // Integer로 가져오기
+
+        if (sessionCheckNumber != null && sessionCheckNumber == checkNumber) {
+            return new ResponseEntity<>("success", HttpStatus.OK); // 인증 성공
+        } else {
+            return new ResponseEntity<>("failure", HttpStatus.OK); // 인증 실패
+        }
+    }
+
+    
 }

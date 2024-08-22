@@ -55,32 +55,4 @@ public class AcountController {
 		return "checkMe";
 	}
 
-	@PostMapping("/mail.do")
-	public String sendMail(@RequestParam("email") String email, @RequestParam("id") String id, Model model) {
-		// 6자리 랜덤 숫자 생성
-		Random rand = new Random();
-		int randomNum = rand.nextInt(900000) + 100000;  // 100000(최소값)부터 999999(최대값) 사이의 숫자
-
-		// 세션에 랜덤 숫자 저장
-		model.addAttribute("randomNum", randomNum);
-		model.addAttribute("email", email);
-		model.addAttribute("id", id);
-
-		// 이메일 전송
-		acountService.sendSimpleEmail(email, "인증번호", "인증번호 : " + randomNum + "입니다.");
-
-		return "checkMe";
-	}
-
-	@PostMapping("/confirmCheckNumber")
-	public String confirmCheckNumber(@RequestParam("checkNumber") String checkNumber, Model model) {
-		// 세션에서 인증번호 가져오기
-		Integer sessionCheckNumber = (Integer) model.getAttribute("randomNum");
-
-		if (sessionCheckNumber != null && sessionCheckNumber.equals(Integer.parseInt(checkNumber))) {
-			return "인증번호가 확인되었습니다.";
-		} else {
-			return "인증번호가 일치하지 않습니다.";
-		}
-	}
 }
