@@ -163,6 +163,8 @@ public class MemberController {
         	if (elapsedTime > 180000) { // 3분이 경과한 경우
         		return new ResponseEntity<>("over", HttpStatus.OK); // 인증번호가 만료됨
         	}else {
+        		session.removeAttribute("randomNum");
+                session.removeAttribute("timestamp");
         		return new ResponseEntity<>("success", HttpStatus.OK); // 인증 성공
         	}
         } else {
