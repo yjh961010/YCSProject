@@ -72,9 +72,6 @@
     <label for="id">아이디 :</label>
     <input type="text" id="id" name="id" placeholder="id를 입력하세요" required>
 
-    <label for="number">번호:</label>
-    <input type="text" id="number" name="number" placeholder="번호를 입력하세요" required>
-
     <label for="mail">이메일:</label>
     <input type="text" id="mail" name="mail" placeholder="메일 입력하세요" required>
 
@@ -95,7 +92,7 @@
     	var id = document.getElementById('id').value;
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/acount/mail.do", true);
+            xhr.open("POST", "/member/mail.do", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -107,18 +104,38 @@
     }
  
     function confirmCheckNumber() {
-        var checkNumber = document.getElementById("checkNumber").value;
+        var checkNumber = document.getElementById('checkNumber').value;
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/acount/confirmCheckNumber", true); // 서버의 /confirmCheckNumber 엔드포인트로 요청
+        xhr.open("POST", "/member/confirmCheckNumber.do", true); // 서버의 /confirmCheckNumber.do 엔드포인트로 요청
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                alert(xhr.responseText); // 서버의 응답을 알림으로 표시
+            if (xhr.readyState === 4) { // 요청이 완료된 상태에서
+                if (xhr.status === 200) { // 서버 응답 상태가 OK일 때
+                    var responseText = xhr.responseText.trim();
+                    if (responseText === "success") {
+                        alert('인증성공'); // 서버의 응답을 알림으로 표시
+                        // 부모 창으로 이동
+                        if (window.opener) {
+                            window.opener.location.href = "/acount/insertNeacountform.do";
+                            window.close(); // 팝업 닫기
+                        }
+                    } else if (responseText === "over") {
+                        alert('인증번호가 만료되었습니다'); // 인증번호가 만료된 경우
+                    } else {
+                        alert('인증실패'); // 인증번호가 틀린 경우
+                    }
+                } else {
+                    alert('서버 요청 실패'); // 서버 요청이 실패한 경우
+                }
             }
         };
+
         xhr.send("checkNumber=" + encodeURIComponent(checkNumber)); // 인증번호를 서버로 전송
     }
+
+
 
     function resendCheckNumber() {
         // 인증번호 재발송 로직을 여기에 추가

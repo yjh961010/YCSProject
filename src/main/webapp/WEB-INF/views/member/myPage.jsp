@@ -6,6 +6,12 @@
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
+<script>
+    function openPopup(url) {
+        window.open(url, "popupWindow", "width=600,height=400,scrollbars=yes");
+    }
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="myPage">
         <div class="header-content">
@@ -54,26 +60,39 @@
                 <div class="Account-header">
                     <span class="material-icons"></span> 계좌 정보
                 </div>
+                <br>
                 <div class="Account-body">
+                
                     <c:choose>
                         <c:when test="${empty acount}">
                             <p>등록된 계좌가 없습니다.</p>
-                                <a href="/acount/insertNeacountform.do" >계좌추가</a>
+              				<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do')">계좌 추가하기</button>
                         </c:when>
                         <c:otherwise>
-                        	<c:forEach items="${acount}" var="ac">
-                            <div class="Account-info">
-                                <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
-                                <p><strong>현재 잔액:</strong> ${ac.money}원</p>
-                                <div class="account-actions">
-                                    <a href="/acount/insertNeacountform.do" >계좌추가</a>
-                                    <a href="/acount/deleteNeacount.do" >계좌삭제</a>
-                                </div>
+                        <div class="products">
+							<c:forEach items="${acount}" var="ac">
+							    <div class="acount-card ${ac.acount_status eq 'Y' ? 'primary-account' : ''}">
+							        <c:if test="${ac.acount_status eq 'Y'}">
+							            <span class="badge">주 계좌</span>
+							            <i class="fas fa-star primary-icon"></i>
+							        </c:if>
+							        <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
+							        <p><strong>현재 잔액:</strong> ${ac.money}원</p>
+							        <div class="account-actions">
+							            <form action="/acount/deleteNeacount.do" method="post" style="display:inline;">
+							                <input type="hidden" name="acount_id" value="${ac.acount_id}" />
+							                <button type="submit">계좌삭제</button>
+							            </form>
+							        </div>
+							    </div>
+							</c:forEach>
                             </div>
-                            </c:forEach>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
                         </c:otherwise>
                     </c:choose>
+                    
                 </div>
+
             </div>
         </div>
         <br>
