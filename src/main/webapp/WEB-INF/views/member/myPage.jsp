@@ -87,7 +87,7 @@
 							    </div>
 							</c:forEach>
                             </div>
-							<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do')">계좌 추가하기</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
                         </c:otherwise>
                     </c:choose>
                     
