@@ -36,11 +36,17 @@
         } else {
             // 주계좌로 설정된 경우 처리 로직 추가
             if (primaryAccountChecked) {
-                document.getElementById("acount_status").value = "Y";
+                // 모든 계좌를 비주계좌로 변경
+                fetch(`/acount/updateAllAccountsToNonPrimary?member_id=${memberID}`, {method: 'POST'})
+                    .then(response => response.text())
+                    .then(() => {
+                        document.getElementById("acount_status").value = "Y";
+                        document.frm.submit();
+                    });
             } else {
                 document.getElementById("acount_status").value = "N";
+                document.frm.submit();
             }
-            document.frm.submit();
         }
     }
 </script>

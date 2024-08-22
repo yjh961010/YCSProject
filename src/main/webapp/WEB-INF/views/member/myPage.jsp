@@ -67,7 +67,10 @@
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                                 <div class="account-actions">
                                     <a href="/acount/insertNeacountform.do" >계좌추가</a>
-                                    <a href="/acount/deleteNeacount.do" >계좌삭제</a>
+                                    <form action="/acount/deleteNeacount.do" method="post" style="display:inline;">
+                                        <input type="hidden" name="acount_id" value="${ac.acount_id}" />
+                                        <button type="submit">계좌삭제</button>
+                                    </form>
                                 </div>
                             </div>
                             </c:forEach>
