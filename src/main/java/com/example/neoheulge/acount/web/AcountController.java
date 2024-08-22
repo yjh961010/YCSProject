@@ -24,7 +24,7 @@ import com.example.neoheulge.purproduct.service.PurproductService;
 public class AcountController {
 	@Autowired
 	AcountService acountService;
-	
+
 	@Autowired
 	PurproductService purproductService;
 
@@ -33,19 +33,26 @@ public class AcountController {
 	@PostMapping("/insertNeacount.do")
 	public String addAccount(NeAcountDTO dto) {
 		acountService.addAccount(dto);
-		return "member/acount";
+		return "member/myPage="+dto.getMember_id();
 	}
 
 	@GetMapping("/insertNeacountform.do")
 	public String addAccountform(NeAcountDTO dto) {
 		return "member/acount";
 	}
-	
+
+	@RequestMapping("/deleteNeacount.do")
+	public String deleteAccount(NeAcountDTO dto) {
+		acountService.removeAccount(dto);
+		return "member/myPage="+dto.getMember_id();
+	}
+
+
 	@GetMapping("/add.do")
 	public String addAcount() {
 		return "checkMe";
 	}
-	
+
 	@PostMapping("/mail.do")
     public String sendMail(@RequestParam("email") String email,String id, Model model) {
         // 6자리 랜덤 숫자 생성
@@ -62,11 +69,11 @@ public class AcountController {
         System.out.println("저장된 값 : "+model);
         return "checkMe";
     }
-	
-	
-	
 
-	
+
+
+
+
     @PostMapping("/confirmCheckNumber")
     public String confirmCheckNumber(@RequestParam String checkNumber, Model model) {
         String sessionCheckNumber = (String) model.getAttribute("checkNumber");
