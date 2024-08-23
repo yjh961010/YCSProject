@@ -13,10 +13,11 @@
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<main>
     <div class="myPage">
         <div class="header-content">
             <div class="vanner">
-                <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+                <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
             </div>
             <div class="mylogin-form">
                 <sec:authorize access="isAuthenticated()">
@@ -207,5 +208,5 @@
                 </div>
              </div>
     </div>
-
+</main>
 <jsp:include page="../footer.jsp" />
