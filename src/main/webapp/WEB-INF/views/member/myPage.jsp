@@ -10,14 +10,45 @@
     function openPopup(url) {
         window.open(url, "popupWindow", "width=600,height=400,scrollbars=yes");
     }
+    
+    function changeMainAccount(accountId) {
+        if (confirm("주 계좌를 바꾸시겠습니까?")) {
+            // AJAX 요청을 통해 서버에 주 계좌 변경 요청
+            fetch('/acount/changeMainAccount.do', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ accountId: accountId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("주 계좌가 변경되었습니다.");
+                    location.reload(); // 페이지 새로고침
+                } else {
+                    alert("주 계좌 변경에 실패했습니다.");
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert("오류가 발생했습니다.");
+            });
+        }
+    }
+
+    function confirmDelete(event) {
+        event.stopPropagation(); 
+        return confirm("계좌정보를 삭제하시겠습니까?");
+    }
 </script>
 
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<main>
     <div class="myPage">
         <div class="header-content">
             <div class="vanner">
-                <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
+                <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
             </div>
             <div class="mylogin-form">
                 <sec:authorize access="isAuthenticated()">
@@ -57,44 +88,43 @@
             </div>
         </div>
         <div class="container1">
-            <div class="Account">
-                <div class="Account-header">
-                    <span class="material-icons"></span> 계좌 정보
-                </div>
-                <br>
-                <div class="Account-body">
-                
-                    <c:choose>
-                        <c:when test="${empty acount}">
-                            <p>등록된 계좌가 없습니다.</p>
-              				<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do?member=<sec:authentication property="principal.username"/>')">계좌 추가하기</button>
-                        </c:when>
-                        <c:otherwise>
-                        <div class="products">
-							<c:forEach items="${acount}" var="ac">
-							    <div class="acount-card ${ac.acount_status eq 'Y' ? 'primary-account' : ''}">
-							        <c:if test="${ac.acount_status eq 'Y'}">
-							            <span class="badge">주 계좌</span>
-							            <i class="fas fa-star primary-icon"></i>
-							        </c:if>
-							        <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
-							        <p><strong>현재 잔액:</strong> ${ac.money}원</p>
-							        <div class="account-actions">
-							            <form action="/acount/deleteNeacount.do" method="post" style="display:inline;">
-							                <input type="hidden" name="acount_id" value="${ac.acount_id}" />
-							                <button type="submit">계좌삭제</button>
-							            </form>
-							        </div>
-							    </div>
-							</c:forEach>
+ <div class="Account">
+    <div class="Account-header">
+        <span class="material-icons"></span> 계좌 정보
+    </div>
+    <br>
+    <div class="Account-body">
+        <c:choose>
+            <c:when test="${empty acount}">
+                <p>등록된 계좌가 없습니다.</p>
+                <button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do?member=<sec:authentication property="principal.username"/>')">계좌 추가하기</button>
+            </c:when>
+            <c:otherwise>
+                <div class="products">
+                    <c:forEach items="${acount}" var="ac">
+                        <div class="acount-card ${ac.acount_status eq 'Y' ? 'primary-account' : ''}">
+                            <div class="card-content" onclick="changeMainAccount(${ac.acount_id})">
+                                <c:if test="${ac.acount_status eq 'Y'}">
+                                    <span class="badge">주 계좌</span>
+                                    <i class="fas fa-star primary-icon"></i>
+                                </c:if>
+                                <p><strong>계좌 번호:</strong> ${ac.acount_number}</p>
+                                <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
-                        </c:otherwise>
-                    </c:choose>
-                    
+                            <div class="account-actions">
+                                <form action="/acount/deleteNeacount.do" method="post" style="display:inline;" onsubmit="return confirmDelete(event)">
+                                    <input type="hidden" name="acount_id" value="${ac.acount_id}" />
+                                    <button type="submit" class="btn btn-danger">계좌삭제</button>
+                                </form>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
-
-            </div>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
         </div>
         <br>
         <div class = "container1">
@@ -208,5 +238,5 @@
                 </div>
              </div>
     </div>
-</main>
+
 <jsp:include page="../footer.jsp" />
