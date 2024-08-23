@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="/css/product/ProductStyle.css">
 <link rel="stylesheet" type="text/css" href="/css/product/productList.css">
-
+<main>
 <div class="myPage">
     <div class="header-content">
         <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
         </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
@@ -154,7 +154,7 @@
         </div>
     </div>
 </div>
-
+</main>
 
 <script>
     function toggleDetails(button) {

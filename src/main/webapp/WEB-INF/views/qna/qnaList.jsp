@@ -28,10 +28,11 @@
 
     }
 </script>
+<main>
 <div class="qna">
     <div class="header-content">
         <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
         </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
@@ -178,7 +179,7 @@
                         <c:forEach var="dto" items="${noticeList}" varStatus="status">
                             <c:if test="${status.index < 5}">
                                 <tr>
-                                    <td width="50%">
+                                    <td width="50%" align="left">
                                         <span>&nbsp;&nbsp;</span>
                                         <a href="/notice/noticeView.do?id=${dto.id}">
                                                 ${dto.subject}
@@ -215,7 +216,7 @@
                         <c:forEach var="dto" items="${commuList}" varStatus="status">
                             <c:if test="${status.index < 5}">
                                 <tr>
-                                    <td width="50%">
+                                    <td width="50%" align="left">
                                         <span>&nbsp;&nbsp;</span>
                                         <a href="/commu/commuContent.do?id=${dto.id}">
                                              <c:choose>
@@ -251,6 +252,6 @@
             </div>
         </div>
     </div>
-
 </div>
+</main>
 <jsp:include page="../footer.jsp"/>

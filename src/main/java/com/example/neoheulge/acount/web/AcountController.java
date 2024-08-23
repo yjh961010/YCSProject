@@ -61,8 +61,6 @@ public class AcountController {
 	@GetMapping("/add.do")
 	public String addAccount(HttpServletRequest req,@RequestParam String member) {
 		String email = memberService.IdEmail(member);
-		System.out.println("id :"+member);
-		System.out.println("메일 :"+email);
 		req.setAttribute("id", member);
 		req.setAttribute("mail", email);
 		return "checkMe";

@@ -8,10 +8,11 @@
 <link rel="stylesheet" type="text/css" href="/css/qna/qnaStyle.css">
 <!DOCTYPE html>
 <jsp:include page="../header.jsp"/>
+<main>
 <div class="qna">
     <div class="header-content">
         <div class="vanner">
-            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:750px; height: 280px;">
+            <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
         </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
@@ -173,7 +174,7 @@
     </div>
 </div>
 </div>
-
+</main>
 <script type="text/javascript">
     function checkForm() {
         if (document.f.subject.value.trim() === "") {
