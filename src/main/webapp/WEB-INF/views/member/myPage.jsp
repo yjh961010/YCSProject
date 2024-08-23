@@ -2,7 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <jsp:include page="../header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/member/MypageStyle.css">
@@ -97,7 +97,6 @@
         <c:choose>
             <c:when test="${empty acount}">
                 <p>등록된 계좌가 없습니다.</p>
-                <button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do?member=<sec:authentication property="principal.username"/>')">계좌 추가하기</button>
             </c:when>
             <c:otherwise>
                 <div class="products">
@@ -112,6 +111,8 @@
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                             </div>
                             <div class="account-actions">
+                            	<button type="button" class="btn btn-primary" onclick="window.location.href='/payment.do'">충전하기</button>
+                            	
                                 <form action="/acount/deleteNeacount.do" method="post" style="display:inline;" onsubmit="return confirmDelete(event)">
                                     <input type="hidden" name="acount_id" value="${ac.acount_id}" />
                                     <button type="submit" class="btn btn-danger">계좌삭제</button>
@@ -120,10 +121,20 @@
                         </div>
                     </c:forEach>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
+                
             </c:otherwise>
         </c:choose>
     </div>
+            
+    <c:choose>
+	    <c:when test="${empty acount}">
+			<button type="button" class="btn btn-primary" onclick="openPopup('/acount/add.do?member=<sec:authentication property="principal.username"/>')">계좌 추가하기</button>
+	    </c:when>
+    	<c:when test="${not empty acount}">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/acount/insertNeacountform.do'">계좌 추가하기</button>
+    	</c:when>
+    </c:choose>
+
 </div>
         </div>
         <br>
@@ -238,5 +249,92 @@
                 </div>
              </div>
     </div>
+<button type="button" class="btn btn-primary" onclick="openModal()">충전하기</button>
+
+<!-- 모달 구조 -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close1" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            <!-- Ajax로 로드된 콘텐츠가 여기 들어갑니다 -->
+            
+        </div>
+    </div>
+</div>
+
+<style>
+/* 모달 배경 */
+.modal {
+    display: none; /* 기본적으로 숨김 상태 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 회색 배경 */
+}
+
+/* 모달 콘텐츠 */
+.modal-content {
+    background-color: #fff; /* 하얀색 배경 */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 너비 조정 */
+    max-width: 600px; /* 최대 너비 설정 */
+}
+
+/* 닫기 버튼 */
+.close1 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<script>
+// 모달 열기
+function openModal() {
+    document.getElementById("myModal").style.display = "block";
+    
+    // Ajax로 콘텐츠 불러오기
+    $.ajax({
+        url: "/payment.do",  // URL을 /payment.jsp로 변경
+        type: "GET",
+        success: function(data) {
+            // 데이터를 모달에 삽입
+            $("#modal-body").html(data);
+        },
+        error: function(xhr, status, error) {
+            console.log("Error: " + error);
+            $("#modal-body").html("<p>콘텐츠를 불러오는 중 오류가 발생했습니다.</p>");
+        }
+    }); 
+}
+
+// 모달 닫기
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+    $("#modal-body").html(''); // 모달 닫을 때 내용 비우기
+}
+
+// 모달 배경 클릭 시 모달 닫기
+window.onclick = function(event) {
+    if (event.target == document.getElementById("myModal")) {
+        closeModal();
+    }
+}
+</script>
+
 
 <jsp:include page="../footer.jsp" />
