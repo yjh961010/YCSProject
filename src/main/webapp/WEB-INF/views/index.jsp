@@ -250,9 +250,9 @@
 			</div>
 			<div class="community-prizes">
 				<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">전회차 상금</h3>
-				<c:forEach var="dto" items="${session.winnerList}">
-				<p>${dto.product} ${dto.accumulated_amount}원</p>
-				</c:forEach>
+				 <c:forEach var="dto" items="${sessionScope.winnerList}">
+           			 <p>${dto.product_name} ${dto.accumulated_amount}원</p>
+       			 </c:forEach>
 			</div>
 			
 		</div>

@@ -2,7 +2,7 @@ package com.example.neoheulge.product.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 
 import com.example.neoheulge.commu.service.CommuService;
 import com.example.neoheulge.dto.CommuDTO;
@@ -19,6 +19,7 @@ import com.example.neoheulge.dto.NeSavProdDTO;
 import com.example.neoheulge.product.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -66,7 +67,10 @@ public class ProductController {
 		 @ResponseBody
 		    public List<NeSavProdDTO> winner(HttpServletRequest req) {
 		        List<NeSavProdDTO> winnerList = productService.winnerList();
-		        req.setAttribute("winnerList", winnerList);
+		       
+		        HttpSession session = req.getSession();
+		        session.setAttribute("winnerList", winnerList);
+
 		        return winnerList; // JSON 형태로 반환
 		    }
 
