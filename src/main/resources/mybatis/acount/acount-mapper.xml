@@ -45,7 +45,7 @@
     </update>
 
     <!-- 특정 계좌의 상태를 Y로 변경 -->
-    <update id="updatePrimaryAccountStatus" parameterType="NeAcountDTO">
+    <update id="updatePrimaryAccountStatus" parameterType="int">
         UPDATE neacount
         SET acount_status = 'Y'
         WHERE acount_id = #{acount_id, jdbcType=VARCHAR}

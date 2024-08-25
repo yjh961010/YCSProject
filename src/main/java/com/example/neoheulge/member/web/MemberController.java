@@ -73,14 +73,12 @@ public class MemberController {
     public String myPage(HttpServletRequest req,NePreSavProdDTO dto,
     		@RequestParam String user) {
     	dto.setMember_id(user);
-    	System.out.println(user);
     	
     	List<Map<String, Object>> getByMemberId = purproductService.getByMemberId(dto);
     	req.setAttribute("getByMemberId", getByMemberId);
     	
     	List<NeAcountDTO> acount = acountService.getAccountsByMemberId(user);
     	req.setAttribute("acount", acount);
-    	System.out.println(acount);
     	
     	return "member/myPage";
     }
@@ -137,7 +135,6 @@ public class MemberController {
 
         // 이메일 전송
         acountService.sendSimpleEmail(email, "인증번호", "인증번호 : " + randomNum + "입니다.");
-        System.out.println("저장된 값 : "+session.getAttribute("timestamp"));
         return "checkMe";
     }
 	

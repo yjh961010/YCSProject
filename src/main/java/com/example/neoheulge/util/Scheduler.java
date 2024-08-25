@@ -17,7 +17,7 @@ import com.example.neoheulge.purproduct.service.PurproductService;
 @Component
 public class Scheduler {
 
-    private static final Logger logger = LoggerFactory.getLogger(Scheduler.class);
+    //private static final Logger logger = LoggerFactory.getLogger(Scheduler.class);
 
     @Autowired
     private SqlSession sqlSession;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.neoheulge.dto.NeAcountDTO;
 
-import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,8 +68,24 @@ public class AcountService {
 
         mailSender.send(message);
     }
-
-
-
+    
+    public void updateAllAccountsToNonPrimary(String member_id) {
+    	sqlSession.update("updateAllAccountsToNonPrimary",member_id);
+    }
+    
+    public void updatePrimaryAccountStatus(int acount_id) {
+    	sqlSession.update("updatePrimaryAccountStatus",acount_id);
+    }
+    
+    public boolean changeMainAccount(String username, int accountId) {
+        try {
+            updateAllAccountsToNonPrimary(username);
+            updatePrimaryAccountStatus(accountId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
   
 }
