@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.neoheulge.dto.NeAcountDTO;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,8 @@ public class AcountService {
 
         mailSender.send(message);
     }
-    
+
+
 
   
 }

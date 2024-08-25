@@ -28,8 +28,9 @@ public class TossPaymentController {
 
     //추후 @AuthenticationPrincipal 어노테이션 통해서 로그인 상태에서 결제 할 수 있게 보완 해야함
     @PostMapping("/toss")
-    public ResponseEntity<PaymentResponseDTO> requestPayment(@AuthenticationPrincipal User principal, @RequestBody PaymentsRequestDTO request) {
-        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), principal.getUsername()).toPaymentResDto();
+    public ResponseEntity<PaymentResponseDTO> requestPayment( @RequestBody PaymentsRequestDTO request) {
+        String mail = "a@a";
+        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), mail).toPaymentResDto();
         paymentResDto.setSuccessUrl(request.getMySuccessUrl() == null ? tossPaymentConfig.getSuccessUrl() : request.getMySuccessUrl());
         paymentResDto.setFailUrl(request.getMyFailUrl() == null ? tossPaymentConfig.getFailUrl() : request.getMyFailUrl());
         System.out.println("paymentResDto = " + paymentResDto.getPayType() + " " + paymentResDto.getAmount());
