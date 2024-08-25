@@ -70,10 +70,10 @@
 
 <form class="container">
     <label for="id">아이디 :</label>
-    <input type="text" id="id" name="id" placeholder="id를 입력하세요" required>
+    <input type="text" id="id" name="id" value="${id}" readonly>
 
     <label for="mail">이메일:</label>
-    <input type="text" id="mail" name="mail" placeholder="메일 입력하세요" required>
+    <input type="text" id="mail" name="mail" value="${mail}" readonly>
 
     <label for="checkNumber">인증번호:</label>
     <input type="text" id="checkNumber" name="checkNumber" placeholder="인증번호를 입력하세요" required>

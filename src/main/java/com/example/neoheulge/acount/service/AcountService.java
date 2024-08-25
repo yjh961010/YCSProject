@@ -69,6 +69,23 @@ public class AcountService {
         mailSender.send(message);
     }
     
-
+    public void updateAllAccountsToNonPrimary(String member_id) {
+    	sqlSession.update("updateAllAccountsToNonPrimary",member_id);
+    }
+    
+    public void updatePrimaryAccountStatus(int acount_id) {
+    	sqlSession.update("updatePrimaryAccountStatus",acount_id);
+    }
+    
+    public boolean changeMainAccount(String username, int accountId) {
+        try {
+            updateAllAccountsToNonPrimary(username);
+            updatePrimaryAccountStatus(accountId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
   
 }
