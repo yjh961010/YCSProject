@@ -14,6 +14,7 @@ import com.example.neoheulge.payments.service.PaymentService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
@@ -21,7 +22,9 @@ import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +44,7 @@ public class TossPaymentController {
 
     //추후 @AuthenticationPrincipal 어노테이션 통해서 로그인 상태에서 결제 할 수 있게 보완 해야함
     @PostMapping("/toss")
-    public ResponseEntity<PaymentResponseDTO> requestPayment(@RequestBody PaymentsRequestDTO request,HttpServletRequest req) {
+    public ResponseEntity<PaymentResponseDTO> requestPayment(@AuthenticationPrincipal User user, @Valid @RequestBody PaymentsRequestDTO request, HttpServletRequest req) {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	String username = authentication.getName();
     	
@@ -52,7 +55,7 @@ public class TossPaymentController {
         
         System.out.println("acount_id : "+acountId);
         
-        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), Email).toPaymentResDto();
+        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), user.getUsername()).toPaymentResDto();
         paymentResDto.setSuccessUrl(request.getMySuccessUrl() == null ? tossPaymentConfig.getSuccessUrl() : request.getMySuccessUrl());
         paymentResDto.setFailUrl(request.getMyFailUrl() == null ? tossPaymentConfig.getFailUrl() : request.getMyFailUrl());
         System.out.println("paymentResDto = " + paymentResDto.getPayType() + " " + paymentResDto.getAmount());
