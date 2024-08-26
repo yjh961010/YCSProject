@@ -27,7 +27,7 @@
             <br>
             <div class="links">
                 <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
-                <a href="" class="link-btn">내 정보 수정(링크 없음)</a>
+                <a href="/admin/editMemberForm.do?memberID=<sec:authentication property='principal.username'/>" class="link-btn">내 정보 수정</a>
             </div>
         </div>
         
