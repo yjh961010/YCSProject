@@ -72,6 +72,7 @@
                  	</sec:authorize> --%>
 		<div class="login-form">
 			<sec:authorize access="isAuthenticated()">
+		<div class="logview">
     	<div class="profile-container">
         <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
             alt="프로필 이미지" class="profile-img"/>
@@ -90,6 +91,7 @@
         <form action="<c:url value='/logout' />" method="post" class="logout-form">
             <button type="submit" class="logout-btn">로그아웃</button>
         </form>
+    </div>
     </div>
 </sec:authorize>
 
