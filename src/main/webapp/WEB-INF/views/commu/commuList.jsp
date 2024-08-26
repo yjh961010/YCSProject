@@ -89,13 +89,14 @@
 			</select> <input type="text" placeholder="검색어를 입력하세요" id="search"
 				value="${search}">
 			<button onclick="performSearch()">검색</button>
-			<a href="/commu/commuWrite.do" class="write-btn"><button>글쓰기</button></a>
 		</div>
 		<div id="commu">
 			<table align="right">
 				<tr>
 					<td><sec:authorize access="isAuthenticated()">
-						</sec:authorize> <sec:authorize access="isAnonymous()">
+			<a href="/commu/commuWrite.do" class="write-btn">글쓰기</a>
+						</sec:authorize> 
+						<sec:authorize access="isAnonymous()">
 							<a href="javascript:void(0);" class="write-btn"
 								onclick="checkLogin()">글쓰기</a>
 						</sec:authorize></td>

@@ -59,7 +59,7 @@
         <div class="product-card">
             <div class="product-image">💰</div>
             <div class="product-info">
-                <a class="product-title" href="productDetail.do">${dto.product_name}</a>
+                <a class="product-title" href="/product/productDetail.do?product_code=${dto.product_code}">${dto.product_name}</a>
                 <p><strong>기본 금리:</strong> ${dto.base_rate}</p>
                 <p><strong>골든볼 금리:</strong> ${dto.goldenball_rate}</p>
                 <p><strong>만기:</strong> ${dto.subscription_period}</p>
