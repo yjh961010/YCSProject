@@ -4,12 +4,10 @@
 
 
 <link rel="stylesheet" type="text/css" href="/css/admin/addProdStyle.css">
-
+<main>
 <div class="add-product-page">
-    <h2>상품 추가</h2>
-
-
     <form name="f" action="/admin/addProdPro.do" method="POST" enctype="multipart/form-data">
+    <h2>상품 추가</h2>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <input type="hidden" name="product_status" value="활성">
         <table>
@@ -22,7 +20,7 @@
             <tr>
                 <td>
                     <label for="prodcut_image">Product Image :</label>
-                    <input type="file" name="file" id="product_image" accept="image/*" />
+                    <input type="file" name="file" id="prodcut_image" />
                 </td>
             </tr>
             <tr>
@@ -109,6 +107,6 @@
         </table>
     </form>
 </div>
-
+</main>
 
 <jsp:include page="../footer.jsp"/>
