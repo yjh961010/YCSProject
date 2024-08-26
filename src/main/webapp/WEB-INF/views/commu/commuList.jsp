@@ -35,6 +35,7 @@
 		<div class="vanner">
 			<img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
 		</div>
+		
 		<div class="login-form">
 			
 	<sec:authorize access="isAuthenticated()">
