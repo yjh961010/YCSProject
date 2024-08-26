@@ -196,6 +196,7 @@
                     <div class="cancellation-body">
                         <div class="products">
                             <c:forEach items="${getByMemberId}" var="product">
+                   
                                 <c:if test="${product.STATUS == '해지'}">
                                     <div class="product-card">
                                         <div class="product-info">
@@ -207,7 +208,7 @@
                                                     ${product.STATUS}
                                             </p>
                                             <div class="product-actions">
-                                                <form action="" method="post">
+                                                <form action="${pageContext.request.contextPath}/proProduct/deleteProProduct.do?subscription_id=${product.SUBSCRIPTION_ID}" method="POST">
                                                     <button type="submit" class="btn btn-secondary">삭제하기</button>
                                                 </form>
                                             </div>
