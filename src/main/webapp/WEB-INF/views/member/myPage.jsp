@@ -113,8 +113,10 @@
                                 <p><strong>현재 잔액:</strong> ${ac.money}원</p>
                             </div>
                             <div class="account-actions">
-                            	<button type="button" class="btn btn-primary" onclick="window.location.href='/payment.do'">충전하기</button>
-                            	
+								<form action="/payment.do" method="post" id="paymentForm">
+								  <input type="hidden" name="acount_id" value="${ac.acount_id}" />
+								  <button type="submit" class="btn btn-primary">충전하기</button>
+								</form>                            	
                                 <form action="/acount/deleteNeacount.do" method="post" style="display:inline;" onsubmit="return confirmDelete(event)">
                                     <input type="hidden" name="acount_id" value="${ac.acount_id}" />
                                     <button type="submit" class="btn btn-danger">계좌삭제</button>
