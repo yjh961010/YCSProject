@@ -173,11 +173,11 @@
                                         </p>
 
                                         <div class="product-actions">
+                                        <button type="submit" class="btn btn-primary">자동 결제 설정</button>
                                             <form action="<c:url value='/proProduct/cancel' />" method="post">
                                                 <sec:authentication var="username" property="principal.username"/>
                                                 <input type="hidden" name="user" value="${username}"/>
                                                 <input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
-                                                <button type="submit" class="btn btn-primary">충전하기</button>
                                                 <button type="submit" class="btn btn-secondary">해지하기</button>
                                             </form>
                                         </div>
