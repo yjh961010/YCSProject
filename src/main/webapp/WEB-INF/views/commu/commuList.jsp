@@ -77,7 +77,7 @@
 		</div>
 	</div>
 
-<div class="total-box" style="background-color: #e0f5fc;">
+<div class="total-box">
 		<h2 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">커뮤니티</h2>
 		<div class="search-form">
 			<select id="searchType">
