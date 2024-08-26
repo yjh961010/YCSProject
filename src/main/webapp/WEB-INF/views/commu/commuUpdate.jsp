@@ -18,21 +18,26 @@
         </div>
         <div class="login-form">
             <sec:authorize access="isAuthenticated()">
-                <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
-                     alt="프로필 이미지"/>
-                <div class="nick">
-                    <strong class="itemfont col" id="nickNameArea">현재 접속 아이디</strong> <br>
-                    <span class="itemfont col">
-                        <a id="blogDomainChange" onclick="return false;" class="set_domain_btn">
-                        <span class="blog_domain col"> <sec:authentication property="principal.username"/> </span>
-                        <span class ="set_domain_iconcol"></span>
-                        </a>
-                    </span>
-                </div>
-                <form action="<c:url value='/logout' />" method="post">
-                    <button type="submit">로그아웃</button>
-                </form>
-            </sec:authorize>
+    	<div class="profile-container">
+        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
+            alt="프로필 이미지" class="profile-img"/>
+        
+        <div class="profile-info">
+            <strong class="itemfont col" id="nickNameArea">
+                <sec:authentication property="principal.username"/>
+            </strong> 
+            <br>
+            <div class="links">
+                <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
+                <a href="" class="link-btn">내 정보 수정(링크 없음)</a>
+            </div>
+        </div>
+        
+        <form action="<c:url value='/logout' />" method="post" class="logout-form">
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
+    </div>
+</sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <h1>neoheulge</h1>
                 <h4>더 안전하고 더 편리하게 </h4>
