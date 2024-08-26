@@ -162,7 +162,7 @@
 				<div>
 					<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c0c0c0; margin-bottom: 8px;">
 					    <span style="text-align: left;"><h3 style="margin: 0;">공지사항</h3></span>
-					    <span style="text-align: left;"><a href="/notice/noticeList.do"> 더보기 >> </a></span>
+					    <span style="text-align: left;"><a href="/notice/noticeList.do"> 더보기 + </a></span>
 					</div>
 					<table>
 
@@ -208,7 +208,7 @@
 				<div>
 					<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c0c0c0; margin-bottom: 8px;">
 					    <span style="text-align: left;"><h3 style="margin: 0;">커뮤니티</h3></span>
-					    <span style="text-align: left;"><a href="/commu/commuList.do">더보기 >></a></span>
+					    <span style="text-align: left;"><a href="/commu/commuList.do">더보기 +</a></span>
 					</div>
 					<table>
 						<thead>
@@ -233,8 +233,7 @@
                                             ${dto.subject}
                                         </c:otherwise>
                                     </c:choose>
-
-												</a></td>
+									</a></td>
 										<td align="center" width="25%">${dto.author}</td>
 										<td align="center"><fmt:parseDate var="parsedDate"
 												value="${dto.createtime}" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -248,15 +247,37 @@
 				</div>
 
 			</div>
+				
 			<div class="community-prizes">
-				<h3 style="margin-bottom: 8px; border-bottom: 2px solid #c0c0c0;">전회차 상금</h3>
-				 <c:forEach var="dto" items="${sessionScope.winnerList}">
-           			 <p>${dto.product_name} ${dto.accumulated_amount}원</p>
-       			 </c:forEach>
+				<div>
+					<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c0c0c0; margin-bottom: 8px;">
+					    <span style="text-align: left;"><h3 style="margin: 0;">전회차 상금</h3></span>
+					</div>
+					<table>
+						<thead>
+							<tr class="commu-header">
+								<th>상품이름</th>
+								<th>누적 금액</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="dto" items="${sessionScope.winnerList}" varStatus="status">
+									<tr>
+										<td width="50%"><span>&nbsp;&nbsp;</span> 
+											${dto.product_name}
+										</td>
+										<td align="right" width="50%">
+										<fmt:formatNumber value="${dto.accumulated_amount}"
+									type="number" groupingUsed="true" />
+										원</td>
+									</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			
 		</div>
-		
 	</div>
 	
 	<br> <br>

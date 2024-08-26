@@ -65,6 +65,7 @@
                     </div>
                     <div>
                         <button>
+                       <%-- <button onclick="window.location.href='/admin/updateMemberForm.do?memberID=<sec:authentication property="principal.username"/>'"> --%>
                             <a href="">회원정보수정</a><br>
                         </button>
                     <form action="<c:url value='/logout' />" method="post">
