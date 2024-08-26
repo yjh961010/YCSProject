@@ -7,6 +7,7 @@ import com.example.neoheulge.payments.dto.request.PaymentsRequestDTO;
 import com.example.neoheulge.payments.dto.response.PaymentResponseDTO;
 import com.example.neoheulge.payments.entity.Payments;
 import com.example.neoheulge.payments.service.PaymentService;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
@@ -28,9 +29,10 @@ public class TossPaymentController {
 
     //추후 @AuthenticationPrincipal 어노테이션 통해서 로그인 상태에서 결제 할 수 있게 보완 해야함
     @PostMapping("/toss")
-    public ResponseEntity<PaymentResponseDTO> requestPayment( @RequestBody PaymentsRequestDTO request) {
-        String mail = "a@a";
-        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), mail).toPaymentResDto();
+    public ResponseEntity<PaymentResponseDTO> requestPayment(@AuthenticationPrincipal User principal, @Valid @RequestBody PaymentsRequestDTO request) {
+//        String mail = "a@a";
+        System.out.println("principal.getUsername() = " + principal.getUsername());
+        PaymentResponseDTO paymentResDto = paymentService.createPaymentRequest(request.toEntity(), principal.getUsername()).toPaymentResDto();
         paymentResDto.setSuccessUrl(request.getMySuccessUrl() == null ? tossPaymentConfig.getSuccessUrl() : request.getMySuccessUrl());
         paymentResDto.setFailUrl(request.getMyFailUrl() == null ? tossPaymentConfig.getFailUrl() : request.getMyFailUrl());
         System.out.println("paymentResDto = " + paymentResDto.getPayType() + " " + paymentResDto.getAmount());

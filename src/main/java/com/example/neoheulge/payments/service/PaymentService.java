@@ -26,11 +26,10 @@ public class PaymentService {
     private final MemberService memberService;
 
 
-    public Payments createPaymentRequest(Payments payments, String userEmail) {
-            Member member = memberService.findMember(userEmail);
-            if (member == null) {
-                member = memberService.findDefaultMember();
-            }
+    public Payments createPaymentRequest(Payments payments, String userName) {
+            Member member = memberService.findMember(userName);
+        System.out.println("userEmail = " + userName);
+        System.out.println("member = " + member);
             if (payments.getAmount() < 1000) {
                 throw new RuntimeException("금액이 안됨");
             }
