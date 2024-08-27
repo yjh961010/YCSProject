@@ -119,14 +119,22 @@ public class AdminController {
     
 	
     @PostMapping("/updateMemberPro.do")
-    public String updateMemberPro(@ModelAttribute MemberDTO dto, BindingResult result,  Model model) {
-        UploadFile uploadFile = new UploadFile(); 
+    public String updateMemberPro(@RequestParam(name = "file", required = false) MultipartFile mf,
+    		@RequestParam("previousImg") String previousImg,@ModelAttribute MemberDTO dto, BindingResult result,  Model model) {
         try { 
-            if (dto.getFile() != null) {
-              if (uploadFile.uploadFile(dto.getFile())) {
-                    dto.setProfile(uploadFile.getFullName()); // 새 파일 이름으로 업데이트
-                } 
-            }  
+        	if (mf != null && !mf.isEmpty()) {
+   			 String filename = mf.getOriginalFilename();
+           	 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+           	 String uniqueFilename = timeStamp + "_" + filename;
+    
+           	 String path = servletcontext.getRealPath("/img");
+   	            File file = new File(path, uniqueFilename);
+   	            mf.transferTo(file);
+   				dto.setProfile(uniqueFilename); // 새 파일 이름으로 업데이트
+   			} else {
+   				// 새로운 이미지가 업로드되지 않은 경우 기존 이미지 파일명을 그대로 사용
+              	 dto.setProfile(previousImg); 
+   			}		
        } catch (Exception e) {
             e.printStackTrace();
            }
@@ -148,14 +156,22 @@ public class AdminController {
 }
     
     @PostMapping("/editMemberPro.do")
-    public String editMemberPro(@ModelAttribute MemberDTO dto, BindingResult result,  Model model) {
-    	UploadFile uploadFile = new UploadFile(); 
+    public String editMemberPro(@RequestParam(name = "file", required = false) MultipartFile mf,
+    		@RequestParam("previousImg") String previousImg,@ModelAttribute MemberDTO dto, BindingResult result,  Model model) {
     	try { 
-    		if (dto.getFile() != null) {
-    			if (uploadFile.uploadFile(dto.getFile())) {
-    				dto.setProfile(uploadFile.getFullName()); // 새 파일 이름으로 업데이트
-    			} 
-    		}  
+    		if (mf != null && !mf.isEmpty()) {
+    			 String filename = mf.getOriginalFilename();
+            	 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+            	 String uniqueFilename = timeStamp + "_" + filename;
+     
+            	 String path = servletcontext.getRealPath("/img");
+    	            File file = new File(path, uniqueFilename);
+    	            mf.transferTo(file);
+    				dto.setProfile(uniqueFilename); // 새 파일 이름으로 업데이트
+    			} else {
+    				// 새로운 이미지가 업로드되지 않은 경우 기존 이미지 파일명을 그대로 사용
+               	 dto.setProfile(previousImg); 
+    			}		
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
@@ -184,11 +200,14 @@ public class AdminController {
     public String addProdPro(@RequestParam(name = "file", required = false) MultipartFile mf,@ModelAttribute NeSavProdDTO dto, BindingResult result, Model model) {
          try { 
         	 String filename = mf.getOriginalFilename();
-	            String path = servletcontext.getRealPath("/img");
-	            File file = new File(path, filename);
+        	 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        	 String uniqueFilename = timeStamp + "_" + filename;
+ 
+        	 String path = servletcontext.getRealPath("/img");
+	            File file = new File(path, uniqueFilename);
 	            mf.transferTo(file);
 
-	            dto.setProduct_image(filename); // 새 파일 이름으로 업데이트
+	            dto.setProduct_image(uniqueFilename);
 
         } catch (Exception e) {
              e.printStackTrace();
@@ -251,18 +270,21 @@ public class AdminController {
     @PostMapping("/updateProdOk.do")
     public String updateProdOk(@RequestParam(name = "file", required = false) MultipartFile mf, 
 			@RequestParam("previousImg") String previousImg,@ModelAttribute NeSavProdDTO dto, BindingResult result, Model model) {
-    	 
          try { 
         	 if (mf != null && !mf.isEmpty()) {
 		            // 새로운 이미지가 업로드된 경우 처리
-		            String filename = mf.getOriginalFilename();
-		            String path = servletcontext.getRealPath("/img");
-		            File file = new File(path, filename);
-		            mf.transferTo(file);
+        		 String filename = mf.getOriginalFilename();
+            	 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+            	 String uniqueFilename = timeStamp + "_" + filename;
+     
+            	 String path = servletcontext.getRealPath("/img");
+    	            File file = new File(path, uniqueFilename);
+    	            mf.transferTo(file);
 
-		            dto.setProduct_image(filename); // 새 파일 이름으로 업데이트
+    	            dto.setProduct_image(uniqueFilename);
                  }else {
-                	 dto.setProduct_image(previousImg); // 새 파일 이름으로 업데이트
+                	// 새로운 이미지가 업로드되지 않은 경우 기존 이미지 파일명을 그대로 사용
+                	 dto.setProduct_image(previousImg); 
                 	 
              }  
         } catch (Exception e) {
