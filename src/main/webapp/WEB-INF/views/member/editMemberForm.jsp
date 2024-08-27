@@ -77,7 +77,9 @@
                 ${signup_date}</td>
         </tr>
         <tr>
-            <td align="center"><input type="submit" value="UPDATE"></td>
+            <td align="center">
+            <input type="submit" value="UPDATE">
+            </td>
         </tr>
     </table>
 </form>

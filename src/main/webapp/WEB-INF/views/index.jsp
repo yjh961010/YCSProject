@@ -139,7 +139,7 @@
 			<c:forEach var="dto" items="${prodList}" varStatus="status">
 				<a href="/product/productDetail.do?product_code=${dto.product_code}">
 					<div class="product-card">
-						<div class="product-image">💰</div>
+						<div class="product-image"><img src="${pageContext.request.contextPath}/img/${dto.product_image}" alt="현재 상품 이미지" id="currentImage" width="360" height="150"/></div>
 						<div class="product-info">
 							<h3 class="product-title">${dto.product_name}</h3>
 							<h5>
