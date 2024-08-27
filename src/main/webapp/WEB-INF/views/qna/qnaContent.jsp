@@ -66,7 +66,8 @@
                 <td class="profile-info-cell">
                     <div class="profile-info">
                         <strong class="itemfont col" id="nickNameArea">
-                            <sec:authentication property="principal.username"/>
+                            환영합니다<br>
+                            <sec:authentication property="principal.username"/>님
                         </strong>
                         <br>
                         <div class="links">

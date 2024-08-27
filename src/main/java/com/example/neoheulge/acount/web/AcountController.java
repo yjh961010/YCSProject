@@ -42,7 +42,6 @@ public class AcountController {
 		
 		System.out.println("39: "+dto.getAcount_status()+", 333 "+dto.getMember_id());
 		if("Y".equals(dto.getAcount_status())) {
-			System.out.println("주계좌");
 			acountService.updateAllAccountsToNonPrimary(dto.getMember_id());
 		}
 		acountService.addAccount(dto);
