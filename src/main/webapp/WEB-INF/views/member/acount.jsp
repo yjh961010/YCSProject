@@ -102,7 +102,7 @@
                                 <tr>
                                     <td style="text-align: center;">
                                         <label for="member_id" style="display: none">아이디</label>
-                                        <input type="text" id="member_id" name="member_id" placeholder="아이디 입력">
+                                        <input type="text" id="member_id" name="member_id" value="<sec:authentication property="principal.username"/>">
                                     </td>
                                 </tr>
                                 <tr>
