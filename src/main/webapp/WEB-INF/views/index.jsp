@@ -39,16 +39,9 @@
     function viewNotice() {
         window.open("${pageContext.request.contextPath}/viewNotice.do", "Notice", "width=400,height=650");
     }
-    
-    
+     
 </script>
 
-<div class="img-container-size">
-	<div class="img=box-center">
-		<img class="img" src="http://lorempixel.com/1920/400/sports/10/"
-			alt="">
-	</div>
-</div>
 <main>
 	<div class="hero-container">
 		<div class="slideshow-container">

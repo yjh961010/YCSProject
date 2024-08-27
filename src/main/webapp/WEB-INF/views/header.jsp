@@ -33,13 +33,7 @@
         setTimeout(autoShowSlides, 5000); // Change image every 5 seconds
     }
 
-    function updateFill(currentAmount, goalAmount, fillId, labelId) {
-        var percentage = (currentAmount / goalAmount) * 100;
-        // 퍼센트가 100을 초과하지 않도록 제한
-        percentage = Math.min(percentage, 100);
-        var boxFill = document.getElementById(fillId);
-        boxFill.style.transform = 'translateY(' + (100 - percentage) + '%)';
-    }
+    
 
     // 페이지 로드 시 초기값 설정
     window.onload = function() {
@@ -47,21 +41,7 @@
        checkAdVisibility();
         // 슬라이드 쇼 초기화
         showSlides(slideIndex);
-        autoShowSlides();
-		
-
-        
-        // 퍼센트 채우기 초기화
-        var initialValues = [
-            { amount: 150000, goal: 1000000, fillId: 'box-fill-0', labelId: 'box-label-1' },
-            { amount: 700000, goal: 1000000, fillId: 'box-fill-1', labelId: 'box-label-2' },
-            { amount: 500000, goal: 1000000, fillId: 'box-fill-2', labelId: 'box-label-3' },
-            { amount: 1000000, goal: 1000000, fillId: 'box-fill-3', labelId: 'box-label-4' }
-        ];
-
-        initialValues.forEach(function(item) {
-            updateFill(item.amount, item.goal, item.fillId, item.labelId);
-        });
+        autoShowSlides();	
         
     };
     
