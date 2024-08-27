@@ -72,27 +72,32 @@
                  	</sec:authorize> --%>
 		<div class="login-form">
 			<sec:authorize access="isAuthenticated()">
-		<div class="logview">
-    	<div class="profile-container">
-        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
-            alt="프로필 이미지" class="profile-img"/>
-        
-        <div class="profile-info">
-            <strong class="itemfont col" id="nickNameArea">
-                <sec:authentication property="principal.username"/>
-            </strong> 
-            <br>
-            <div class="links">
-                <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
-                <a href="/admin/editMemberForm.do?memberID=<sec:authentication property='principal.username'/>" class="link-btn">내 정보 수정</a>
-            </div>
-        </div>
-        
+<div class="logview">
+    <div class="profile-container">
+        <table class="profile-table">
+            <tr>
+                <td width="50%" class="profile-image-cell">
+                    <img src="${pageContext.request.contextPath}/img/fast.jpg" alt="프로필 이미지" class="profile-img"/>
+                </td>
+                <td class="profile-info-cell">
+                    <div class="profile-info">
+                        <strong class="itemfont col" id="nickNameArea">
+                            <sec:authentication property="principal.username"/>
+                        </strong>
+                        <br>
+                        <div class="links">
+                            <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
+                            <a href="/admin/editMemberForm.do?memberID=<sec:authentication property='principal.username'/>" class="link-btn">내 정보 수정</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <form action="<c:url value='/logout' />" method="post" class="logout-form">
             <button type="submit" class="logout-btn">로그아웃</button>
         </form>
     </div>
-    </div>
+</div>
 </sec:authorize>
 
 			<sec:authorize access="isAnonymous()">
@@ -139,7 +144,7 @@
 			<c:forEach var="dto" items="${prodList}" varStatus="status">
 				<a href="/product/productDetail.do?product_code=${dto.product_code}">
 					<div class="product-card">
-						<div class="product-image">💰</div>
+						<div class="product-image"><img src="${pageContext.request.contextPath}/img/${dto.product_image}" alt="현재 상품 이미지" id="currentImage" width="360" height="150"/></div>
 						<div class="product-info">
 							<h3 class="product-title">${dto.product_name}</h3>
 							<h5>
