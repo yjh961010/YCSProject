@@ -63,7 +63,10 @@ public class TossPaymentController {
     
     @PostMapping("/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody Payments request,NeAcountDTO dto,HttpServletRequest req) {
-        JSONObject result = paymentService.confirmPayment(
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String username = authentication.getName();
+    	
+    	JSONObject result = paymentService.confirmPayment(
                 request.getPaymentKey(),
                 request.getOrderId(),
                 request.getAmount()
@@ -77,8 +80,13 @@ public class TossPaymentController {
         dto.setAcount_id(acountId);
         dto.setMoney(request.getAmount());
         acountService.updateMoney(dto);
+        result.put("username", username);
+        
+        
         System.out.println("dto = "+dto.getAcount_id()+"/22/"+dto.getMoney());
         System.out.println("result1 = " + result.toJSONString());
+        
+        
         return ResponseEntity.ok(result);
     }
 
