@@ -31,12 +31,18 @@ public class PurproductController {
 	PurproductService purproductService;
 	
 	@GetMapping("/does.do")
-	public String productSignUp(HttpServletRequest req,@RequestParam String product_code,
-			@RequestParam(value="id", required=false, defaultValue="0")Integer id ) {
-		NeSavProdDTO prod = productService.selectProductByCode(product_code);
-		req.setAttribute("product", prod);
-		
-		return "proproduct/productSignUp";
+	public String productSignUp(HttpServletRequest req,NePreSavProdDTO dto,@RequestParam String product_code,
+			@RequestParam String member_id) {
+		NePreSavProdDTO find = purproductService.findProdDo(dto.getMember_id(),dto.getProduct_code());
+		if(find	!=null) {
+			req.setAttribute("msg", "이미 가입한 상품입니다.");
+			req.setAttribute("url", "../index.do");
+			return "message";
+		}else {
+			NeSavProdDTO prod = productService.selectProductByCode(product_code);
+			req.setAttribute("product", prod);
+			return "proproduct/productSignUp";
+		}
 	}
 	
 	@PostMapping("/input.do")
@@ -84,7 +90,7 @@ public class PurproductController {
 		purproductService.terminateSubscription(pdto);
 		productService.updateAccumulatedAmount(params);
 		
-		return "redirect:../index.do";
+		return "redirect:/member/myPage.do?user="+user;
 	}
 	
 	@PostMapping("/deleteProProduct.do")
@@ -92,6 +98,38 @@ public class PurproductController {
 		int res = purproductService.deleteProProduct(subscription_id);
 		return "redirect:../index.do";
 	}
+	
+	@PostMapping("/autoInput.do")
+	public String autoInput(HttpServletRequest req,String product_code) {
+		req.setAttribute("product", product_code);
+    	return "proproduct/autoInput";
+	}
+	
+	@PostMapping("/auto.do")
+	public String autoInputDo(@RequestParam String start_date,
+	                          @RequestParam String cycle,
+	                          @RequestParam int amount,
+	                          @RequestParam String account,
+	                          @RequestParam String product_code) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    
+	    NePreSavProdDTO dto = new NePreSavProdDTO();
+	    dto.setAuto_account(account);
+	    dto.setAuto_amount(amount);
+	    dto.setAuto_cycle(cycle);
+	    dto.setAuto_date(start_date);
+	    dto.setMember_id(username);
+	    dto.setProduct_code(product_code);
+
+	    System.out.println("1 : " + account + " 2 : " + amount + " 3 : " + cycle + " 4 : " + start_date + " 5 : " + username + " 6 : " + product_code);
+
+	    // Update auto payment details
+	    purproductService.updateAutoPayment(dto);
+	    
+	    return "redirect:/member/myPage.do?user=" + username;
+	}
+
 }
 
 

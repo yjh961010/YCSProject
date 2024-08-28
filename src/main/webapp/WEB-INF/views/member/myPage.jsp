@@ -51,29 +51,36 @@
             <div class="vanner">
                 <img alt="main" src="${pageContext.request.contextPath}/img/van.jpg" style="width:898px; height: 280px;">
             </div>
-            <div class="mylogin-form">
+            <div class="login-form">
                 <sec:authorize access="isAuthenticated()">
-                    <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTZfMjAg/MDAxNzIxMTE1NzY3MjY4.ueDvccl7mHx7z0DVBHHqagXj2aoAhIi1uSYaQrufjS4g.1xT_9Yxv4LolXwixUFJ-SEK-Y0z39lD3qbv2YsZbhS4g.JPEG/%EC%96%B4%EB%9E%98%EA%B3%A4.jpeg/%25EC%2596%25B4%25EB%259E%2598%25EA%25B3%25A4.jpeg?type=w161"
-                         alt="프로필 이미지"/>
-                    <div class="nick">
-                        <strong class="itemfont col" id="nickNameArea">현재 접속 아이디</strong> <br>
-                        <span class="itemfont col">
-                        <a id="blogDomainChange" onclick="return false;" class="set_domain_btn">
-                        <span class="blog_domain col"> <sec:authentication property="principal.username"/> </span>
-                        <span class ="set_domain_iconcol"></span>
-                        </a>
-                    </span>
+<div class="logview">
+    <div class="profile-container">
+        <table class="profile-table">
+            <tr>
+                <td width="50%" class="profile-image-cell">
+                    <img src="${pageContext.request.contextPath}/img/${profile.profile}" alt="프로필 이미지" class="profile-img"/>
+                </td>
+                <td class="profile-info-cell">
+                    <div class="profile-info">
+                        <strong class="itemfont col" id="nickNameArea">
+                            환영합니다<br>
+                            <sec:authentication property="principal.username"/>님
+                        </strong>
+                        <br>
+                        <div class="links">
+                            <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
+                            <a href="/member/editMemberForm.do?memberID=<sec:authentication property='principal.username'/>" class="link-btn">내 정보 수정</a>
+                        </div>
                     </div>
-                    <div>
-                        <button>
-                       <%-- <button onclick="window.location.href='/admin/updateMemberForm.do?memberID=<sec:authentication property="principal.username"/>'"> --%>
-                            <a href="">회원정보수정</a><br>
-                        </button>
-                    <form action="<c:url value='/logout' />" method="post">
-                        <button type="submit">로그아웃</button>
-                    </form>
-                    </div>
-                </sec:authorize>
+                </td>
+            </tr>
+        </table>
+        <form action="<c:url value='/logout' />" method="post" class="logout-form">
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
+    </div>
+</div>
+</sec:authorize>
                 <sec:authorize access="isAnonymous()">
                     <h4>neoheulge <br> 더 안전하고 더 편리하게</h4>
                     <form action="<c:url value='/login' />" method="post">
@@ -164,19 +171,22 @@
                                         <p><strong>가입 금액:</strong>
                                                 ${product.SUBSCRIPTION_AMOUNT}
                                         </p>
-                                        <p><strong>가입 금액:</strong>
+                                        <p><strong>주기:</strong>
                                                 ${product.AUTO_CYCLE}
                                         </p>
-                                        <p><strong>가입 금액:</strong>
+                                        <p><strong>자동 결제 금액:</strong>
                                                 ${product.AUTO_AMOUNT}
                                         </p>
 
                                         <div class="product-actions">
+	                                        <form action="<c:url value='/proProduct/autoInput.do' />" method="post">
+	                                            <input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
+	                                        	<button type="submit" class="btn btn-primary">자동 결제 설정</button>
+	                                        </form>
                                             <form action="<c:url value='/proProduct/cancel' />" method="post">
                                                 <sec:authentication var="username" property="principal.username"/>
                                                 <input type="hidden" name="user" value="${username}"/>
                                                 <input type="hidden" name="product_code" value="${product.PRODUCT_CODE}">
-                                                <button type="submit" class="btn btn-primary">충전하기</button>
                                                 <button type="submit" class="btn btn-secondary">해지하기</button>
                                             </form>
                                         </div>

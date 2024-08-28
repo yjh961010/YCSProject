@@ -38,18 +38,14 @@
         background-color: #0056b3;
     }
 </style>
-<h2 align="center">회원정보수정</h2>
+<h2 align="center">내 정보 수정</h2>
 <div align="center">
 
 
 
-<form name="f" action="/admin/updateMemberPro.do" method="POST" enctype="multipart/form-data">
+<form name="f" action="/member/editMemberPro.do" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <table>
-        <tr>
-            <td><label for="grade">Grade :</label>
-                <input type="text" name="grade" id="grade" value="${member.grade}"></td>
-        </tr>
         <tr>
             <td><label for="memberID">MemberID :</label>
                 <input type="text" name="memberID" id="memberID" value="${member.memberID}" readonly="readonly"></td>
@@ -61,9 +57,9 @@
         <tr>
             <td><label for="profile">Profile : </label>
                 <img src="${pageContext.request.contextPath}/img/${member.profile}" alt="Profile Picture" id="currentProfilePic"/>
-                <input type="file" name="file" id="profile" accept="image/*" />
+                <input type="file" name="file" id="profile"  />
                 <input type="hidden" id="previousImg" name="previousImg" value="${member.profile}">
-                </td>
+            </td>
         </tr>
         <tr>
             <td><label for="nickname">NickName :</label>
@@ -83,7 +79,9 @@
                 ${signup_date}</td>
         </tr>
         <tr>
-            <td align="center"><input type="submit" value="UPDATE"></td>
+            <td align="center">
+            <input type="submit" value="UPDATE">
+            </td>
         </tr>
     </table>
 </form>
