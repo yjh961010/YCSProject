@@ -1,5 +1,6 @@
 package com.example.neoheulge.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity(debug = false)
 @RequiredArgsConstructor
-public class SpringSecurityConfig {
+public class SpringSecurityConfig  {
 
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -29,6 +30,8 @@ public class SpringSecurityConfig {
 	        	//.requestMatchers("/admin/**").hasAuthority("ROLE_1") //관리자페이지 접근제어
 	        	.requestMatchers("/**", "/css/**","/img/**").permitAll()
 	            .anyRequest().authenticated()  // 나머지 경로는 인증 필요
+
+
 	        )
 	        .formLogin(form -> form
 	            .loginPage("/member/login.do") // 로그인 페이지 설정
@@ -36,7 +39,7 @@ public class SpringSecurityConfig {
 	            .failureHandler(new CustomAuthenticationFailureHandler()) // 커스텀 핸들러 추가
 	            .defaultSuccessUrl("/")
 	            .permitAll()  // 로그인 페이지는 모든 사용자에게 허용
-	         
+
 	        )
 	        .logout((logout) -> logout
 	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -55,4 +58,5 @@ public class SpringSecurityConfig {
 	    public static BCryptPasswordEncoder bCryptPasswordEncoder() {
 	        return new BCryptPasswordEncoder();
 	    }
+
 }

@@ -43,6 +43,7 @@ public class MemberController {
 	
 	@GetMapping("/login.do")
 	public String login() {
+        System.out.println("memberservice = " + memberservice);
 		return "member/login";
 	}
 	

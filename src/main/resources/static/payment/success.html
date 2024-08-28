@@ -32,10 +32,10 @@
     </div>
 </div>
 
-<div class="box_section" style="width: 600px; text-align: left">
-    <b>Response Data :</b>
-    <div id="response" style="white-space: initial"></div>
-</div>
+<!--<div class="box_section" style="width: 600px; text-align: left">-->
+<!--    <b>Response Data :</b>-->
+<!--    <div id="response" style="white-space: initial"></div>-->
+<!--</div>-->
 
 <script>
     // 쿼리 파라미터 값을 서버로 전달해 결제 요청할 때 보낸 데이터와 동일한지 반드시 확인하세요.
@@ -50,7 +50,7 @@
             paymentKey: paymentKey,
             orderId: orderId,
             amount: amount,
-        };
+       };
         const response = await fetch("/api/v1/payments/confirm", {
             method: "POST",
             headers: {
@@ -64,14 +64,36 @@
         }
         return json;
     }
+    // 결제 완료 후 계좌 잔액 가져오는 함수
+    async function successData() {
+        const data = urlParams.get("balance")
+        const balanceData = {
+            balance: data,
+        };
+        const responseBalance = await fetch("/balance", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(balanceData),
+        });
+        const balanceJson = await responseBalance.json();
+        if (!balanceJson.ok) {
+            throw new Error('HTTP error! status: ' + balanceJson.status);
+        }
+        return balanceJson;
+    }
+
     confirm()
-        .then(function (data) {
+        .then(function () {
             // TODO: 결제 승인에 성공했을 경우 UI 처리 로직을 구현하세요.
-            document.getElementById("response").innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
+            // document.getElementById("response").innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`
+            successData();
         })
         .catch((err) => {
             // TODO: 결제 승인에 실패했을 경우 UI 처리 로직을 구현하세요.
             window.location.href = `/fail.html?message=${err.message}&code=${err.code}`;
+
         });
 
     const paymentKeyElement = document.getElementById("paymentKey");

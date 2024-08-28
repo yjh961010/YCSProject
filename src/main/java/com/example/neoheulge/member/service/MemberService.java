@@ -31,6 +31,8 @@ public class MemberService {
 		member.setPassword(bcryptPasswordEncoder.encode(member.getPassword()));
 		return memberDAO.signupPro(member);
 	}
+
+
 	public Member findMember(String UserName) {
 		System.out.println("memberRepository = " + memberRepository.findByName(UserName));
 		return memberRepository.findByName(UserName)

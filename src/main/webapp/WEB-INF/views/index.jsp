@@ -80,7 +80,7 @@
         <div class="profile-info">
             <strong class="itemfont col" id="nickNameArea">
                 <sec:authentication property="principal.username"/>
-            </strong> 
+            </strong>  
             <br>
             <div class="links">
                 <a href="${pageContext.request.contextPath}/member/myPage.do?user=<sec:authentication property="principal.username"/>" class="link-btn">마이페이지</a>
