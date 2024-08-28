@@ -57,7 +57,7 @@
         <tr>
             <td><label for="profile">Profile : </label>
                 <img src="${pageContext.request.contextPath}/img/${member.profile}" alt="Profile Picture" id="currentProfilePic"/>
-                <input type="file" name="file" id="profile" accept="image/*" />
+                <input type="file" name="file" id="profile"  />
                 <input type="hidden" id="previousImg" name="previousImg" value="${member.profile}">
             </td>
         </tr>

@@ -1,5 +1,8 @@
 package com.example.neoheulge.member.web;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.neoheulge.acount.service.AcountService;
 import com.example.neoheulge.dto.MemberDTO;
@@ -23,6 +27,7 @@ import com.example.neoheulge.member.service.MemberService;
 import com.example.neoheulge.purproduct.service.PurproductService;
 import com.example.neoheulge.util.SmsUtil;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -41,6 +46,9 @@ public class MemberController {
 	@Autowired
 	AcountService acountService;
 	
+	@Autowired
+	ServletContext servletcontext;
+	
 	@GetMapping("/login.do")
 	public String login() {
 		return "member/login";
@@ -52,7 +60,20 @@ public class MemberController {
 	}
 	
 	@PostMapping("/signupPro.do")
-	public String signupPro(MemberDTO member) {
+	public String signupPro(MemberDTO member,@RequestParam(name = "file", required = false)MultipartFile mf) {
+		try {
+	 String filename = mf.getOriginalFilename();
+   	 String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+   	 String uniqueFilename = timeStamp + "_" + filename;
+
+   	 String path = servletcontext.getRealPath("/img");
+     File file = new File(path, uniqueFilename);
+     mf.transferTo(file);
+     member.setProfile(uniqueFilename);
+		}catch (Exception e) {
+            e.printStackTrace();
+           }
+		System.out.println("프로필 : "+member.getProfile());
 		memberservice.signupPro(member);
 		return "redirect:/";
 	}
