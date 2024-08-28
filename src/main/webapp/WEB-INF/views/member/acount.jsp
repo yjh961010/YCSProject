@@ -63,7 +63,7 @@
         <table class="profile-table">
             <tr>
                 <td width="50%" class="profile-image-cell">
-                    <img src="${pageContext.request.contextPath}/img/fast.jpg" alt="프로필 이미지" class="profile-img"/>
+                    <img src="${pageContext.request.contextPath}/img/${profile.profile}" alt="프로필 이미지" class="profile-img"/>
                 </td>
                 <td class="profile-info-cell">
                     <div class="profile-info">

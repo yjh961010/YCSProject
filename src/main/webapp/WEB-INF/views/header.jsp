@@ -76,7 +76,20 @@
                 // 데이터를 localStorage에 저장
                 localStorage.setItem('winnerList', JSON.stringify(response));
                 // 현재 페이지에서 데이터를 사용하거나 다른 페이지로 이동할 수 있습니다.
-                displayWinners(response);
+               displayWinners(response);
+            }
+        };
+        xhr.send();
+    }
+    function profile() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "${pageContext.request.contextPath}/profile.do", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                // 데이터를 localStorage에 저장
+                localStorage.setItem('profile', JSON.stringify(response));
+                // 현재 페이지에서 데이터를 사용하거나 다른 페이지로 이동할 수 있습니다.
             }
         };
         xhr.send();

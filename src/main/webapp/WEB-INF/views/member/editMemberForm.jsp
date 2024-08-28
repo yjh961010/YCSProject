@@ -43,7 +43,7 @@
 
 
 
-<form name="f" action="/admin/editMemberPro.do" method="POST" enctype="multipart/form-data">
+<form name="f" action="/member/editMemberPro.do" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <table>
         <tr>
