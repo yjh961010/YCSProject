@@ -77,4 +77,17 @@
     <delete id="deleteAllAcount" parameterType="String">
         DELETE FROM neacount WHERE member_id = #{member_id}
     </delete>
+    
+    <select id="selectPrimary" resultType="String">
+		select acount_number
+		from neacount
+		where acount_status = 'Y'
+	</select>
+	
+	<select id="selectAcount" parameterType="String" resultType="NeAcountDTO">
+		SELECT * 
+		FROM neacount 
+		WHERE member_id = #{member_id, jdbcType=VARCHAR}
+		AND acount_status = 'N'
+    </select>
 </mapper>

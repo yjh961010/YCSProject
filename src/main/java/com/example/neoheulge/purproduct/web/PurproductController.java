@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.neoheulge.acount.service.AcountService;
+import com.example.neoheulge.dto.NeAcountDTO;
 import com.example.neoheulge.dto.NePreSavProdDTO;
 import com.example.neoheulge.dto.NeSavProdDTO;
 import com.example.neoheulge.product.service.ProductService;
@@ -29,6 +31,9 @@ public class PurproductController {
 	
 	@Autowired
 	PurproductService purproductService;
+	
+	@Autowired
+	private AcountService acountService;
 	
 	@GetMapping("/does.do")
 	public String productSignUp(HttpServletRequest req,NePreSavProdDTO dto,@RequestParam String product_code,
@@ -101,6 +106,15 @@ public class PurproductController {
 	
 	@PostMapping("/autoInput.do")
 	public String autoInput(HttpServletRequest req,String product_code) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    
+		String Ynum = acountService.selectPrimary();
+		List<NeAcountDTO> list = acountService.selectAcount(username);
+		System.out.println("dto : "+Ynum);
+		
+		req.setAttribute("acountName", Ynum);
+		req.setAttribute("acountList", list);
 		req.setAttribute("product", product_code);
     	return "proproduct/autoInput";
 	}

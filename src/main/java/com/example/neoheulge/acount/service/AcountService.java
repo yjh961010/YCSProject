@@ -97,5 +97,13 @@ public class AcountService {
     public int deleteAllAcount(String member_id) {
     	return sqlSession.delete("deleteAllAcount",member_id);
     }
-  
+    
+    public String selectPrimary() {
+    	return sqlSession.selectOne("selectPrimary");
+    }
+    
+    public List<NeAcountDTO> selectAcount(String member_id) {
+        return sqlSession.selectList("selectAcount", member_id);
+    }
+
 }
