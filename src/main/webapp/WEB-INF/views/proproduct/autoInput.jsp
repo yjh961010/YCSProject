@@ -155,14 +155,16 @@
                 </select>
             </div>
             <div class="input-group">
-                <label for="account">자동결제 계좌</label>
-                <select id="account" name="account" required>
-                	<option value="${acountName}">${acountName}</option>
-                	<c:forEach items="${acountList}" var="ac">
-                		<option value="${ac.acount_number}">${ac.acount_number}</option>
-                	</c:forEach>
-                </select> 
-            </div>
+			    <label for="account">자동결제 계좌</label>
+			    <select id="account" name="account" required>
+			        <option value="" disabled selected>선택하세요</option>
+			        <c:forEach items="${acountList}" var="ac">
+			            <option value="${ac.acount_number}">${ac.acount_number}</option>
+			        </c:forEach>
+			        <option value="other">기타</option>
+			    </select>
+			    <input type="text" id="otherAccount" name="otherAccount" placeholder="직접 입력" style="display:none;" />
+			</div>
             <div class="input-group">
                 <label for="start-date">자동결제 시작일</label>
                 <input type="date" id="start_date" name="start_date" required>
@@ -178,6 +180,22 @@
             const dayOfMonth = date.getDate();
             document.getElementById('day-of-month').textContent = `선택한 날짜의 일: ${dayOfMonth}`;
         });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var accountSelect = document.getElementById('account');
+            var otherAccountInput = document.getElementById('otherAccount');
+            
+            accountSelect.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    otherAccountInput.style.display = 'block';
+                    otherAccountInput.focus();
+                } else {
+                    otherAccountInput.style.display = 'none';
+                    otherAccountInput.value = ''; // Clear the input if other option is not selected
+                }
+            });
+        });
+       
     </script>
 
 </body>
