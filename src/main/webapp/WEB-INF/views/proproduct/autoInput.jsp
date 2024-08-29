@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -154,7 +156,12 @@
             </div>
             <div class="input-group">
                 <label for="account">자동결제 계좌</label>
-                <input type="text" id="account" name="account" required>
+                <select id="account" name="account" required>
+                	<option value="${acountName}">${acountName}</option>
+                	<c:forEach items="${acountList}" var="ac">
+                		<option value="${ac.acount_number}">${ac.acount_number}</option>
+                	</c:forEach>
+                </select> 
             </div>
             <div class="input-group">
                 <label for="start-date">자동결제 시작일</label>

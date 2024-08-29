@@ -93,5 +93,17 @@ public class AcountService {
     public void updateMoney(NeAcountDTO dto) {
     	sqlSession.update("updateMoney",dto);
     }
-  
+    
+    public int deleteAllAcount(String member_id) {
+    	return sqlSession.delete("deleteAllAcount",member_id);
+    }
+    
+    public String selectPrimary() {
+    	return sqlSession.selectOne("selectPrimary");
+    }
+    
+    public List<NeAcountDTO> selectAcount(String member_id) {
+        return sqlSession.selectList("selectAcount", member_id);
+    }
+
 }
