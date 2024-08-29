@@ -106,4 +106,8 @@ public class PurproductService {
 	    params.put("member_id",member_id);
     	return sqlSession.selectOne("findProdDo",params);
     }
+    
+    public int deleteAllProduct(String member_id) {
+    	return sqlSession.delete("deleteAllProduct",member_id);
+    }
 }

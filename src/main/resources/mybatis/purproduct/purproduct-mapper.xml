@@ -234,5 +234,9 @@
     AND product_code = #{product_code}
     AND status IN ('활성')
 </select>
+
+<delete id="deleteAllProduct" parameterType="String">
+		delete from nepreSavProd where member_id = #{member_id}
+	</delete>
 	
 </mapper>
