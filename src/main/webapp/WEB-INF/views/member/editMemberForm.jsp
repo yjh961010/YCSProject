@@ -97,19 +97,11 @@ table input[type="submit"]:hover, .delete-btn:hover {
 </form>
 </div>
 
-<script>
-function confirmDelete() {
-    // 첫 번째 경고창을 표시하여 추가 정보를 제공합니다.
-    var firstMessage = "회원 탈퇴 시 계약 상품이 전부 해지되며 충전된 금액과 해지금액을 돌려받을 수 없습니다! 금액을 돌려받으려면 상품 해지와 환불을 받은 뒤 탈퇴를 해주세요!";
-    
-    // 첫 번째 경고창을 확인한 후, 두 번째 확인 창을 표시합니다.
-    if (confirm(firstMessage)) {
-        // 두 번째 확인 창에서 실제 탈퇴 여부를 묻습니다.
-        var username = "${member.memberID}";
-        if (confirm("정말로 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
-            // 사용자가 탈퇴를 확인하면, 탈퇴 요청을 보냅니다.
-            window.location.href = "/member/deleteMember.do?member_id=" + encodeURIComponent(username);
-        }
+<script type="text/javascript">
+   function confirmDelete() {
+	 var username = "${member.memberID}";
+	 if (confirm("정말로 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
+        window.location.href = "/member/deleteMember.do?member_id="+ encodeURIComponent(username);
     }
 }
 </script>

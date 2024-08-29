@@ -234,9 +234,19 @@
     AND product_code = #{product_code}
     AND status IN ('활성')
 </select>
-
-<delete id="deleteAllProduct" parameterType="String">
+	
+	<!-- 회원탈퇴시 상품정보 삭제 -->
+	<delete id="deleteAllProduct" parameterType="String">
 		delete from nepreSavProd where member_id = #{member_id}
 	</delete>
+	
+	<select id="getSignMemberId" parameterType="NePreSavProdDTO" resultType="Map">
+	    SELECT *
+	    FROM nepreSavProd nsp
+	    JOIN neSavProd ns
+	    ON nsp.product_code = ns.product_code
+	    WHERE nsp.member_id = #{member_id}
+	    AND nsp.status IN ('활성')
+	</select>
 	
 </mapper>

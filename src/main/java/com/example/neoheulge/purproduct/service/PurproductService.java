@@ -107,7 +107,13 @@ public class PurproductService {
     	return sqlSession.selectOne("findProdDo",params);
     }
     
+    //가입한 상품정보 전체 삭제
     public int deleteAllProduct(String member_id) {
     	return sqlSession.delete("deleteAllProduct",member_id);
+    }
+    
+    //회원 삭제전 가입한 상품 있는지 확인
+    public List<Map<String, Object>> getSignMemberId(NePreSavProdDTO dto) {
+        return sqlSession.selectList("getSignMemberId", dto);
     }
 }
