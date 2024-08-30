@@ -64,7 +64,7 @@ public class TossPaymentController {
     @PostMapping("/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody Payments request,NeAcountDTO dto,HttpServletRequest req) {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	String username = authentication.getName();
+        String username = authentication.getName();
     	
     	JSONObject result = paymentService.confirmPayment(
                 request.getPaymentKey(),

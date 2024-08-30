@@ -271,7 +271,7 @@ public class MemberController {
         int acountRes = acountService.deleteAllAcount(member_id);
         int commuRes = commuService.deleteEditCommu(member_id);
         int qnaRes = qnaService.deleteEditQna(member_id);
-        int memberRes = memberservice.deleteMember(member_id);
+//        int memberRes = memberservice.deleteMember(member_id);
 
         // 세션 무효화
         HttpSession session = request.getSession(false);
