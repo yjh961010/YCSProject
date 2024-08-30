@@ -53,6 +53,7 @@ public class SchedulerService {
     	double autoAmount = ((Number) member.get("AUTO_AMOUNT")).doubleValue();
         String autoCycle = (String) member.get("AUTO_CYCLE");
         double additionalAmount = 0;
+        String acount_number = (String) member.get("AUTO_ACOUNT");
         
         switch (autoCycle) {
 	        case "매일":
@@ -74,6 +75,7 @@ public class SchedulerService {
             params.put("member_id", member.get("MEMBER_ID"));
             params.put("product_code", member.get("PRODUCT_CODE"));
             params.put("additionalAmount", additionalAmount);
+            params.put("auto_acount", acount_number);
 
             System.out.println("추가금 넣기 실행: " + params);
             purproductService.addAdditionalAmount(params);
