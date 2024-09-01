@@ -60,11 +60,12 @@
 
 
     <!-- 계좌에서 돈 차감 -->
-    <update id="deductMoneyFromAccount">
+    <update id="deductMoneyFromAccount" >
         UPDATE neacount
-        SET money = money - #{autoAmount, jdbcType=INTEGER}
-        WHERE acount_id = #{autoAccount, jdbcType=INTEGER}
-        AND money >= #{autoAmount, jdbcType=INTEGER}
+        SET money = money - #{additionalAmount}
+        WHERE acount_number = #{auto_account}
+        AND member_id = #{member_id}
+        AND money >= #{additionalAmount}
     </update>
 
     <!-- 결제 로그 기록 -->
