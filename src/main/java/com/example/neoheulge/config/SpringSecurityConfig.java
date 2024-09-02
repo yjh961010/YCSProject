@@ -27,7 +27,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_1")
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_2")
                         //.requestMatchers("/지정경로/**").hasAnyAuthority("ROLE_1", "ROLE_2")-> 일반회원/비회원구분
                         .requestMatchers("/**", "/css/**", "/img/**").permitAll()
                         .anyRequest().authenticated())
