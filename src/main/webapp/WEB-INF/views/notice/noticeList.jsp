@@ -50,10 +50,7 @@
         <button onclick="performSearch()">검색</button>
     </div>
     <div id="notice">
-  		
-        <sec:authorize access="isAuthenticated()">
-            <sec:authentication property="principal.username" var="username" />
-            <c:if test="${username eq 'admin'}">
+        <sec:authorize access="hasRole('ROLE_2')">
                 <table align="right">
                     <tr>
                         <td>
@@ -61,7 +58,6 @@
                         </td>
                     </tr>
                 </table>
-            </c:if>
         </sec:authorize>
         <table class="notice-table">
             <thead>

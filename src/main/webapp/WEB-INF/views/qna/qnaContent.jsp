@@ -18,17 +18,16 @@
 
     }
 
-    function checkWriteId(username){
-
-        if (username === 'admin') {
+    function checkWriteId(hasRole2) {
+        // hasRole2가 true일 경우에만 답글 작성 페이지로 이동합니다.
+        if (hasRole2 === 'true') {
             window.location.href = "/qna/qnaWrite.do?id=${getQna.id}";
         } else {
             alert("관리자만 답글을 작성할 수 있습니다.");
         }
-
     }
 
-    function checkUpdateId(username){
+    function checkUpdateId(username, hasRole2){
 
         if (username === '${getQna.author}') {
             window.location.href = "/qna/qnaUpdate.do?id=${getQna.id}";
@@ -38,8 +37,8 @@
 
     }
 
-    function checkDeleteId(username) {
-        if (username === '${getQna.author}' || username === 'admin') {
+    function checkDeleteId(username, hasRole2) {
+        if (username === '${getQna.author}' || hasRole2) {
             if (confirm("정말로 삭제하시겠습니까?")) {
                 window.location.href = "/qna/qnaDelete.do?id=${getQna.id}";
             }
@@ -127,10 +126,19 @@
         <tr>
             <td colspan="4" style="text-align: right;">
                 <sec:authorize access="isAuthenticated()">
-                    <sec:authentication property="principal.username" var="username" />
-                    <input type="button" value="답글달기" onclick="checkWriteId('${username}')">
-                    <input type="button" value="글수정" onclick="checkUpdateId('${username}')">
-                    <input type="button" value="글삭제" onclick="checkDeleteId('${username}')">
+                    <!-- 현재 사용자의 username을 가져옵니다. -->
+						<sec:authentication property="principal.username" var="username" />
+
+						<!-- ROLE_2 권한이 있는지 확인하고, JavaScript에 사용할 변수를 설정합니다. -->
+						<sec:authorize access="hasRole('ROLE_2')" var="hasRole2">
+							<c:set var="hasRole2" value="true" />
+						</sec:authorize>
+						<c:if test="${hasRole2 == null}">
+							<c:set var="hasRole2" value="false" />
+						</c:if>
+                    <input type="button" value="답글달기" onclick="checkWriteId('${hasRole2}')">
+                    <input type="button" value="글수정" onclick="checkUpdateId('${username}', ${hasRole2})">
+                    <input type="button" value="글삭제" onclick="checkDeleteId('${username}', ${hasRole2})">
                 </sec:authorize>
                 <sec:authorize access="isAnonymous()">
                     <input type="button" value="답글달기" onclick="checkLogin()">

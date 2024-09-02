@@ -126,7 +126,9 @@
                 <a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a>
                 <a href="${pageContext.request.contextPath}/product/productList.do">상품 목록</a>
                 <a href="${pageContext.request.contextPath}/qna/qnaList.do">고객지원</a>
-                <a href="${pageContext.request.contextPath}/admin/adminPage.do">관리자 페이지</a>
+                <sec:authorize access="hasRole('ROLE_2')">
+                	<a href="${pageContext.request.contextPath}/admin/adminPage.do">관리자 페이지</a>
+        		</sec:authorize>
             </nav>
         </div>
     </header>
