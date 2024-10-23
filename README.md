@@ -28,13 +28,13 @@
 - **데이터베이스 관리 도구**: DBeaver
 
 ## 사용 기술
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Java_logo_and_wordmark.svg/1920px-Java_logo_and_wordmark.svg.png" alt="Java" width="50"/> 
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/db/JavaScript_logo_2.svg" alt="JavaScript" width="50"/> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Java_logo_and_wordmark.svg" alt="Java" width="50"/> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="50"/> 
 <img src="https://spring.io/images/spring-logo.svg" alt="Spring" width="50"/> 
 <img src="https://mybatis.org/images/mybatis-logo.png" alt="MyBatis" width="50"/> 
 <img src="https://www.spring.io/images/spring-scheduler.png" alt="Spring Scheduler" width="50"/> 
 <img src="https://jquery.com/jquery-wp-content/themes/jquery.com/images/jquery-logo.svg" alt="jQuery" width="50"/> 
 <img src="https://www.chartjs.org/img/chartjs-logo.svg" alt="Chart.js" width="50"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/AJAX_logo_and_wordmark.svg" alt="AJAX" width="50"/> 
-<img src="https://developers.kakao.com/assets/img/kakaodevelopers.png" alt="Kakao Developers" width="50"/> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/KakaoTalk_logo.png" alt="Kakao Developers" width="50"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/JSON_logo_200x200.png" alt="JSON" width="50"/> 
