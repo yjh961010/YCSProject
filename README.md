@@ -28,6 +28,12 @@
 - **데이터베이스 관리 도구**: DBeaver
 
 ## 사용 기술
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=java, javascript" />
+  </a>
+</p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Java_logo_and_wordmark.svg" alt="Java" width="50"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="50"/> 
 <img src="https://spring.io/images/spring-logo.svg" alt="Spring" width="50"/> 
