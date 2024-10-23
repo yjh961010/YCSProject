@@ -31,7 +31,7 @@
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java, javascript" />
+    <img src="https://skillicons.dev/icons?i=java,js,spring,jquery,oracle" />
   </a>
 </p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Java_logo_and_wordmark.svg" alt="Java" width="50"/> 
